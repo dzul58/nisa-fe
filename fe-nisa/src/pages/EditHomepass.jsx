@@ -30,7 +30,7 @@ const EditHomepass = () => {
     useEffect(() => {
         const fetchHomepassData = async () => {
             try {
-                const response = await axios.get(`http://192.168.202.166:8000/api/homepass/${id}`);
+                const response = await axios.get(`http://localhost:3000/api/homepass/${id}`);
                 const formattedData = {
                     ...response.data,
                     completion_date: formatDateTimeForInput(response.data.completion_date),
@@ -47,7 +47,7 @@ const EditHomepass = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.put(`http://192.168.202.166:8000/api/homepass/${id}`, formData);
+            await axios.put(`http://localhost:3000/api/homepass/${id}`, formData);
             alert("Homepass berhasil diperbarui!");
             navigate("/");
         } catch (error) {

@@ -63,21 +63,7 @@ const Home = () => {
       </div>
       <table className="min-w-full bg-white border border-gray-300 shadow-lg rounded-lg">
         <thead>
-          <tr>
-            <th className="border-b px-4 py-2 bg-gray-200">No</th>
-            <th className="border-b px-4 py-2 bg-gray-200">Timestamp</th>
-            <th className="border-b px-4 py-2 bg-gray-200 whitespace-nowrap">Nama Lengkap PIC yg mengajukan</th>
-            <th className="border-b px-4 py-2 bg-gray-200">Pengajuan dari</th>
-            <th className="border-b px-4 py-2 bg-gray-200">Sumber Permintaan</th>
-            <th className="border-b px-4 py-2 bg-gray-200">CID Pelanggan</th>
-            <th className="border-b px-4 py-2 bg-gray-200">Homepass ID</th>
-            <th className="border-b px-4 py-2 bg-gray-200">Network</th>
-            <th className="border-b px-4 py-2 bg-gray-200">Status Home-ID</th>
-            <th className="border-b px-4 py-2 bg-gray-200">PIC HPM</th>
-            <th className="border-b px-4 py-2 bg-gray-200">Status</th>
-            <th className="border-b px-4 py-2 bg-gray-200">Actions</th>
-          </tr>
-          <tr>
+        <tr>
             <th className="border-b px-4 py-2" colSpan="12">
               <div className="grid grid-cols-12 gap-2">
                 <input
@@ -163,6 +149,20 @@ const Home = () => {
                 />
               </div>
             </th>
+          </tr>
+          <tr>
+            <th className="border-b px-4 py-2 bg-gray-200">No</th>
+            <th className="border-b px-4 py-2 bg-gray-200">Timestamp</th>
+            <th className="border-b px-4 py-2 bg-gray-200 whitespace-nowrap">Nama Lengkap PIC yg mengajukan</th>
+            <th className="border-b px-4 py-2 bg-gray-200">Pengajuan dari</th>
+            <th className="border-b px-4 py-2 bg-gray-200">Sumber Permintaan</th>
+            <th className="border-b px-4 py-2 bg-gray-200">CID Pelanggan</th>
+            <th className="border-b px-4 py-2 bg-gray-200">Homepass ID</th>
+            <th className="border-b px-4 py-2 bg-gray-200">Network</th>
+            <th className="border-b px-4 py-2 bg-gray-200">Status Home-ID</th>
+            <th className="border-b px-4 py-2 bg-gray-200">PIC HPM</th>
+            <th className="border-b px-4 py-2 bg-gray-200">Status</th>
+            <th className="border-b px-4 py-2 bg-gray-200">Actions</th>
           </tr>
         </thead>
         <tbody>
