@@ -35,7 +35,7 @@ const CreateHomepass = () => {
       if (formData.house_photo) {
         const housePhotoFormData = new FormData();
         housePhotoFormData.append("file", formData.house_photo);
-        const uploadResponse = await axios.post("http://localhost:3000/api/upload", housePhotoFormData, {
+        const uploadResponse = await axios.post("http://192.168.202.166:3002/api/upload", housePhotoFormData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
@@ -67,7 +67,7 @@ const CreateHomepass = () => {
       if (!formData.completion_date) {
         delete dataToSend.completion_date;
       }
-      const response = await axios.post("http://localhost:3000/api/homepass", dataToSend);
+      const response = await axios.post("http://192.168.202.166:3002/api/homepass", dataToSend);
       console.log("RESPONSE>>>", response.data);
       alert("Homepass berhasil dibuat!");
       navigate("/");
@@ -350,28 +350,4 @@ const CreateHomepass = () => {
 };
 
 export default CreateHomepass;
-
-
-// useEffect(() => {
-//   const fetchHomepassData = async () => {
-//       try {
-//           const response = await axios.get(`http://localhost:3000/api/homepass/${id}`);
-//           const formattedData = {
-//               ...response.data,
-//               completion_date: formatDateTimeForInput(response.data.completion_date),
-//           };
-//           setFormData(formattedData);
-//       } catch (error) {
-//           console.error("Error fetching homepass data:", error);
-//       }
-//   };
-
-//   fetchHomepassData();
-// }, [id]);
-
-// const response = await axios.put(`http://localhost:3000/api/homepass/${id}`, dataToSend);
-//           console.log("RESPONSE>>>", response.data);
-//           alert("Homepass berhasil dibuat!");
-//           navigate("/");
-
 

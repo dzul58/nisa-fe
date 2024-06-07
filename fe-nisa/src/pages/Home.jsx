@@ -31,7 +31,7 @@ const Home = () => {
   const fetchData = async () => {
     try {
       const queryParams = new URLSearchParams({ ...filterValues, page }).toString();
-      const response = await axios.get(`http://localhost:3000/api/homepass?${queryParams}`);
+      const response = await axios.get(`http://192.168.202.166:3002/api/homepass?${queryParams}`);
       setData(response.data.requests);
       setTotalPages(response.data.totalPages);
     } catch (error) {
