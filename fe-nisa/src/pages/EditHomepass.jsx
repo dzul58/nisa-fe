@@ -13,7 +13,7 @@ const EditHomepass = () => {
         current_address: "",
         destination_address: "",
         coordinate_point: "",
-        house_photo: "",
+        house_photo: null,
         request_purpose: "",
         email_address: "",
         hpm_check_result: "",
@@ -47,14 +47,53 @@ const EditHomepass = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.put(`http://localhost:3000/api/homepass/${id}`, formData);
-            alert("Homepass berhasil diperbarui!");
-            navigate("/");
+          let uploadResult = {};
+    
+          // Mengunggah file gambar jika ada
+          if (formData.house_photo) {
+            const housePhotoFormData = new FormData();
+            housePhotoFormData.append("file", formData.house_photo);
+            const uploadResponse = await axios.post("http://localhost:3000/api/upload", housePhotoFormData, {
+              headers: {
+                "Content-Type": "multipart/form-data",
+              },
+            });
+    
+            // Membuat objek uploadResult
+            uploadResult = {
+              fullNamePic: formData.full_name_pic,
+              submissionFrom: formData.submission_from,
+              requestSource: formData.request_source,
+              customerCid: formData.customer_cid,
+              homepassId: formData.homepass_id,
+              housePhotoUrl: uploadResponse.data.imageUrl,
+            };
+          } else {
+            // Membuat objek uploadResult kosong jika tidak ada file yang diunggah
+            uploadResult = {
+              fullNamePic: formData.full_name_pic,
+              submissionFrom: formData.submission_from,
+              requestSource: formData.request_source,
+              customerCid: formData.customer_cid,
+              homepassId: formData.homepass_id,
+              housePhotoUrl: "",
+            };
+          }
+    
+          // Mengirimkan data ke endpoint /api/homepass
+          const dataToSend = { ...formData, uploadResult };
+          if (!formData.completion_date) {
+            delete dataToSend.completion_date;
+          }
+          const response = await axios.put(`http://localhost:3000/api/homepass/${id}`, dataToSend);
+          console.log("RESPONSE>>>", response.data);
+          alert("Homepass berhasil dibuat!");
+          navigate("/");
         } catch (error) {
-            console.error("Error updating homepass:", error);
-            alert("Terjadi kesalahan saat memperbarui Homepass.");
+          console.error("Error creating homepass:", error);
+          alert("Terjadi kesalahan saat membuat Homepass.");
         }
-    };
+      };
 
     const formatDateTimeForInput = (dateString) => {
         if (!dateString) return "";
@@ -74,6 +113,13 @@ const EditHomepass = () => {
             [name]: value,
         });
     };
+
+    const handleFileChange = (event) => {
+        setFormData({
+          ...formData,
+          house_photo: event.target.files[0],
+        });
+      };
 
     return (
         <div className="p-4">
@@ -175,11 +221,11 @@ const EditHomepass = () => {
                     Foto Rumah:
                 </label>
                 <input
-                    type="text"
+                    type="file"
                     id="house_photo"
                     name="house_photo"
-                    value={formData.house_photo}
-                    onChange={handleChange}
+                    accept="image/*"
+                    onChange={handleFileChange}
                     className="border-gray-300 rounded-md w-full py-2 px-3 focus:outline-none focus:ring focus:border-blue-300"
                 />
             </div>

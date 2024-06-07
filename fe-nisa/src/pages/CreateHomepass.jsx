@@ -29,24 +29,38 @@ const CreateHomepass = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // Mengunggah file gambar terlebih dahulu
-      const housePhotoFormData = new FormData();
-      housePhotoFormData.append("file", formData.house_photo);
-      const uploadResponse = await axios.post("http://localhost:3000/api/upload", housePhotoFormData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      let uploadResult = {};
 
-      // Membuat objek uploadResult
-      const uploadResult = {
-        fullNamePic: formData.full_name_pic,
-        submissionFrom: formData.submission_from,
-        requestSource: formData.request_source,
-        customerCid: formData.customer_cid,
-        homepassId: formData.homepass_id,
-        housePhotoUrl: uploadResponse.data.imageUrl,
-      };
+      // Mengunggah file gambar jika ada
+      if (formData.house_photo) {
+        const housePhotoFormData = new FormData();
+        housePhotoFormData.append("file", formData.house_photo);
+        const uploadResponse = await axios.post("http://localhost:3000/api/upload", housePhotoFormData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
+
+        // Membuat objek uploadResult
+        uploadResult = {
+          fullNamePic: formData.full_name_pic,
+          submissionFrom: formData.submission_from,
+          requestSource: formData.request_source,
+          customerCid: formData.customer_cid,
+          homepassId: formData.homepass_id,
+          housePhotoUrl: uploadResponse.data.imageUrl,
+        };
+      } else {
+        // Membuat objek uploadResult kosong jika tidak ada file yang diunggah
+        uploadResult = {
+          fullNamePic: formData.full_name_pic,
+          submissionFrom: formData.submission_from,
+          requestSource: formData.request_source,
+          customerCid: formData.customer_cid,
+          homepassId: formData.homepass_id,
+          housePhotoUrl: "",
+        };
+      }
 
       // Mengirimkan data ke endpoint /api/homepass
       const dataToSend = { ...formData, uploadResult };
@@ -173,7 +187,7 @@ const CreateHomepass = () => {
             className="border-gray-300 rounded-md w-full py-2 px-3 focus:outline-none focus:ring focus:border-blue-300"
           />
         </div>
-        <div className="mb-4">
+		    <div className="mb-4">
           <label htmlFor="house_photo" className="block font-medium mb-1">
             Foto Rumah:
           </label>
@@ -336,3 +350,28 @@ const CreateHomepass = () => {
 };
 
 export default CreateHomepass;
+
+
+// useEffect(() => {
+//   const fetchHomepassData = async () => {
+//       try {
+//           const response = await axios.get(`http://localhost:3000/api/homepass/${id}`);
+//           const formattedData = {
+//               ...response.data,
+//               completion_date: formatDateTimeForInput(response.data.completion_date),
+//           };
+//           setFormData(formattedData);
+//       } catch (error) {
+//           console.error("Error fetching homepass data:", error);
+//       }
+//   };
+
+//   fetchHomepassData();
+// }, [id]);
+
+// const response = await axios.put(`http://localhost:3000/api/homepass/${id}`, dataToSend);
+//           console.log("RESPONSE>>>", response.data);
+//           alert("Homepass berhasil dibuat!");
+//           navigate("/");
+
+
