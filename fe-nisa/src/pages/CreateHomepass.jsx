@@ -35,7 +35,7 @@ const CreateHomepass = () => {
       if (formData.house_photo) {
         const housePhotoFormData = new FormData();
         housePhotoFormData.append("file", formData.house_photo);
-        const uploadResponse = await axios.post("http://192.168.202.166:3002/api/upload", housePhotoFormData, {
+        const uploadResponse = await axios.post("http://192.168.202.166:8000/api/upload", housePhotoFormData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
@@ -67,7 +67,7 @@ const CreateHomepass = () => {
       if (!formData.completion_date) {
         delete dataToSend.completion_date;
       }
-      const response = await axios.post("http://192.168.202.166:3002/api/homepass", dataToSend);
+      const response = await axios.post("http://192.168.202.166:8000/api/homepass", dataToSend);
       console.log("RESPONSE>>>", response.data);
       alert("Homepass berhasil dibuat!");
       navigate("/");
