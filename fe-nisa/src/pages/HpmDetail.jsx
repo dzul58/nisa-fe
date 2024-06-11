@@ -38,7 +38,7 @@ const HpmDetail = () => {
 
   return (
     <div className="p-4">
-      <div className="flex justify-end">
+      {/* <div className="flex justify-end">
         <button
             onClick={handleBack}
             className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded mb-4"
@@ -67,7 +67,128 @@ const HpmDetail = () => {
         <p><strong>PIC HPM:</strong> {data.hpm_pic}</p>
         <p><strong>Status:</strong> {data.status}</p>
         <p><strong>Tanggal Pengerjaan:</strong> {formatDate(data.completion_date)}</p>
+      </div> */}
+
+      <div class="p-8 rounded border border-gray-200">
+  <h1 class="font-medium text-3xl">Add User</h1>
+  <p class="text-gray-600 mt-6">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dignissimos dolorem vel cupiditate laudantium dicta.</p>
+
+  <form>
+    <div class="mt-8 grid lg:grid-cols-2 gap-4">
+      <div>
+        <label class="text-sm text-gray-700 block mb-1 font-medium">Nama Lengkap PIC yg mengajukan:</label>
+        <div class="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full" >{data.full_name_pic}</div>
       </div>
+
+      <div>
+        <label class="text-sm text-gray-700 block mb-1 font-medium">Timestamp:</label>
+        <div class="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full" >{formatDate(data.timestamp)}</div>
+      </div>
+
+      <div>
+        <label class="text-sm text-gray-700 block mb-1 font-medium">Pengajuan dari:</label>
+        <div class="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full">{data.submission_from}</div>
+      </div>
+
+      <div>
+        <label class="text-sm text-gray-700 block mb-1 font-medium">Sumber Permintaan:</label>
+        <div class="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full">{data.request_source}</div>
+      </div>
+
+      <div>
+        <label class="text-sm text-gray-700 block mb-1 font-medium">CID Pelanggan:</label>
+        <div class="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full">{data.customer_cid}</div>
+      </div>
+
+      <div>
+        <label class="text-sm text-gray-700 block mb-1 font-medium">Alamat Saat ini (existing):</label>
+        <div class="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full">{data.current_address}</div>
+      </div>
+
+      <div>
+        <label class="text-sm text-gray-700 block mb-1 font-medium">Alamat Tujuan (destinasi):</label>
+        <div class="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full">{data.destination_address}</div>
+      </div>
+
+      <div>
+        <label class="text-sm text-gray-700 block mb-1 font-medium">Titik koordinat:</label>
+        <div class="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full">{data.coordinate_point}</div>
+      </div>
+
+      <div>
+        <label class="text-sm text-gray-700 block mb-1 font-medium">Tujuan Permintaan:</label>
+        <div class="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full">{data.request_purpose}</div>
+      </div>
+
+      <div>
+        <label class="text-sm text-gray-700 block mb-1 font-medium">Email Address:</label>
+        <div class="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full" >{data.email_address}</div>
+      </div>
+
+      <div>
+        <label class="text-sm text-gray-700 block mb-1 font-medium">Hasil Pengecekan Tim HPM:</label>
+        <div class="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full" >{data.hpm_check_result}</div>
+      </div>
+
+      <div>
+        <label class="text-sm text-gray-700 block mb-1 font-medium">Homepass id:</label>
+        <div class="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full" >{data.homepass_id}</div>
+      </div>
+
+      <div>
+        <label class="text-sm text-gray-700 block mb-1 font-medium">Network:</label>
+        <div class="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full" >{data.network}</div>
+      </div>
+
+      <div>
+        <label class="text-sm text-gray-700 block mb-1 font-medium">Status Home-ID:</label>
+        <div class="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full" >{data.home_id_status}</div>
+      </div>
+
+      <div>
+        <label class="text-sm text-gray-700 block mb-1 font-medium">Remarks(Uncover/Reject):</label>
+        <div class="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full" >{data.remarks}</div>
+      </div>
+
+      <div>
+        <label class="text-sm text-gray-700 block mb-1 font-medium">Note/Recommendation(free text):</label>
+        <div class="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full" >{data.notes_recommendations}</div>
+      </div>
+
+      <div>
+        <label class="text-sm text-gray-700 block mb-1 font-medium">PIC HPM:</label>
+        <div class="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full" >{data.hpm_pic}</div>
+      </div>
+
+      <div>
+        <label class="text-sm text-gray-700 block mb-1 font-medium">Status:</label>
+        <div class="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full" >{data.status}</div>
+      </div>
+
+      <div>
+        <label class="text-sm text-gray-700 block mb-1 font-medium">Tanggal Pengerjaan:</label>
+        <div class="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full" >{formatDate(data.completion_date)}</div>
+      </div>
+
+      <div>
+        <label class="text-sm text-gray-700 block mb-1 font-medium">Timestamp</label>
+        <div class="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full" >{formatDate(data.timestamp)}</div>
+      </div>
+
+    </div>
+
+
+
+
+    <div class="space-x-4 mt-8 flex justify-end">
+      <button type="submit" class="py-2 px-4 bg-green-500 text-white rounded hover:bg-green-600 active:bg-green-700 disabled:opacity-50">Update</button>
+
+      <button class="py-2 px-4 bg-white border border-gray-200 text-gray-600 rounded hover:bg-gray-100 active:bg-gray-200 disabled:opacity-50">Back</button>
+    </div>
+  </form>
+</div>
+
+
     </div>
   );
 };
