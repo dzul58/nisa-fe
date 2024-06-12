@@ -32,45 +32,10 @@ const HpmDetail = () => {
     return <div>Loading...</div>;
   }
 
-  const handleBack = () => {
-    navigate(-1);
-  };
-
   return (
     <div className="p-4">
-      {/* <div className="flex justify-end">
-        <button
-            onClick={handleBack}
-            className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded mb-4"
-        >
-            Back
-        </button>
-      </div>
-      <div className="bg-white p-4 shadow rounded">
-        <p><strong>Timestamp:</strong> {formatDate(data.timestamp)}</p>
-        <p><strong>Nama Lengkap PIC yg mengajukan:</strong> {data.full_name_pic}</p>
-        <p><strong>Pengajuan dari:</strong> {data.submission_from}</p>
-        <p><strong>Sumber Permintaan:</strong> {data.request_source}</p>
-        <p><strong>CID Pelanggan:</strong> {data.customer_cid}</p>
-        <p><strong>Alamat Saat ini (existing):</strong> {data.current_address}</p>
-        <p><strong>Alamat Tujuan (destinasi):</strong> {data.destination_address}</p>
-        <p><strong>Titik koordinat:</strong> {data.coordinate_point}</p>
-        <p><strong>Foto Rumah (optional, bila ada):</strong> {data.house_photo}</p>
-        <p><strong>Tujuan Permintaan:</strong> {data.request_purpose}</p>
-        <p><strong>Email Address:</strong> {data.email_address}</p>
-        <p><strong>Hasil Pengecekan Tim HPM:</strong> {data.hpm_check_result}</p>
-        <p><strong>Homepass id:</strong> {data.homepass_id}</p>
-        <p><strong>Network:</strong> {data.network}</p>
-        <p><strong>Status Home-ID:</strong> {data.home_id_status}</p>
-        <p><strong>Remarks(Uncover/Reject):</strong> {data.remarks}</p>
-        <p><strong>Note/Recommendation(free text):</strong> {data.notes_recommendations}</p>
-        <p><strong>PIC HPM:</strong> {data.hpm_pic}</p>
-        <p><strong>Status:</strong> {data.status}</p>
-        <p><strong>Tanggal Pengerjaan:</strong> {formatDate(data.completion_date)}</p>
-      </div> */}
-
       <div class="p-8 rounded border border-gray-200">
-  <h1 class="font-medium text-3xl">Add User</h1>
+  <h1 class="font-medium text-3xl">Detail Moving Address</h1>
   <p class="text-gray-600 mt-6">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dignissimos dolorem vel cupiditate laudantium dicta.</p>
 
   <form>
@@ -86,9 +51,17 @@ const HpmDetail = () => {
       </div>
 
       <div>
-        <label class="text-sm text-gray-700 block mb-1 font-medium">Pengajuan dari:</label>
-        <div class="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full">{data.submission_from}</div>
-      </div>
+            <label className="text-sm text-gray-700 block mb-1 font-medium">Pengajuan dari:</label>
+            {data.submission_from ? (
+              <div className="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full">
+                {data.submission_from}
+              </div>
+            ) : (
+              <div className="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full">
+                <input type="text" placeholder="Pengajuan dari:" className="w-full bg-transparent focus:outline-none" disabled />
+              </div>
+            )}
+          </div>
 
       <div>
         <label class="text-sm text-gray-700 block mb-1 font-medium">Sumber Permintaan:</label>
@@ -101,12 +74,12 @@ const HpmDetail = () => {
       </div>
 
       <div>
-        <label class="text-sm text-gray-700 block mb-1 font-medium">Alamat Saat ini (existing):</label>
+        <label class="text-sm text-gray-700 block mb-1 font-medium" rows="3">Alamat Saat ini (existing):</label>
         <div class="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full">{data.current_address}</div>
       </div>
 
       <div>
-        <label class="text-sm text-gray-700 block mb-1 font-medium">Alamat Tujuan (destinasi):</label>
+        <label class="text-sm text-gray-700 block mb-1 font-medium" rows="3">Alamat Tujuan (destinasi):</label>
         <div class="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full">{data.destination_address}</div>
       </div>
 
@@ -152,7 +125,7 @@ const HpmDetail = () => {
 
       <div>
         <label class="text-sm text-gray-700 block mb-1 font-medium">Note/Recommendation(free text):</label>
-        <div class="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full" >{data.notes_recommendations}</div>
+        <div rows="3" class="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full" >{data.notes_recommendations}</div>
       </div>
 
       <div>
@@ -166,25 +139,49 @@ const HpmDetail = () => {
       </div>
 
       <div>
+        <label class="text-sm text-gray-700 block mb-1 font-medium">Photo Rumah:</label>
+        <div rows="2"  class="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full" >{data.house_photo}</div>
+      </div>
+
+      <div>
         <label class="text-sm text-gray-700 block mb-1 font-medium">Tanggal Pengerjaan:</label>
         <div class="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full" >{formatDate(data.completion_date)}</div>
       </div>
 
-      <div>
-        <label class="text-sm text-gray-700 block mb-1 font-medium">Timestamp</label>
-        <div class="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full" >{formatDate(data.timestamp)}</div>
+    </div>
+
+
+
+    <div>
+    <button
+  class="p-4 border border-gray-200 rounded w-64 bg-white hover:bg-gray-50 hover:border-b-4 hover:border-b-blue-500 flex items-center active:bg-gray-100"
+>
+  <div class="flex justify-center items-center text-gray-500 mr-4">
+    <svg
+      xmlns={data.house_photo}
+      class="h-6 w-6"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+      />
+    </svg>
+  </div>
+  <h1 class="font-bold text-gray-700 text-sm">Content page</h1>
+</button>
+      
+      <div class="space-x-4 mt-8 flex justify-end">
+        <button type="submit" class="py-2 px-4 bg-green-500 text-white rounded hover:bg-green-600 active:bg-green-700 disabled:opacity-50">Update</button>
+        <button class="py-2 px-4 bg-white border border-gray-200 text-gray-600 rounded hover:bg-gray-100 active:bg-gray-200 disabled:opacity-50">Back</button>
       </div>
-
     </div>
 
-
-
-
-    <div class="space-x-4 mt-8 flex justify-end">
-      <button type="submit" class="py-2 px-4 bg-green-500 text-white rounded hover:bg-green-600 active:bg-green-700 disabled:opacity-50">Update</button>
-
-      <button class="py-2 px-4 bg-white border border-gray-200 text-gray-600 rounded hover:bg-gray-100 active:bg-gray-200 disabled:opacity-50">Back</button>
-    </div>
+    
   </form>
 </div>
 

@@ -14,7 +14,7 @@ const Navbar = () => {
       <div className="p-4 flex justify-between items-center">
         <h2 className="text-2xl font-bold">
           <Link to="/" className="hover:text-white">
-            Request - Homepass (Responses)
+           	Moving Address
           </Link>
         </h2>
         <button className="md:hidden focus:outline-none" onClick={toggleMenu}>
@@ -25,12 +25,6 @@ const Navbar = () => {
           )}
         </button>
       </div>
-      {/* <nav
-        className={`${
-          isOpen ? 'block' : 'hidden'
-        } md:block md:mt-4 md:p-0 md:h-auto`}
-      >
-      </nav> */}
     </div>
   );
 };

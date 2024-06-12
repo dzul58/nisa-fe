@@ -5,6 +5,7 @@ import HpmDetail from '../pages/HpmDetail';
 import CreateHomepass from '../pages/CreateHomepass';
 import EditHomepass from '../pages/EditHomepass';
 import Template from '../pages/Template';
+import DetailHomepass from '../pages/DetailHomepass';
 
 
 const router = createBrowserRouter([
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
         {
           path: "/hmpdetail/:id",
           element: <HpmDetail />,
+        },
+        {
+          path: "/hmpdetails/:id",
+          element: <DetailHomepass />,
         },
         {
           path: "/updatehomepass/:id",

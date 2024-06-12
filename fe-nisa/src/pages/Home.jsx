@@ -181,7 +181,7 @@ const Home = () => {
               <td className="border-b px-4 py-2">{row.status}</td>
               <td className="border-b px-4 py-2">
                 <Link
-                  to={`/hmpdetail/${row.id}`}
+                  to={`/hmpdetails/${row.id}`}
                   className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded mr-2"
                 >
                   Detail
