@@ -5,27 +5,27 @@ import { useNavigate, useParams } from "react-router-dom";
 const EditHomepass = () => {
     const navigate = useNavigate();
     const { id } = useParams();
-  const [formData, setFormData] = useState({
-    full_name_pic: "",
-    submission_from: "",
-    request_source: "",
-    customer_cid: "",
-    current_address: "",
-    destination_address: "",
-    coordinate_point: "",
-    house_photo: null,
-    request_purpose: "",
-    email_address: "",
-    hpm_check_result: "",
-    homepass_id: "",
-    network: "",
-    home_id_status: "",
-    remarks: "",
-    notes_recommendations: "",
-    hpm_pic: "",
-    status: "",
-    completion_date: "",
-  });
+    const [formData, setFormData] = useState({
+      full_name_pic: '',
+      submission_from: '',
+      request_source: '',
+      customer_cid: '',
+      current_address: '',
+      destination_address: '',
+      coordinate_point: '',
+      house_photo: null,
+      request_purpose: '',
+      email_address: '',
+      hpm_check_result: '',
+      homepass_id: '',
+      network: '',
+      home_id_status: '',
+      remarks: '',
+      notes_recommendations: '',
+      hpm_pic: '',
+      status: '',
+      completion_date: '',
+    });
 
 
   useEffect(() => {
@@ -54,54 +54,46 @@ const EditHomepass = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      let uploadResult = {};
-
+      let uploadResult = {
+        fullNamePic: formData.full_name_pic,
+        submissionFrom: formData.submission_from,
+        requestSource: formData.request_source,
+        customerCid: formData.customer_cid,
+        homepassId: formData.homepass_id,
+        house_photo: formData.house_photo || "",
+      };
+  
       // Mengunggah file gambar jika ada
       if (formData.house_photo) {
         const housePhotoFormData = new FormData();
         housePhotoFormData.append("file", formData.house_photo);
-        const uploadResponse = await axios.post(`http://localhost:3000/api/upload`, housePhotoFormData, {
-          headers: {
-            Authorization: `Bearer ${localStorage.access_token}`,
-            "Content-Type": "multipart/form-data",
-          },
-        });
-
-        // Membuat objek uploadResult
-        uploadResult = {
-          fullNamePic: formData.full_name_pic,
-          submissionFrom: formData.submission_from,
-          requestSource: formData.request_source,
-          customerCid: formData.customer_cid,
-          homepassId: formData.homepass_id,
-          housePhotoUrl: uploadResponse.data.imageUrl,
-        };
-      } else {
-        // Membuat objek uploadResult kosong jika tidak ada file yang diunggah
-        uploadResult = {
-          fullNamePic: formData.full_name_pic,
-          submissionFrom: formData.submission_from,
-          requestSource: formData.request_source,
-          customerCid: formData.customer_cid,
-          homepassId: formData.homepass_id,
-          housePhotoUrl: "",
-        };
+        try {
+          const uploadResponse = await axios.post("http://localhost:3000/api/upload", housePhotoFormData, {
+            headers: {
+              "Content-Type": "multipart/form-data",
+              Authorization: `Bearer ${localStorage.access_token}`,
+            },
+          });
+          uploadResult.house_photo = uploadResponse.data.imageUrl;
+        } catch (error) {
+          console.error("Error uploading file:", error);
+          alert("Terjadi kesalahan saat mengunggah file. Silakan coba lagi.");
+          return; // Hentikan eksekusi jika terjadi error saat mengunggah file
+        }
       }
-
+  
       // Mengirimkan data ke endpoint /api/homepass
-      const dataToSend = { ...formData, uploadResult };
-      if (!formData.completion_date) {
+      const dataToSend = { ...formData, house_photo: uploadResult.house_photo };
+      if (formData.completion_date === '') {
         delete dataToSend.completion_date;
       }
-      const response = await axios.put(`http://localhost:3000/api/homepass/${id}`, dataToSend,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.access_token}`,
-          },
-        }
-      );
+      const response = await axios.put(`http://localhost:3000/api/homepass/${id}`, dataToSend, {
+        headers: {
+          Authorization: `Bearer ${localStorage.access_token}`,
+        },
+      });
       console.log("RESPONSE>>>", response.data);
-      alert("Homepass berhasil di update!");
+      alert("Homepass berhasil dibuat!");
       navigate("/");
     } catch (error) {
       console.error("Error creating homepass:", error);
