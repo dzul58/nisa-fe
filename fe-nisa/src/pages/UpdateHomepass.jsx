@@ -351,9 +351,3 @@ const UpdateHomepass = () => {
 }
 
 export default UpdateHomepass;
-
-
-
-
-
-
