@@ -51,55 +51,55 @@ const EditHomepass = () => {
     fetchHomepassData();
   }, [id]);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      let uploadResult = {
-        fullNamePic: formData.full_name_pic,
-        submissionFrom: formData.submission_from,
-        requestSource: formData.request_source,
-        customerCid: formData.customer_cid,
-        homepassId: formData.homepass_id,
-        house_photo: formData.house_photo || "",
-      };
-  
-      // Mengunggah file gambar jika ada
-      if (formData.house_photo) {
-        const housePhotoFormData = new FormData();
-        housePhotoFormData.append("file", formData.house_photo);
-        try {
-          const uploadResponse = await axios.post("http://localhost:3000/api/upload", housePhotoFormData, {
-            headers: {
-              "Content-Type": "multipart/form-data",
-              Authorization: `Bearer ${localStorage.access_token}`,
-            },
-          });
-          uploadResult.house_photo = uploadResponse.data.imageUrl;
-        } catch (error) {
-          console.error("Error uploading file:", error);
-          alert("Terjadi kesalahan saat mengunggah file. Silakan coba lagi.");
-          return; // Hentikan eksekusi jika terjadi error saat mengunggah file
-        }
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  try {
+    let uploadResult = {
+      fullNamePic: formData.full_name_pic,
+      submissionFrom: formData.submission_from,
+      requestSource: formData.request_source,
+      customerCid: formData.customer_cid,
+      homepassId: formData.homepass_id,
+      house_photo: formData.house_photo || "",
+    };
+
+    // Mengunggah file gambar jika ada
+    if (formData.house_photo) {
+      const housePhotoFormData = new FormData();
+      housePhotoFormData.append("file", formData.house_photo);
+      try {
+        const uploadResponse = await axios.post("http://localhost:3000/api/upload", housePhotoFormData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${localStorage.access_token}`,
+          },
+        });
+        uploadResult.house_photo = uploadResponse.data.imageUrl;
+      } catch (error) {
+        console.error("Error uploading file:", error);
+        alert("Terjadi kesalahan saat mengunggah file. Silakan coba lagi.");
+        return; // Hentikan eksekusi jika terjadi error saat mengunggah file
       }
-  
-      // Mengirimkan data ke endpoint /api/homepass
-      const dataToSend = { ...formData, house_photo: uploadResult.house_photo };
-      if (formData.completion_date === '') {
-        delete dataToSend.completion_date;
-      }
-      const response = await axios.put(`http://localhost:3000/api/homepass/${id}`, dataToSend, {
-        headers: {
-          Authorization: `Bearer ${localStorage.access_token}`,
-        },
-      });
-      console.log("RESPONSE>>>", response.data);
-      alert("Homepass berhasil dibuat!");
-      navigate("/");
-    } catch (error) {
-      console.error("Error creating homepass:", error);
-      alert("Terjadi kesalahan saat membuat Homepass.");
     }
-  };
+
+    // Mengirimkan data ke endpoint /api/homepass
+    const dataToSend = { ...formData, house_photo: uploadResult.house_photo };
+    if (formData.completion_date === '') {
+      delete dataToSend.completion_date;
+    }
+    const response = await axios.put(`http://localhost:3000/api/homepass/${id}`, dataToSend, {
+      headers: {
+        Authorization: `Bearer ${localStorage.access_token}`,
+      },
+    });
+    console.log("RESPONSE>>>", response.data);
+    alert("Homepass berhasil dibuat!");
+    navigate("/");
+  } catch (error) {
+    console.error("Error creating homepass:", error);
+    alert("Terjadi kesalahan saat membuat Homepass.");
+  }
+};
 
   const handleChange = (event) => {
     const { name, value } = event.target;
