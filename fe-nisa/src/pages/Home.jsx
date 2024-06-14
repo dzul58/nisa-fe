@@ -31,7 +31,11 @@ const Home = () => {
   const fetchData = async () => {
     try {
       const queryParams = new URLSearchParams({ ...filterValues, page }).toString();
-      const response = await axios.get(`http://192.168.202.166:8000/api/homepass?${queryParams}`);
+      const response = await axios.get(`http://localhost:3000/api/homepass?${queryParams}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.access_token}`,
+        },
+      });
       setData(response.data.requests);
       setTotalPages(response.data.totalPages);
     } catch (error) {
@@ -57,7 +61,7 @@ const Home = () => {
   return (
     <div className="overflow-x-auto p-4 bg-gray-100">
       <div className="mb-4">
-        <Link to="/createhomepass" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+        <Link to="/createhomepass" className="bg-blue-400 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
           Create Homepass
         </Link>
       </div>
@@ -182,13 +186,13 @@ const Home = () => {
               <td className="border-b px-4 py-2">
                 <Link
                   to={`/hmpdetails/${row.id}`}
-                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded mr-2"
+                  className="bg-blue-400 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded mr-2"
                 >
                   Detail
                 </Link>
                 <Link
                   to={`/updatehomepass/${row.id}`}
-                  className="bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-2 rounded"
+                  className="bg-green-400 hover:bg-green-700 text-white font-bold py-1 px-2 rounded"
                 >
                   Update
                 </Link>

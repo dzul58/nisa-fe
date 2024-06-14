@@ -13,7 +13,13 @@ const DetailHomepass = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://192.168.202.166:8000/api/homepass/${detailId}`);
+        const response = await axios.get(`http://localhost:3000/api/homepass/${detailId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.access_token}`,
+            },
+          }
+        );
         setData(response.data);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -108,7 +114,7 @@ const DetailHomepass = () => {
                     href={data.house_photo} 
                     target="_blank" 
                     rel="noopener noreferrer" 
-                    className="px-4 py-1 text-lg font-medium bg-purple-700 text-white rounded-lg cursor-pointer"
+                    className="px-4 py-1 text-lg font-medium bg-purple-500 text-white rounded-lg cursor-pointer"
                 >
                     Image
                 </a>

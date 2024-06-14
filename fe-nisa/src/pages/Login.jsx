@@ -3,7 +3,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const Login = () =>  {
+const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -22,7 +22,7 @@ const Login = () =>  {
       const dataLogin = { email, password };
       let { data } = await axios.post(`http://localhost:3000/login`, dataLogin);
       localStorage.setItem("access_token", data.access_token);
-
+        // console.log(data.access_token);
       Swal.fire({
         icon: "success",
         title: "Success Login",
@@ -32,42 +32,48 @@ const Login = () =>  {
     } catch (error) {
       Swal.fire({
         icon: "error",
-        title: "Failed Login",
+        title: error.response.data.error,
       });
     }
   }
 
   return (
-    <>
-      <div className="min-h-screen flex items-center justify-center w-full dark:bg-gray-950">
-        <div className="bg-white dark:bg-gray-900 shadow-md rounded-lg px-8 py-6 max-w-md">
-          <h1 className="text-2xl font-bold text-center mb-4 dark:text-gray-200">Welcome Back!</h1>
-          <form onSubmit={handleLogin}>
-            <div className="mb-4">
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Email Address</label>
-              <input type="email" id="email" className="shadow-sm rounded-md w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" placeholder="your@email.com" required onChange={emailOnChange} />
-            </div>
-            <div className="mb-4">
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Password</label>
-              <input type="password" id="password" className="shadow-sm rounded-md w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" placeholder="Enter your password" required onChange={passwordOnChange} />
-              <a href="#"
-                className="text-xs text-gray-600 hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Forgot
-                Password?</a>
-            </div>
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center">
-                <input type="checkbox" id="remember" className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 focus:outline-none" checked />
-                <label htmlFor="remember" className="ml-2 block text-sm text-gray-700 dark:text-gray-300">Remember me</label>
+    <div className="relative flex min-h-screen text-gray-800 antialiased flex-col justify-center overflow-hidden bg-gray-50 py-6 sm:py-12">
+      <div className="relative py-3 sm:w-96 mx-auto text-center">
+        <span className="text-2xl font-light">Moving Address Homepass</span>
+        <div className="mt-4 bg-white shadow-md rounded-lg text-left">
+          <div className="h-2 bg-purple-400 rounded-t-md"></div>
+          <div className="px-8 py-6">
+            <form onSubmit={handleLogin}>
+              <label className="block font-semibold">Email</label>
+              <input
+                type="text"
+                placeholder="Email"
+                className="border w-full h-5 px-3 py-5 mt-2 hover:outline-none focus:outline-none focus:ring-indigo-500 focus:ring-1 rounded-md"
+                required
+                onChange={emailOnChange}
+              />
+              <label className="block mt-3 font-semibold">Password</label>
+              <input
+                type="password"
+                placeholder="Password"
+                className="border w-full h-5 px-3 py-5 mt-2 hover:outline-none focus:outline-none focus:ring-indigo-500 focus:ring-1 rounded-md"
+                required
+                onChange={passwordOnChange}
+              />
+              <div className="flex justify-between items-baseline">
+                <button
+                  type="submit"
+                  className="mt-4 bg-purple-500 text-white py-2 px-6 rounded-md hover:bg-purple-600"
+                >
+                  Login
+                </button>
               </div>
-              <a href="#"
-                className="text-xs text-indigo-500 hover:text-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Create
-                Account</a>
-            </div>
-            <button type="submit" className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Login</button>
-          </form>
+            </form>
+          </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

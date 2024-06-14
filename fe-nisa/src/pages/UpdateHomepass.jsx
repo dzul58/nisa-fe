@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
-const CreateHomepass = () => {
-  const navigate = useNavigate();
+const UpdateHomepass = () => {
+    const navigate = useNavigate();
+    const { id } = useParams();
   const [formData, setFormData] = useState({
     full_name_pic: "",
     submission_from: "",
@@ -15,7 +16,34 @@ const CreateHomepass = () => {
     house_photo: null,
     request_purpose: "",
     email_address: "",
+    hpm_check_result: "",
+    homepass_id: "",
+    network: "",
+    home_id_status: "",
+    remarks: "",
+    notes_recommendations: "",
+    hpm_pic: "",
+    status: "",
+    completion_date: "",
   });
+
+
+  useEffect(() => {
+    const fetchHomepassData = async () => {
+        try {
+            const response = await axios.get(`http://192.168.202.166:8000/api/homepass/${id}`);
+            const formattedData = {
+                ...response.data,
+                completion_date: formatDateTimeForInput(response.data.completion_date),
+            };
+            setFormData(formattedData);
+        } catch (error) {
+            console.error("Error fetching homepass data:", error);
+        }
+    };
+  
+    fetchHomepassData();
+  }, [id]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -26,13 +54,12 @@ const CreateHomepass = () => {
       if (formData.house_photo) {
         const housePhotoFormData = new FormData();
         housePhotoFormData.append("file", formData.house_photo);
-        const uploadResponse = await axios.post("http://localhost:3000/api/upload", housePhotoFormData, {
+        const uploadResponse = await axios.post(`http://localhost:3000/api/upload`, housePhotoFormData, {
           headers: {
             "Content-Type": "multipart/form-data",
-            Authorization: `Bearer ${localStorage.access_token}`,
           },
         });
-        // console.log(uploadResponse.data.imageUrl, "ini upload rspon");
+
         // Membuat objek uploadResult
         uploadResult = {
           fullNamePic: formData.full_name_pic,
@@ -40,9 +67,8 @@ const CreateHomepass = () => {
           requestSource: formData.request_source,
           customerCid: formData.customer_cid,
           homepassId: formData.homepass_id,
-          house_photo: uploadResponse.data.imageUrl,
+          housePhotoUrl: uploadResponse.data.imageUrl,
         };
-        console.log(house_photo, "ini uploadResponse");
       } else {
         // Membuat objek uploadResult kosong jika tidak ada file yang diunggah
         uploadResult = {
@@ -51,23 +77,18 @@ const CreateHomepass = () => {
           requestSource: formData.request_source,
           customerCid: formData.customer_cid,
           homepassId: formData.homepass_id,
-          house_photo: "",
+          housePhotoUrl: "",
         };
       }
 
       // Mengirimkan data ke endpoint /api/homepass
-      const dataToSend = { ...formData, house_photo: uploadResult.house_photo  };
+      const dataToSend = { ...formData, uploadResult };
       if (!formData.completion_date) {
         delete dataToSend.completion_date;
       }
-      const response = await axios.post("http://localhost:3000/api/homepass", dataToSend, 
-        {
-        headers: {
-          Authorization: `Bearer ${localStorage.access_token}`,
-        },
-      });
+      const response = await axios.put(`http://192.168.202.166:8000/api/homepass/${id}`, dataToSend);
       console.log("RESPONSE>>>", response.data);
-      alert("Homepass berhasil dibuat!");
+      alert("Homepass berhasil di update!");
       navigate("/");
     } catch (error) {
       console.error("Error creating homepass:", error);
@@ -92,6 +113,16 @@ const CreateHomepass = () => {
 
    const handleCancel = () => {
     navigate("/");
+  };
+
+  const formatDateTimeForInput = (dateTimeString) => {
+    const dateTime = new Date(dateTimeString);
+    const year = dateTime.getFullYear();
+    const month = String(dateTime.getMonth() + 1).padStart(2, "0");
+    const day = String(dateTime.getDate()).padStart(2, "0");
+    const hours = String(dateTime.getHours()).padStart(2, "0");
+    const minutes = String(dateTime.getMinutes()).padStart(2, "0");
+    return `${year}-${month}-${day}T${hours}:${minutes}`;
   };
 
 
@@ -155,6 +186,25 @@ const CreateHomepass = () => {
             </div>
           </div>
 
+          {/* <div className="col-span-full">
+            <label htmlFor="cover-photo" className="block text-sm font-medium leading-6 text-gray-900">Foto Rumah</label>
+            <div className="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
+              <div className="text-center">
+                <svg className="mx-auto h-12 w-12 text-gray-300" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path fillRule="evenodd" d="M1.5 6a2.25 2.25 0 012.25-2.25h16.5A2.25 2.25 0 0122.5 6v12a2.25 2.25 0 01-2.25 2.25H3.75A2.25 2.25 0 011.5 18V6zM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0021 18v-1.94l-2.69-2.689a1.5 1.5 0 00-2.12 0l-.88.879.97.97a.75.75 0 11-1.06 1.06l-5.16-5.159a1.5 1.5 0 00-2.12 0L3 16.061zm10.125-7.81a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0z" clipRule="evenodd" />
+                </svg>
+                <div className="mt-4 flex text-sm leading-6 text-gray-600">
+                  <label htmlFor="file-upload" className="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500">
+                    <span>Upload a file</span>
+                    <input id="house_photo" name="house_photo" type="file" accept="image/*" onChange={handleFileChange} className="sr-only"/>
+                  </label>
+                  <p className="pl-1">or drag and drop</p>
+                </div>
+                <p className="text-xs leading-5 text-gray-600">PNG, JPG</p>
+              </div>
+            </div>
+          </div> */}
+
           <div className="col-span-full">
           <label htmlFor="cover-photo" className="block text-sm font-medium leading-6 text-gray-900">
             Foto Rumah
@@ -209,7 +259,7 @@ const CreateHomepass = () => {
             </div>
           </div>
 
-          {/* <div className="sm:col-span-3">
+          <div className="sm:col-span-3">
             <label htmlFor="hpm_check_result" className="block text-sm font-medium leading-6 text-gray-900">HPM Check Result:</label>
             <div className="mt-2">
               <select id="hpm_check_result" name="hpm_check_result" value={formData.hpm_check_result} onChange={handleChange} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
@@ -230,18 +280,6 @@ const CreateHomepass = () => {
           </div>
 
 
-          <div className="sm:col-span-3">
-            <label htmlFor="home_id_status" className="block text-sm font-medium leading-6 text-gray-900">Home ID Status:</label>
-            <div className="mt-2">
-              <select id="home_id_status" name="home_id_status" value={formData.home_id_status} onChange={handleChange} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
-              <option> </option>
-                <option> </option>
-                <option>Taken</option>
-                <option>Released</option>
-              </select>
-            </div>
-          </div>
-
           <div className="sm:col-span-2">
             <label htmlFor="homepass_id" className="block text-sm font-medium leading-6 text-gray-900">Homepass ID:</label>
             <div className="mt-2">
@@ -249,6 +287,12 @@ const CreateHomepass = () => {
             </div>
           </div>
 
+          <div className="sm:col-span-2">
+            <label htmlFor="home_id_status" className="block text-sm font-medium leading-6 text-gray-900">Home ID Status:</label>
+            <div className="mt-2">
+              <input type="text" id="home_id_status" name="home_id_status" value={formData.home_id_status} onChange={handleChange} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+            </div>
+          </div>
 
           <div className="sm:col-span-2">
             <label htmlFor="network" className="block text-sm font-medium leading-6 text-gray-900">Network:</label>
@@ -283,22 +327,22 @@ const CreateHomepass = () => {
                 <option>Pending</option>
               </select>
             </div>
-          </div> */}
+          </div>
 
 
-          {/* <div className="sm:col-span-2">
+          <div className="sm:col-span-2">
             <label htmlFor="completion_date" className="block text-sm font-medium leading-6 text-gray-900">Completion Date and Time:</label>
             <div className="mt-2">
               <input type="datetime-local" id="completion_date" name="completion_date" value={formData.completion_date} onChange={handleChange} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
             </div>
-          </div> */}
+          </div>
 
         </div>
       </div>
 
       <div className="flex items-center justify-end gap-x-6">
-      <button type="button" onClick={handleCancel} className="w-32 bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">Cancel</button>
-      <button type="submit" className="w-32 rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 py-3 px-6">Save</button>
+        <button type="button" onClick={handleCancel} className="w-32 bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">Cancel</button>
+        <button type="submit" className="w-32 rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 py-3 px-6">Save</button>
       </div>
     </form>
     </div>
@@ -306,4 +350,10 @@ const CreateHomepass = () => {
   );
 }
 
-export default CreateHomepass;
+export default UpdateHomepass;
+
+
+
+
+
+
