@@ -20,9 +20,15 @@ const CreateHomepass = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      let uploadResult = {};
-
-      // Mengunggah file gambar jika ada
+      let uploadResult = {
+        fullNamePic: formData.full_name_pic,
+        submissionFrom: formData.submission_from,
+        requestSource: formData.request_source,
+        customerCid: formData.customer_cid,
+        homepassId: formData.homepass_id,
+        housePhotoUrl: "" // Default to an empty string if no file is uploaded
+      };
+  
       if (formData.house_photo) {
         const housePhotoFormData = new FormData();
         housePhotoFormData.append("file", formData.house_photo);
@@ -32,41 +38,24 @@ const CreateHomepass = () => {
             Authorization: `Bearer ${localStorage.access_token}`,
           },
         });
-        // console.log(uploadResponse.data.imageUrl, "ini upload rspon");
-        // Membuat objek uploadResult
-        uploadResult = {
-          fullNamePic: formData.full_name_pic,
-          submissionFrom: formData.submission_from,
-          requestSource: formData.request_source,
-          customerCid: formData.customer_cid,
-          homepassId: formData.homepass_id,
-          house_photo: uploadResponse.data.imageUrl,
-        };
-        console.log(house_photo, "ini uploadResponse");
-      } else {
-        // Membuat objek uploadResult kosong jika tidak ada file yang diunggah
-        uploadResult = {
-          fullNamePic: formData.full_name_pic,
-          submissionFrom: formData.submission_from,
-          requestSource: formData.request_source,
-          customerCid: formData.customer_cid,
-          homepassId: formData.homepass_id,
-          house_photo: "",
-        };
+        uploadResult.housePhotoUrl = uploadResponse.data.imageUrl;
       }
-
-      // Mengirimkan data ke endpoint /api/homepass
-      const dataToSend = { ...formData, house_photo: uploadResult.house_photo  };
+  
+      const dataToSend = { 
+        ...formData, 
+        uploadResult 
+      };
+      
       if (!formData.completion_date) {
         delete dataToSend.completion_date;
       }
-      const response = await axios.post("http://localhost:3000/api/homepass", dataToSend, 
-        {
+  
+      const response = await axios.post("http://localhost:3000/api/homepass", dataToSend, {
         headers: {
           Authorization: `Bearer ${localStorage.access_token}`,
         },
       });
-      console.log("RESPONSE>>>", response.data);
+  
       alert("Homepass berhasil dibuat!");
       navigate("/");
     } catch (error) {
@@ -74,6 +63,7 @@ const CreateHomepass = () => {
       alert("Terjadi kesalahan saat membuat Homepass.");
     }
   };
+  
 
   const handleChange = (event) => {
     const { name, value } = event.target;

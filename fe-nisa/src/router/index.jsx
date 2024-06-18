@@ -6,6 +6,7 @@ import EditHomepass from '../pages/EditHomepass';
 import Template from '../pages/Template';
 import DetailHomepass from '../pages/DetailHomepass';
 import Login from '../pages/Login';
+import UpdateHomepass from '../pages/UpdateHomepass';
 
 
 const aunthBeforeLogin = () => {
@@ -51,8 +52,12 @@ const router = createBrowserRouter([
           element: <DetailHomepass />,
         },
         {
-          path: "/updatehomepass/:id",
+          path: "/edithomepass/:id",
           element: <EditHomepass />,
+        },
+        {
+          path: "/updatehomepass/:id",
+          element: <UpdateHomepass />,
         },
       ],
       loader: aunthBeforeLogin,

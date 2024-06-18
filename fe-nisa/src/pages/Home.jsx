@@ -191,10 +191,10 @@ const Home = () => {
                   Detail
                 </Link>
                 <Link
-                  to={`/updatehomepass/${row.id}`}
+                  to={`/edithomepass/${row.id}`}
                   className="bg-green-400 hover:bg-green-700 text-white font-bold py-1 px-2 rounded"
                 >
-                  Update
+                  Edit
                 </Link>
               </td>
             </tr>
