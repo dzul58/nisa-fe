@@ -25,7 +25,7 @@ const UpdateHomepass = () => {
   useEffect(() => {
     const fetchHomepassData = async () => {
       try {
-        const response = await axios.get(`http://192.168.202.166:8000/api/homepass/${id}`, {
+        const response = await axios.get(`http://localhost:3000/api/homepass/${id}`, {
           headers: {
             Authorization: `Bearer ${localStorage.access_token}`,
           },
@@ -68,7 +68,7 @@ const UpdateHomepass = () => {
         completion_date: formData.completion_date,
       };
 
-      const response = await axios.put(`http://192.168.202.166:8000/api/homepass/${id}`, payload, {
+      const response = await axios.put(`http://localhost:3000/api/homepass/${id}`, payload, {
         headers: {
           Authorization: `Bearer ${localStorage.access_token}`,
           "Content-Type": "application/json",
@@ -103,13 +103,23 @@ const UpdateHomepass = () => {
           <h2 className="text-base font-semibold leading-7 text-gray-900">Update Homepass</h2>
           <p className="mt-1 text-sm leading-6 text-gray-600">Update the necessary fields for the homepass.</p>
         </div>
+
   
         <div className="border-b border-gray-900/10 pb-12">
           <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-            <div className="sm:col-span-3">
-              <label htmlFor="hpm_check_result" className="block text-sm font-medium leading-6 text-gray-900">HPM Check Result:</label>
+
+            <div className="sm:col-span-4">
+              <label htmlFor="remarks" className="block text-sm font-medium leading-6 text-gray-900"> Remarks: (Uncover/Reject) </label>
               <div className="mt-2">
-                <select id="hpm_check_result" name="hpm_check_result" value={formData.hpm_check_result} onChange={handleChange} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+                <input id="remarks" name="remarks" value={formData.remarks} onChange={handleChange} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+              </div>
+            </div>
+
+
+            <div className="sm:col-span-3">
+              <label htmlFor="network" className="block text-sm font-medium leading-6 text-gray-900">Network:</label>
+              <div className="mt-2">
+                <select id="network" name="network" value={formData.network} onChange={handleChange} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
                   <option> </option>
                   <option>Tercover</option>
                   <option>Tidak Tercover</option>
@@ -122,6 +132,19 @@ const UpdateHomepass = () => {
               <label htmlFor="hpm_pic" className="block text-sm font-medium leading-6 text-gray-900">HPM PIC:</label>
               <div className="mt-2">
                 <input type="text" id="hpm_pic" name="hpm_pic" value={formData.hpm_pic} onChange={handleChange} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+              </div>
+            </div>
+
+
+            <div className="sm:col-span-3">
+              <label htmlFor="hpm_check_result" className="block text-sm font-medium leading-6 text-gray-900">HPM Check Result:</label>
+              <div className="mt-2">
+                <select id="hpm_check_result" name="hpm_check_result" value={formData.hpm_check_result} onChange={handleChange} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+                  <option> </option>
+                  <option>Tercover</option>
+                  <option>Tidak Tercover</option>
+                  <option>Survey Ops.</option>
+                </select>
               </div>
             </div>
   
@@ -140,20 +163,6 @@ const UpdateHomepass = () => {
               <label htmlFor="homepass_id" className="block text-sm font-medium leading-6 text-gray-900">Homepass ID:</label>
               <div className="mt-2">
                 <input type="text" id="homepass_id" name="homepass_id" value={formData.homepass_id} onChange={handleChange} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
-              </div>
-            </div>
-  
-            <div className="sm:col-span-2">
-              <label htmlFor="network" className="block text-sm font-medium leading-6 text-gray-900">Network:</label>
-              <div className="mt-2">
-                <input type="text" id="network" name="network" value={formData.network} onChange={handleChange} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
-              </div>
-            </div>
-  
-            <div className="sm:col-span-4">
-              <label htmlFor="remarks" className="block text-sm font-medium leading-6 text-gray-900"> Remarks: (Uncover/Reject) </label>
-              <div className="mt-2">
-                <input id="remarks" name="remarks" value={formData.remarks} onChange={handleChange} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
               </div>
             </div>
   

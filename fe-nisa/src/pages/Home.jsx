@@ -31,7 +31,7 @@ const Home = () => {
   const fetchData = async () => {
     try {
       const queryParams = new URLSearchParams({ ...filterValues, page }).toString();
-      const response = await axios.get(`http://192.168.202.166:8000/api/homepass?${queryParams}`, {
+      const response = await axios.get(`http://localhost:3000/api/homepass?${queryParams}`, {
         headers: {
           Authorization: `Bearer ${localStorage.access_token}`,
         },
@@ -59,18 +59,18 @@ const Home = () => {
   };
 
   return (
-    <div className="overflow-x-auto p-4 bg-gray-100">
+    <div className="overflow-x-auto p-5 bg-slate-50">
       <div className="mb-4">
         <Link to="/createhomepass" className="bg-blue-400 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-          Create Homepass
+          Create Request
         </Link>
       </div>
       <table className="min-w-full bg-white border border-gray-300 shadow-lg rounded-lg">
         <thead>
         <tr>
             <th className="border-b px-4 py-2" colSpan="12">
-              <div className="grid grid-cols-12 gap-2">
-                <input
+              <div className="grid grid-cols-12 gap-3">
+                {/* <input
                   type="text"
                   id="fullNamePic"
                   name="fullNamePic"
@@ -78,8 +78,8 @@ const Home = () => {
                   onChange={handleFilterChange}
                   placeholder="Nama Lengkap PIC yg mengajukan"
                   className="border border-gray-300 rounded-md py-2 px-3 col-span-3"
-                />
-                <input
+                /> */}
+                {/* <input
                   type="text"
                   id="submissionFrom"
                   name="submissionFrom"
@@ -96,7 +96,7 @@ const Home = () => {
                   onChange={handleFilterChange}
                   placeholder="Sumber Permintaan"
                   className="border border-gray-300 rounded-md py-2 px-3 col-span-2"
-                />
+                /> */}
                 <input
                   type="text"
                   id="customerCid"
@@ -157,10 +157,11 @@ const Home = () => {
           <tr>
             <th className="border-b px-4 py-2 bg-gray-200">No</th>
             <th className="border-b px-4 py-2 bg-gray-200">Timestamp</th>
-            <th className="border-b px-4 py-2 bg-gray-200 whitespace-nowrap">Nama Lengkap PIC yg mengajukan</th>
-            <th className="border-b px-4 py-2 bg-gray-200">Pengajuan dari</th>
-            <th className="border-b px-4 py-2 bg-gray-200">Sumber Permintaan</th>
+            {/* <th className="border-b px-4 py-2 bg-gray-200 whitespace-nowrap">Nama Lengkap PIC yg mengajukan</th> */}
+            {/* <th className="border-b px-4 py-2 bg-gray-200">Pengajuan dari</th> */}
+            {/* <th className="border-b px-4 py-2 bg-gray-200">Sumber Permintaan</th> */}
             <th className="border-b px-4 py-2 bg-gray-200">CID Pelanggan</th>
+            <th className="border-b px-4 py-2 bg-gray-200">Tujuan Permintaan</th>
             <th className="border-b px-4 py-2 bg-gray-200">Homepass ID</th>
             <th className="border-b px-4 py-2 bg-gray-200">Network</th>
             <th className="border-b px-4 py-2 bg-gray-200">Status Home-ID</th>
@@ -174,10 +175,11 @@ const Home = () => {
             <tr key={row.id} className={index % 2 === 0 ? 'bg-gray-50' : 'bg-white'}>
               <td className="border-b px-4 py-2">{(page - 1) * 10 + index + 1}</td>
               <td className="border-b px-4 py-2">{formatDate(row.timestamp)}</td>
-              <td className="border-b px-4 py-2 whitespace-nowrap">{row.full_name_pic}</td>
-              <td className="border-b px-4 py-2">{row.submission_from}</td>
-              <td className="border-b px-4 py-2">{row.request_source}</td>
+              {/* <td className="border-b px-4 py-2 whitespace-nowrap">{row.full_name_pic}</td> */}
+              {/* <td className="border-b px-4 py-2">{row.submission_from}</td> */}
+              {/* <td className="border-b px-4 py-2">{row.request_source}</td> */}
               <td className="border-b px-4 py-2">{row.customer_cid}</td>
+              <td className="border-b px-4 py-2">{row.request_purpose}</td>
               <td className="border-b px-4 py-2">{row.homepass_id}</td>
               <td className="border-b px-4 py-2">{row.network}</td>
               <td className="border-b px-4 py-2">{row.home_id_status}</td>
