@@ -21,7 +21,7 @@ const EditHomepass = () => {
   useEffect(() => {
     const fetchHomepassData = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/api/homepass/${id}`, {
+        const response = await axios.get(`http://192.168.202.166:8000/api/homepass/${id}`, {
           headers: {
             Authorization: `Bearer ${localStorage.access_token}`,
           },
@@ -49,7 +49,7 @@ const EditHomepass = () => {
       if (formData.house_photo) {
         const housePhotoFormData = new FormData();
         housePhotoFormData.append("file", formData.house_photo);
-        const uploadResponse = await axios.post("http://localhost:3000/api/upload", housePhotoFormData, {
+        const uploadResponse = await axios.post("http://192.168.202.166:8000/api/upload", housePhotoFormData, {
           headers: {
             "Content-Type": "multipart/form-data",
             Authorization: `Bearer ${localStorage.access_token}`,
@@ -60,7 +60,7 @@ const EditHomepass = () => {
 
       const dataToSend = { ...formData, uploadResult };
 
-      const response = await axios.put(`http://localhost:3000/api/homepass/${id}`, dataToSend, {
+      const response = await axios.put(`http://192.168.202.166:8000/api/homepass/${id}`, dataToSend, {
         headers: {
           Authorization: `Bearer ${localStorage.access_token}`,
         },

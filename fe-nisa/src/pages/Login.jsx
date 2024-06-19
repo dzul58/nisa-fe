@@ -20,7 +20,7 @@ const Login = () => {
     e.preventDefault();
     try {
       const dataLogin = { email, password };
-      let { data } = await axios.post(`http://localhost:3000/login`, dataLogin);
+      let { data } = await axios.post(`http://192.168.202.166:8000/login`, dataLogin);
       localStorage.setItem("access_token", data.access_token);
         // console.log(data.access_token);
       Swal.fire({
