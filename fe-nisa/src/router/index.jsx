@@ -3,7 +3,6 @@ import Parent from "../pages/Parent";
 import Home from "../pages/Home";
 import CreateHomepass from '../pages/CreateHomepass';
 import EditHomepass from '../pages/EditHomepass';
-import Template from '../pages/Template';
 import DetailHomepass from '../pages/DetailHomepass';
 import Login from '../pages/Login';
 import UpdateHomepass from '../pages/UpdateHomepass';
@@ -35,10 +34,6 @@ const router = createBrowserRouter([
     {
       element: <Parent />,
       children: [
-        {
-          path: "/tes",
-          element: <Template />,
-        },
         {
           path: "/",
           element: <Home />,

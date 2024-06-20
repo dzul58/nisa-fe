@@ -118,27 +118,41 @@ const EditHomepass = () => {
 
       <div className="border-b border-gray-900/10 pb-12">
         <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-          
+
           <div className="sm:col-span-4">
-            <label htmlFor="full_name_pic" className="block text-sm font-medium leading-6 text-gray-900">Nama Lengkap PIC yang Mengajukan:</label>
+            <label htmlFor="email_address" className="block text-sm font-medium leading-6 text-gray-900">Email Address:</label>
             <div className="mt-2">
-              <input   type="text" id="full_name_pic" name="full_name_pic" value={formData.full_name_pic} onChange={handleChange} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+              <input  type="email" id="email_address" name="email_address" value={formData.email_address} onChange={handleChange} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
             </div>
           </div>
 
           <div className="sm:col-span-3">
-            <label htmlFor="submission_from" className="block text-sm font-medium leading-6 text-gray-900">Pengajuan dari:</label>
-            <div className="mt-2">
-              <input type="text" id="submission_from" name="submission_from" value={formData.submission_from} onChange={handleChange} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+              <label htmlFor="submission_from" className="block text-sm font-medium leading-6 text-gray-900">Pengajuan dari:</label>
+              <div className="mt-2">
+                <select id="submission_from" name="submission_from" value={formData.submission_from} onChange={handleChange} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+                  <option> </option>
+                  <option>CS SIM</option>
+                  <option>CS WIC</option>
+                  <option>CS Priority/SME</option>
+                  <option>CJ MyRep</option>
+                  <option> Tim RWB </option>
+                  <option> Tim WIC </option>
+                </select>
+              </div>
             </div>
-          </div>
+  
+            <div className="sm:col-span-3">
+              <label htmlFor="request_source" className="block text-sm font-medium leading-6 text-gray-900">Sumber Permintaan:</label>
+              <div className="mt-2">
+                <select id="request_source" name="request_source" value={formData.request_source} onChange={handleChange} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+                  <option> </option>
+                  <option>Email, Soc-Med, Whatsapp</option>
+                  <option>Walk In Customer</option>
+                  <option>Retain RWB</option>
+                </select>
+              </div>
+            </div>
 
-          <div className="sm:col-span-3">
-            <label htmlFor="request_source" className="block text-sm font-medium leading-6 text-gray-900">Sumber Permintaan:</label>
-            <div className="mt-2">
-              <input type="text" id="request_source" name="request_source" value={formData.request_source} onChange={handleChange} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
-            </div>
-          </div>
 
           <div className="sm:col-span-3">
             <label htmlFor="customer_cid" className="block text-sm font-medium leading-6 text-gray-900">CID Pelanggan:</label>
@@ -154,6 +168,15 @@ const EditHomepass = () => {
             </div>
           </div>
 
+          <div className="sm:col-span-3">
+              <label htmlFor="destination_address" className="block text-sm font-medium leading-6 text-gray-900">Tujuan Permintaan:</label>
+              <div className="mt-2">
+                <select id="destination_address" name="destination_address" value={formData.destination_address} onChange={handleChange} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+                  <option>Moving Address (Pindah Rumah)</option>
+                </select>
+              </div>
+            </div>
+
           <div className="col-span-full">
             <label htmlFor="current_address" className="block text-sm font-medium leading-6 text-gray-900">Alamat Saat Ini:</label>
             <div className="mt-2">
@@ -161,14 +184,12 @@ const EditHomepass = () => {
             </div>
           </div>
 
-          <div className="sm:col-span-5">
-              <label htmlFor="destination_address" className="block text-sm font-medium leading-6 text-gray-900">Alamat Tujuan:</label>
-              <div className="mt-2">
-                <select id="destination_address" name="destination_address" value={formData.destination_address} onChange={handleChange} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
-                  <option>Moving Address (Pindah Rumah)</option>
-                </select>
-              </div>
+          <div className="col-span-full">
+            <label htmlFor="destination_address" className="block text-sm font-medium leading-6 text-gray-900">Alamat Tujuan:</label>
+            <div className="mt-2">
+              <textarea  type="text" id="destination_address" name="destination_address" value={formData.destination_address} onChange={handleChange} rows="3" className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></textarea>
             </div>
+          </div>
 
           <div className="col-span-full">
           <label htmlFor="cover-photo" className="block text-sm font-medium leading-6 text-gray-900">
@@ -209,104 +230,6 @@ const EditHomepass = () => {
               </div>
             </div>
           </div>
-
-          <div className="sm:col-span-4">
-            <label htmlFor="request_purpose" className="block text-sm font-medium leading-6 text-gray-900">Tujuan Permintaan:</label>
-            <div className="mt-2">
-              <input  type="text" id="request_purpose" name="request_purpose" value={formData.request_purpose} onChange={handleChange} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
-            </div>
-          </div>
-
-          <div className="sm:col-span-4">
-            <label htmlFor="email_address" className="block text-sm font-medium leading-6 text-gray-900">Email Address:</label>
-            <div className="mt-2">
-              <input  type="email" id="email_address" name="email_address" value={formData.email_address} onChange={handleChange} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
-            </div>
-          </div>
-
-          {/* <div className="sm:col-span-3">
-            <label htmlFor="hpm_check_result" className="block text-sm font-medium leading-6 text-gray-900">HPM Check Result:</label>
-            <div className="mt-2">
-              <select id="hpm_check_result" name="hpm_check_result" value={formData.hpm_check_result} onChange={handleChange} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
-              <option> </option>
-                <option>Tercover</option>
-                <option>Tidak Tercover</option>
-                <option>Survey Ops.</option>
-              </select>
-            </div>
-          </div>
-
-
-          <div className="sm:col-span-2">
-            <label htmlFor="hpm_pic" className="block text-sm font-medium leading-6 text-gray-900">HPM PIC:</label>
-            <div className="mt-2">
-              <input type="text" id="hpm_pic" name="hpm_pic" value={formData.hpm_pic} onChange={handleChange} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
-            </div>
-          </div>
-
-
-          <div className="sm:col-span-3">
-            <label htmlFor="home_id_status" className="block text-sm font-medium leading-6 text-gray-900">Home ID Status:</label>
-            <div className="mt-2">
-              <select id="home_id_status" name="home_id_status" value={formData.home_id_status} onChange={handleChange} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
-              <option> </option>
-                <option> </option>
-                <option>Taken</option>
-                <option>Released</option>
-              </select>
-            </div>
-          </div>
-
-          <div className="sm:col-span-2">
-            <label htmlFor="homepass_id" className="block text-sm font-medium leading-6 text-gray-900">Homepass ID:</label>
-            <div className="mt-2">
-              <input  type="text" id="homepass_id" name="homepass_id" value={formData.homepass_id} onChange={handleChange} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
-            </div>
-          </div>
-
-
-          <div className="sm:col-span-2">
-            <label htmlFor="network" className="block text-sm font-medium leading-6 text-gray-900">Network:</label>
-            <div className="mt-2">
-              <input type="text" id="network"  name="network" value={formData.network} onChange={handleChange} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
-            </div>
-          </div>
-
-          <div className="sm:col-span-4">
-            <label htmlFor="remarks" className="block text-sm font-medium leading-6 text-gray-900"> Remarks: (Uncover/Reject) </label>
-            <div className="mt-2">
-              <input id="remarks" name="remarks" value={formData.remarks} onChange={handleChange} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
-            </div>
-          </div>
-
-          <div className="col-span-full">
-            <label htmlFor="notes_recommendations" className="block text-sm font-medium leading-6 text-gray-900">Note/Recomendation (free text):</label>
-            <div className="mt-2">
-              <textarea id="notes_recommendations" name="notes_recommendations" value={formData.notes_recommendations} onChange={handleChange} rows="3" className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></textarea>
-            </div>
-          </div>
-          
-
-      
-          <div className="sm:col-span-3">
-            <label htmlFor="status" className="block text-sm font-medium leading-6 text-gray-900">Status:</label>
-            <div className="mt-2">
-              <select id="status" name="status" value={formData.status} onChange={handleChange} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
-                <option> </option>
-                <option>Done</option>
-                <option>On Progress</option>
-                <option>Pending</option>
-              </select>
-            </div>
-          </div> */}
-
-
-          {/* <div className="sm:col-span-2">
-            <label htmlFor="completion_date" className="block text-sm font-medium leading-6 text-gray-900">Completion Date and Time:</label>
-            <div className="mt-2">
-              <input type="datetime-local" id="completion_date" name="completion_date" value={formData.completion_date} onChange={handleChange} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
-            </div>
-          </div> */}
 
         </div>
       </div>

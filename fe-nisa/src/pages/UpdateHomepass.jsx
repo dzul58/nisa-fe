@@ -104,7 +104,7 @@ const UpdateHomepass = () => {
   };
 
   const handleCancel = () => {
-    navigate("/");
+    navigate(`/hmpdetails/${id}`);
   };
 
 
