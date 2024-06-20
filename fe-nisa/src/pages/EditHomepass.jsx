@@ -17,7 +17,7 @@ const EditHomepass = () => {
     destination_address: "",
     coordinate_point: "",
     house_photo: null,
-    request_purpose: "",
+    request_purpose: "Moving Address (Pindah Rumah)",
     email_address: "",
   });
 
@@ -112,8 +112,8 @@ const EditHomepass = () => {
     <div>
     <form onSubmit={handleSubmit} className="space-y-12">
       <div className="border-b border-gray-900/10 pb-12">
-      <h2 className="text-base font-semibold leading-7 text-gray-900">Create new Request</h2>
-      <p className="mt-1 text-sm leading-6 text-gray-600">This information will be displayed publicly so be careful what you share.</p>
+      <h2 className="text-base font-semibold leading-7 text-gray-900">Edit Moving Address Request</h2>
+      <p className="mt-1 text-sm leading-6 text-gray-600">Edit the necessary fields for the moving address request.</p>
       </div>
 
       <div className="border-b border-gray-900/10 pb-12">
@@ -169,10 +169,10 @@ const EditHomepass = () => {
           </div>
 
           <div className="sm:col-span-3">
-              <label htmlFor="destination_address" className="block text-sm font-medium leading-6 text-gray-900">Tujuan Permintaan:</label>
+              <label htmlFor="request_purpose" className="block text-sm font-medium leading-6 text-gray-900">Tujuan Permintaan:</label>
               <div className="mt-2">
-                <select id="destination_address" name="destination_address" value={formData.destination_address} onChange={handleChange} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
-                  <option>Moving Address (Pindah Rumah)</option>
+                <select id="request_purpose" name="request_purpose" value={formData.request_purpose} onChange={handleChange} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+                <option>Moving Address (Pindah Rumah)</option>
                 </select>
               </div>
             </div>

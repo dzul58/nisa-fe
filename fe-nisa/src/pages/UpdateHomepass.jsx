@@ -113,7 +113,7 @@ const UpdateHomepass = () => {
       <form onSubmit={handleSubmit} className="space-y-12">
         <div className="border-b border-gray-900/10 pb-12">
           <h2 className="text-base font-semibold leading-7 text-gray-900">Update Moving Address Request</h2>
-          <p className="mt-1 text-sm leading-6 text-gray-600">Update the necessary fields for the moving address.</p>
+          <p className="mt-1 text-sm leading-6 text-gray-600">Update the necessary fields for the moving address request.</p>
         </div>
 
   
