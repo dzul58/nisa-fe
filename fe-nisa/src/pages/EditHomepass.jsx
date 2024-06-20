@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const EditHomepass = () => {
   const navigate = useNavigate();
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+  const [isNewPhotoUploaded, setIsNewPhotoUploaded] = useState(false);
   const { id } = useParams();
   const [formData, setFormData] = useState({
     full_name_pic: "",
@@ -37,16 +40,17 @@ const EditHomepass = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsButtonDisabled(true); // Nonaktifkan tombol save setelah ditekan
     try {
       let uploadResult = {
         fullNamePic: formData.full_name_pic,
         submissionFrom: formData.submission_from,
         requestSource: formData.request_source,
         customerCid: formData.customer_cid,
-        housePhotoUrl: "", // Default to an empty string if no file is uploaded
+        housePhotoUrl: formData.house_photo || "", // Gunakan nilai lama jika tidak ada gambar baru diunggah
       };
 
-      if (formData.house_photo) {
+      if (isNewPhotoUploaded) {
         const housePhotoFormData = new FormData();
         housePhotoFormData.append("file", formData.house_photo);
         const uploadResponse = await axios.post("http://192.168.202.166:8000/api/upload", housePhotoFormData, {
@@ -66,11 +70,20 @@ const EditHomepass = () => {
         },
       });
 
-      alert("Homepass berhasil diperbarui!");
+      Swal.fire({
+        icon: "success",
+        title: "The request has been successfully edited!",
+      });
       navigate("/");
     } catch (error) {
       console.error("Error updating homepass:", error);
-      alert("Terjadi kesalahan saat memperbarui Homepass.");
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "There was an error while editing the request.",
+      });
+    } finally {
+      setIsButtonDisabled(false); // Aktifkan kembali tombol save setelah proses selesai
     }
   };
 
@@ -87,6 +100,7 @@ const EditHomepass = () => {
       ...formData,
       house_photo: event.target.files[0],
     });
+    setIsNewPhotoUploaded(true);
   };
 
   const handleCancel = () => {
@@ -147,12 +161,14 @@ const EditHomepass = () => {
             </div>
           </div>
 
-          <div className="col-span-full">
-            <label htmlFor="destination_address" className="block text-sm font-medium leading-6 text-gray-900">Alamat Tujuan:</label>
-            <div className="mt-2">
-              <textarea  type="text" id="destination_address" name="destination_address" value={formData.destination_address} onChange={handleChange} rows="3" className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></textarea>
+          <div className="sm:col-span-5">
+              <label htmlFor="destination_address" className="block text-sm font-medium leading-6 text-gray-900">Alamat Tujuan:</label>
+              <div className="mt-2">
+                <select id="destination_address" name="destination_address" value={formData.destination_address} onChange={handleChange} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+                  <option>Moving Address (Pindah Rumah)</option>
+                </select>
+              </div>
             </div>
-          </div>
 
           <div className="col-span-full">
           <label htmlFor="cover-photo" className="block text-sm font-medium leading-6 text-gray-900">
@@ -297,7 +313,7 @@ const EditHomepass = () => {
 
       <div className="flex items-center justify-end gap-x-6">
       <button type="button" onClick={handleCancel} className="w-32 bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">Cancel</button>
-      <button type="submit" className="w-32 rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 py-3 px-6">Save</button>
+      <button type="submit" className="w-32 rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 py-3 px-6" disabled={isButtonDisabled}>Save</button>
       </div>
     </form>
     </div>

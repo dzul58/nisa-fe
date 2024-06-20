@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const UpdateHomepass = () => {
   const navigate = useNavigate();
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const { id } = useParams();
   const [formData, setFormData] = useState({
     current_address: "",
@@ -41,6 +43,7 @@ const UpdateHomepass = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsButtonDisabled(true); // Nonaktifkan tombol save setelah ditekan
     try {
       const uploadResult = {
         fullNamePic: formData.full_name_pic,
@@ -75,11 +78,20 @@ const UpdateHomepass = () => {
         },
       });
 
-      alert("Homepass berhasil diperbarui!");
-      navigate("/");
+      Swal.fire({
+        icon: "success",
+        title: "The request has been successfully updated!",
+      });
+      navigate(`/hmpdetails/${id}`);
     } catch (error) {
       console.error("Error updating homepass:", error);
-      alert("Terjadi kesalahan saat memperbarui Homepass.");
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "There was an error while updating the request.",
+      });
+    } finally {
+      setIsButtonDisabled(false); // Aktifkan kembali tombol save setelah proses selesai
     }
   };
 
@@ -100,38 +112,62 @@ const UpdateHomepass = () => {
     <div>
       <form onSubmit={handleSubmit} className="space-y-12">
         <div className="border-b border-gray-900/10 pb-12">
-          <h2 className="text-base font-semibold leading-7 text-gray-900">Update Homepass</h2>
-          <p className="mt-1 text-sm leading-6 text-gray-600">Update the necessary fields for the homepass.</p>
+          <h2 className="text-base font-semibold leading-7 text-gray-900">Update Moving Address Request</h2>
+          <p className="mt-1 text-sm leading-6 text-gray-600">Update the necessary fields for the moving address.</p>
         </div>
 
   
         <div className="border-b border-gray-900/10 pb-12">
           <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
 
-            <div className="sm:col-span-4">
+            {/* <div className="sm:col-span-4">
               <label htmlFor="remarks" className="block text-sm font-medium leading-6 text-gray-900"> Remarks: (Uncover/Reject) </label>
               <div className="mt-2">
                 <input id="remarks" name="remarks" value={formData.remarks} onChange={handleChange} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
               </div>
-            </div>
-
+            </div> */}
 
             <div className="sm:col-span-3">
-              <label htmlFor="network" className="block text-sm font-medium leading-6 text-gray-900">Network:</label>
-              <div className="mt-2">
-                <select id="network" name="network" value={formData.network} onChange={handleChange} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
-                  <option> </option>
-                  <option>Tercover</option>
-                  <option>Tidak Tercover</option>
-                  <option>Survey Ops.</option>
-                </select>
-              </div>
-            </div>
-  
-            <div className="sm:col-span-2">
               <label htmlFor="hpm_pic" className="block text-sm font-medium leading-6 text-gray-900">HPM PIC:</label>
               <div className="mt-2">
                 <input type="text" id="hpm_pic" name="hpm_pic" value={formData.hpm_pic} onChange={handleChange} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+              </div>
+            </div>
+            
+
+            <div className="sm:col-span-2">
+              <label htmlFor="remarks" className="block text-sm font-medium leading-6 text-gray-900">Remarks: (Uncover/Reject)</label>
+              <div className="mt-2">
+                <select id="remarks" name="remarks" value={formData.remarks} onChange={handleChange} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+                  <option> </option>
+                  <option>Data Not Valid (tidak sesuai)</option>
+                  <option>Tidak tercover jaringan MyRep & Partner</option>
+                  <option>Add Pole (membutuhkan tiang tambahan)</option>
+                  <option>Installation Not Standart (tidak standar)</option>
+                </select>
+              </div>
+            </div>
+
+            <br />
+
+            <div className="sm:col-span-2">
+              <label htmlFor="homepass_id" className="block text-sm font-medium leading-6 text-gray-900">Homepass ID:</label>
+              <div className="mt-2">
+                <input type="text" id="homepass_id" name="homepass_id" value={formData.homepass_id} onChange={handleChange} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+              </div>
+            </div>
+
+
+            <div className="sm:col-span-5">
+              <label htmlFor="network" className="block text-sm font-medium leading-6 text-gray-900">Network:</label>
+              <div className="mt-5">
+                <select id="network" name="network" value={formData.network} onChange={handleChange} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+                  <option> </option>
+                  <option>SMT</option>
+                  <option>MyRepublic</option>
+                  <option>Fiberstar</option>
+                  <option>MTI</option>
+                </select>
               </div>
             </div>
 
@@ -156,13 +192,6 @@ const UpdateHomepass = () => {
                   <option>Taken</option>
                   <option>Released</option>
                 </select>
-              </div>
-            </div>
-  
-            <div className="sm:col-span-2">
-              <label htmlFor="homepass_id" className="block text-sm font-medium leading-6 text-gray-900">Homepass ID:</label>
-              <div className="mt-2">
-                <input type="text" id="homepass_id" name="homepass_id" value={formData.homepass_id} onChange={handleChange} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
               </div>
             </div>
   
@@ -196,7 +225,7 @@ const UpdateHomepass = () => {
   
         <div className="flex items-center justify-end gap-x-6">
           <button type="button" onClick={handleCancel} className="w-32 bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">Cancel</button>
-        <button type="submit" className="w-32 rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 py-3 px-6">Save</button>
+        <button type="submit" className="w-32 rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 py-3 px-6" disabled={isButtonDisabled}>Save</button>
       </div>
     </form>
   </div>

@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const CreateHomepass = () => {
   const navigate = useNavigate();
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const [formData, setFormData] = useState({
-    full_name_pic: "",
+    // full_name_pic: "",
     submission_from: "",
     request_source: "",
     customer_cid: "",
@@ -19,9 +21,10 @@ const CreateHomepass = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsButtonDisabled(true); // Nonaktifkan tombol save setelah ditekan
     try {
       let uploadResult = {
-        fullNamePic: formData.full_name_pic,
+        // fullNamePic: formData.full_name_pic,
         submissionFrom: formData.submission_from,
         requestSource: formData.request_source,
         customerCid: formData.customer_cid,
@@ -32,7 +35,7 @@ const CreateHomepass = () => {
       if (formData.house_photo) {
         const housePhotoFormData = new FormData();
         housePhotoFormData.append("file", formData.house_photo);
-        const uploadResponse = await axios.post("http://192.168.202.166:8000/api/upload", housePhotoFormData, {
+        const uploadResponse = await axios.post("http://localhost:8000/api/upload", housePhotoFormData, {
           headers: {
             "Content-Type": "multipart/form-data",
             Authorization: `Bearer ${localStorage.access_token}`,
@@ -50,17 +53,26 @@ const CreateHomepass = () => {
         delete dataToSend.completion_date;
       }
   
-      const response = await axios.post("http://192.168.202.166:8000/api/homepass", dataToSend, {
+      const response = await axios.post("http://localhost:8000/api/homepass", dataToSend, {
         headers: {
           Authorization: `Bearer ${localStorage.access_token}`,
         },
       });
   
-      alert("Homepass berhasil dibuat!");
+      Swal.fire({
+        icon: "success",
+        title: "The request has been successfully made!",
+      });
       navigate("/");
     } catch (error) {
       console.error("Error creating homepass:", error);
-      alert("Terjadi kesalahan saat membuat Homepass.");
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "An error occurred while making the request!",
+      });
+    } finally {
+      setIsButtonDisabled(false); // Aktifkan kembali tombol save setelah proses selesai
     }
   };
   
@@ -84,6 +96,8 @@ const CreateHomepass = () => {
     navigate("/");
   };
 
+  
+
 
   return (
     <div>
@@ -95,15 +109,17 @@ const CreateHomepass = () => {
 
       <div className="border-b border-gray-900/10 pb-12">
         <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+
           
-          <div className="sm:col-span-4">
+          
+          {/* <div className="sm:col-span-4">
             <label htmlFor="full_name_pic" className="block text-sm font-medium leading-6 text-gray-900">Nama Lengkap PIC yang Mengajukan:</label>
             <div className="mt-2">
               <input   type="text" id="full_name_pic" name="full_name_pic" value={formData.full_name_pic} onChange={handleChange} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
             </div>
-          </div>
+          </div> */}
 
-          <div className="sm:col-span-3">
+          {/* <div className="sm:col-span-3">
             <label htmlFor="submission_from" className="block text-sm font-medium leading-6 text-gray-900">Pengajuan dari:</label>
             <div className="mt-2">
               <input type="text" id="submission_from" name="submission_from" value={formData.submission_from} onChange={handleChange} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
@@ -115,7 +131,42 @@ const CreateHomepass = () => {
             <div className="mt-2">
               <input type="text" id="request_source" name="request_source" value={formData.request_source} onChange={handleChange} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
             </div>
+          </div> */}
+
+          <div className="sm:col-span-4">
+            <label htmlFor="email_address" className="block text-sm font-medium leading-6 text-gray-900">Email Address:</label>
+            <div className="mt-2">
+              <input  type="email" id="email_address" name="email_address" value={formData.email_address} onChange={handleChange} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+            </div>
           </div>
+
+          <div className="sm:col-span-3">
+              <label htmlFor="submission_from" className="block text-sm font-medium leading-6 text-gray-900">Pengajuan dari:</label>
+              <div className="mt-2">
+                <select id="submission_from" name="submission_from" value={formData.submission_from} onChange={handleChange} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+                  <option> </option>
+                  <option>CS SIM</option>
+                  <option>CS WIC</option>
+                  <option>CS Priority/SME</option>
+                  <option>CJ MyRep</option>
+                  <option> Tim RWB </option>
+                  <option> Tim WIC </option>
+                </select>
+              </div>
+            </div>
+  
+            <div className="sm:col-span-3">
+              <label htmlFor="request_source" className="block text-sm font-medium leading-6 text-gray-900">Sumber Permintaan:</label>
+              <div className="mt-2">
+                <select id="request_source" name="request_source" value={formData.request_source} onChange={handleChange} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+                  <option> </option>
+                  <option>Email, Soc-Med, Whatsapp</option>
+                  <option>Walk In Customer</option>
+                  <option>Retain RWB</option>
+                </select>
+              </div>
+            </div>
+
 
           <div className="sm:col-span-3">
             <label htmlFor="customer_cid" className="block text-sm font-medium leading-6 text-gray-900">CID Pelanggan:</label>
@@ -130,6 +181,15 @@ const CreateHomepass = () => {
               <input type="text" id="coordinate_point" name="coordinate_point" value={formData.coordinate_point} onChange={handleChange} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
             </div>
           </div>
+
+          <div className="sm:col-span-3">
+              <label htmlFor="destination_address" className="block text-sm font-medium leading-6 text-gray-900">Tujuan Permintaan:</label>
+              <div className="mt-2">
+                <select id="destination_address" name="destination_address" value={formData.destination_address} onChange={handleChange} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+                  <option>Moving Address (Pindah Rumah)</option>
+                </select>
+              </div>
+            </div>
 
           <div className="col-span-full">
             <label htmlFor="current_address" className="block text-sm font-medium leading-6 text-gray-900">Alamat Saat Ini:</label>
@@ -182,20 +242,6 @@ const CreateHomepass = () => {
               </div>
                 <p className="text-xs leading-5 text-gray-600">PNG, JPG</p>
               </div>
-            </div>
-          </div>
-
-          <div className="sm:col-span-4">
-            <label htmlFor="request_purpose" className="block text-sm font-medium leading-6 text-gray-900">Tujuan Permintaan:</label>
-            <div className="mt-2">
-              <input  type="text" id="request_purpose" name="request_purpose" value={formData.request_purpose} onChange={handleChange} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
-            </div>
-          </div>
-
-          <div className="sm:col-span-4">
-            <label htmlFor="email_address" className="block text-sm font-medium leading-6 text-gray-900">Email Address:</label>
-            <div className="mt-2">
-              <input  type="email" id="email_address" name="email_address" value={formData.email_address} onChange={handleChange} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
             </div>
           </div>
 
@@ -288,7 +334,7 @@ const CreateHomepass = () => {
 
       <div className="flex items-center justify-end gap-x-6">
       <button type="button" onClick={handleCancel} className="w-32 bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">Cancel</button>
-      <button type="submit" className="w-32 rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 py-3 px-6">Save</button>
+      <button type="submit" className="w-32 rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 py-3 px-6" disabled={isButtonDisabled}>Save</button>
       </div>
     </form>
     </div>
