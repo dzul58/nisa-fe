@@ -27,12 +27,14 @@ const AutoLogin = () => {
         icon: "success",
         title: "Success Login",
       });
-
+  
       navigate("/");
     } catch (error) {
+      console.error('Auto-login error:', error);
       Swal.fire({
         icon: "error",
         title: error.response?.data?.error || "Login failed",
+        text: `Error details: ${error.message}`
       });
       navigate('/login');
     }

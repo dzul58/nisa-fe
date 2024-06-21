@@ -7,6 +7,7 @@ import DetailHomepass from '../pages/DetailHomepass';
 import Login from '../pages/Login';
 import UpdateHomepass from '../pages/UpdateHomepass';
 import AutoLogin from '../pages/AutoLogin';
+import ErrorPage from '../pages/ErrorPage';
 
 
 const aunthBeforeLogin = () => {
@@ -30,6 +31,7 @@ const router = createBrowserRouter([
     {
       path: "/auto-login",
       element: <AutoLogin />,
+      errorElement: <ErrorPage />,
     },
     {
       path: "/login",
