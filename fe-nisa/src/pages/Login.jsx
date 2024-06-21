@@ -4,12 +4,12 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  function emailOnChange(event) {
-    setEmail(event.target.value);
+  function usernameOnChange(event) {
+    setUsername(event.target.value);
   }
 
   function passwordOnChange(event) {
@@ -19,7 +19,7 @@ const Login = () => {
   async function handleLogin(e) {
     e.preventDefault();
     try {
-      const dataLogin = { email, password };
+      const dataLogin = { username, password };
       let { data } = await axios.post(`http://192.168.202.166:8000/login`, dataLogin);
       localStorage.setItem("access_token", data.access_token);
         // console.log(data.access_token);
@@ -45,13 +45,13 @@ const Login = () => {
           <div className="h-2 bg-purple-400 rounded-t-md"></div>
           <div className="px-8 py-6">
             <form onSubmit={handleLogin}>
-              <label className="block font-semibold">Email</label>
+              <label className="block font-semibold">Username</label>
               <input
                 type="text"
-                placeholder="Email"
+                placeholder="Username"
                 className="border w-full h-5 px-3 py-5 mt-2 hover:outline-none focus:outline-none focus:ring-indigo-500 focus:ring-1 rounded-md"
                 required
-                onChange={emailOnChange}
+                onChange={usernameOnChange}
               />
               <label className="block mt-3 font-semibold">Password</label>
               <input

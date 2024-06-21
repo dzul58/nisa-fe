@@ -6,6 +6,7 @@ import EditHomepass from '../pages/EditHomepass';
 import DetailHomepass from '../pages/DetailHomepass';
 import Login from '../pages/Login';
 import UpdateHomepass from '../pages/UpdateHomepass';
+import AutoLogin from '../pages/AutoLogin';
 
 
 const aunthBeforeLogin = () => {
@@ -26,6 +27,10 @@ const aunthAfterLogin = () => {
 
 
 const router = createBrowserRouter([
+    {
+      path: "/auto-login",
+      element: <AutoLogin />,
+    },
     {
       path: "/login",
       element: <Login />,
