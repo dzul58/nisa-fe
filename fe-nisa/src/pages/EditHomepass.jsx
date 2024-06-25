@@ -24,7 +24,7 @@ const EditHomepass = () => {
   useEffect(() => {
     const fetchHomepassData = async () => {
       try {
-        const response = await axios.get(`http://localhost:8000/api/homepass/${id}`, {
+        const response = await axios.get(`http://192.168.202.166:8000/api/homepass/${id}`, {
           headers: {
             Authorization: `Bearer ${localStorage.access_token}`,
           },

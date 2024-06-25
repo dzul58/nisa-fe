@@ -1,15 +1,16 @@
 import { useEffect } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 
 const AutoLogin = () => {
   const navigate = useNavigate();
-  const [searchParams] = useSearchParams();
+  const location = useLocation();
 
   useEffect(() => {
-    const username = searchParams.get('username');
-    const password = searchParams.get('password');
+    const params = new URLSearchParams(location.search.replace(/&amp;/g, '&'));
+    const username = params.get('username');
+    const password = params.get('password');
 
     if (username && password) {
       handleAutoLogin(username, password);
@@ -20,7 +21,7 @@ const AutoLogin = () => {
 
   const handleAutoLogin = async (username, password) => {
     try {
-      const { data } = await axios.get(`http://localhost:8000/auto-login?username=${username}&password=${password}`);
+      const { data } = await axios.get(`http://192.168.202.166:8000/auto-login?username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`);
       localStorage.setItem("access_token", data.access_token);
       
       Swal.fire({
