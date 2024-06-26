@@ -1,32 +1,44 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
 import { format } from 'date-fns';
 import { id } from 'date-fns/locale';
-import { useNavigate, Link } from "react-router-dom";
+import Swal from 'sweetalert2';
 
 const DetailHomepass = () => {
-  const navigate = useNavigate();
   const { id: detailId } = useParams();
   const [data, setData] = useState(null);
+  const [userRole, setUserRole] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://192.168.202.166:8000/api/homepass/${detailId}`,
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.access_token}`,
-            },
-          }
-        );
+        const response = await axios.get(`http://localhost:8000/api/homepass/${detailId}`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.access_token}`,
+          },
+        });
         setData(response.data);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     };
 
+    const fetchUserRole = async () => {
+      try {
+        const response = await axios.get('http://localhost:8000/api/authorization-hpm', {
+          headers: {
+            Authorization: `Bearer ${localStorage.access_token}`,
+          },
+        });
+        setUserRole(response.data.role);
+      } catch (error) {
+        console.error('Error fetching user role:', error);
+      }
+    };
+
     fetchData();
+    fetchUserRole();
   }, [detailId]);
 
   const formatDate = (dateString) => {
@@ -34,9 +46,24 @@ const DetailHomepass = () => {
     return format(date, "dd MMMM yyyy HH:mm", { locale: id });
   };
 
+  const isAdmin = () => userRole === 'HPM';
+
+  const handleUpdateClick = (e) => {
+    if (!isAdmin()) {
+      e.preventDefault();
+      Swal.fire({
+        title: 'Unauthorized',
+        text: 'You do not have permission to update. Only HPM are allowed.',
+        icon: 'error',
+        confirmButtonText: 'OK'
+      });
+    }
+  };
+
   if (!data) {
     return <div>Loading...</div>;
   }
+  
 
   return (
     <div>
@@ -216,12 +243,21 @@ const DetailHomepass = () => {
             >
                 Back
             </Link>
+            {isAdmin() ? (
             <Link 
-                to={`/updatehomepass/${data.id}`} 
-                className="w-32 text-center bg-green-500 text-white font-semibold hover:bg-green-700 py-2 px-4 border border-green-500 hover:border-transparent rounded"
+              to={`/updatehomepass/${data.id}`} 
+              className="w-32 text-center bg-green-500 text-white font-semibold hover:bg-green-700 py-2 px-4 border border-green-500 hover:border-transparent rounded"
             >
-                Update
+              Update
             </Link>
+            ) : (
+            <button 
+              onClick={handleUpdateClick}
+              className="w-32 text-center bg-green-500 text-white font-semibold hover:bg-green-700 py-2 px-4 border border-green-500 hover:border-transparent rounded"
+            >
+              Update
+            </button>
+        )}
         </div>
       </form>
     </div>

@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { format } from 'date-fns';
 import { id } from 'date-fns/locale';
+import Swal from 'sweetalert2';
 
 const Home = () => {
   const [data, setData] = useState([]);
@@ -19,6 +20,8 @@ const Home = () => {
   });
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [userRole, setUserRole] = useState('');
+  const navigate = useNavigate();
 
   const handleFilterChange = (event) => {
     const { name, value } = event.target;
@@ -31,7 +34,7 @@ const Home = () => {
   const fetchData = async () => {
     try {
       const queryParams = new URLSearchParams({ ...filterValues, page }).toString();
-      const response = await axios.get(`http://192.168.202.166:8000/api/homepass?${queryParams}`, {
+      const response = await axios.get(`http://localhost:8000/api/homepass?${queryParams}`, {
         headers: {
           Authorization: `Bearer ${localStorage.access_token}`,
         },
@@ -43,8 +46,22 @@ const Home = () => {
     }
   };
 
+  const fetchUserRole = async () => {
+    try {
+      const response = await axios.get('http://localhost:8000/api/authorization-cs', {
+        headers: {
+          Authorization: `Bearer ${localStorage.access_token}`,
+        },
+      });
+      setUserRole(response.data.role);
+    } catch (error) {
+      console.error('Error fetching user role:', error);
+    }
+  };
+
   useEffect(() => {
     fetchData();
+    fetchUserRole();
   }, [filterValues, page]);
 
   const formatDate = (dateString) => {
@@ -58,12 +75,45 @@ const Home = () => {
     }
   };
 
+  const showUnauthorizedAlert = () => {
+    Swal.fire({
+      title: 'Unauthorized',
+      text: 'You do not have permission to perform this action. Only Administrators are allowed.',
+      icon: 'error',
+      confirmButtonText: 'OK'
+    }).then(() => {
+      navigate('/');
+    });
+  };
+
+  const isAdmin = () => userRole === 'Administrator';
+
+  const handleCreateClick = () => {
+    if (isAdmin()) {
+      navigate('/createhomepass');
+    } else {
+      showUnauthorizedAlert()
+    }
+  };
+
+  const handleEditClick = (e, id) => {
+    if (!isAdmin()) {
+      e.preventDefault();
+      showUnauthorizedAlert()
+    }
+  };
+
   return (
     <div className="overflow-x-auto p-5 bg-slate-50">
       <div className="mb-4">
-        <Link to="/createhomepass" className="bg-blue-400 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-          Create Request
-        </Link>
+        {/* {isAdmin() && ( */}
+          <button
+            onClick={handleCreateClick}
+            className="bg-blue-400 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          >
+            Create Request
+          </button>
+        {/* )} */}
       </div>
       <table className="min-w-full bg-white border border-gray-300 shadow-lg rounded-lg">
         <thead>
@@ -192,12 +242,15 @@ const Home = () => {
                 >
                   Detail
                 </Link>
-                <Link
-                  to={`/edithomepass/${row.id}`}
-                  className="bg-green-400 hover:bg-green-700 text-white font-bold py-1 px-2 rounded"
-                >
-                  Edit
-                </Link>
+                {/* {isAdmin() && ( */}
+                  <Link
+                    to={`/edithomepass/${row.id}`}
+                    onClick={(e) => handleEditClick(e, row.id)}
+                    className="bg-green-400 hover:bg-green-700 text-white font-bold py-1 px-2 rounded"
+                  >
+                    Edit
+                  </Link>
+                {/* )} */}
               </td>
             </tr>
           ))}
