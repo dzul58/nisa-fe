@@ -6,7 +6,7 @@ import { id } from 'date-fns/locale';
 import { useNavigate, Link } from "react-router-dom";
 
 const DetailHomepass = () => {
-  const navigate = useNavigate();
+//   const navigate = useNavigate();
   const { id: detailId } = useParams();
   const [data, setData] = useState(null);
 
