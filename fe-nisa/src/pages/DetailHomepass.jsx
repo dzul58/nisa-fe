@@ -175,7 +175,6 @@ const DetailHomepass = () => {
               </div>
           </div>
 
-
           <div className="sm:col-span-3">
             <label htmlFor="hpm_pic" className="block text-sm font-medium leading-6 text-gray-900">HPM PIC:</label>
             <div className="mt-2">
