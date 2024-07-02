@@ -24,7 +24,7 @@ const EditHomepass = () => {
   useEffect(() => {
     const fetchHomepassData = async () => {
       try {
-        const response = await axios.get(`http://localhost:8000/api/homepass/${id}`, {
+        const response = await axios.get(`https://moving-address-be.oss.myrepublic.co.id/api/homepass/${id}`, {
           headers: {
             Authorization: `Bearer ${localStorage.access_token}`,
           },
@@ -53,7 +53,7 @@ const EditHomepass = () => {
       if (isNewPhotoUploaded) {
         const housePhotoFormData = new FormData();
         housePhotoFormData.append("file", formData.house_photo);
-        const uploadResponse = await axios.post("http://localhost:8000/api/upload", housePhotoFormData, {
+        const uploadResponse = await axios.post("https://moving-address-be.oss.myrepublic.co.id/api/upload", housePhotoFormData, {
           headers: {
             "Content-Type": "multipart/form-data",
             Authorization: `Bearer ${localStorage.access_token}`,
@@ -64,7 +64,7 @@ const EditHomepass = () => {
 
       const dataToSend = { ...formData, uploadResult };
 
-      const response = await axios.put(`http://localhost:8000/api/edit-homepass/${id}`, dataToSend, {
+      const response = await axios.put(`https://moving-address-be.oss.myrepublic.co.id/api/edit-homepass/${id}`, dataToSend, {
         headers: {
           Authorization: `Bearer ${localStorage.access_token}`,
         },
@@ -112,8 +112,8 @@ const EditHomepass = () => {
     <div>
     <form onSubmit={handleSubmit} className="space-y-12">
       <div className="border-b border-gray-900/10 pb-12">
-      <h2 className="text-base font-semibold leading-7 text-gray-900">Edit Moving Address Request</h2>
-      <p className="mt-1 text-sm leading-6 text-gray-600">Edit the necessary fields for the moving address request.</p>
+        <h2 className="text-base font-semibold leading-7 text-gray-900">Edit Moving Address Request</h2>
+        <p className="mt-1 text-sm leading-6 text-gray-600">Edit the necessary fields for the moving address request.</p>
       </div>
 
       <div className="border-b border-gray-900/10 pb-12">
