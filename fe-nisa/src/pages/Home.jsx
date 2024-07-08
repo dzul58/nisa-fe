@@ -109,7 +109,7 @@ const Home = () => {
         {/* {isAdmin() && ( */}
           <button
             onClick={handleCreateClick}
-            className="bg-blue-400 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            className="bg-[#6A1B9A] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
           >
             Create Request
           </button>
@@ -238,19 +238,19 @@ const Home = () => {
               <td className="border-b px-4 py-2">
                 <Link
                   to={`/hmpdetails/${row.id}`}
-                  className="bg-blue-400 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded mr-2"
+                  className="bg-[#6A1B9A] hover:bg-[#4A0F70] text-white font-bold py-1 px-2 rounded mr-2"
                 >
-                  Detail
+                   Detail
                 </Link>
-                {/* {isAdmin() && ( */}
-                  <Link
-                    to={`/edithomepass/${row.id}`}
-                    onClick={(e) => handleEditClick(e, row.id)}
-                    className="bg-green-400 hover:bg-green-700 text-white font-bold py-1 px-2 rounded"
-                  >
+              {/* {isAdmin() && ( */}
+                <Link
+                  to={`/edithomepass/${row.id}`}
+                  onClick={(e) => handleEditClick(e, row.id)}
+                  className="bg-[#6A1B9A] hover:bg-[#4A0F70] text-white font-bold py-1 px-2 rounded"
+                >
                     Edit
-                  </Link>
-                {/* )} */}
+                </Link>
+              {/* )} */}
               </td>
             </tr>
           ))}

@@ -220,9 +220,9 @@ const UpdateHomepass = () => {
           </div>
         </div>
   
-        <div className="flex items-center justify-end gap-x-6">
-          <button type="button" onClick={handleCancel} className="w-32 bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">Cancel</button>
-        <button type="submit" className="w-32 rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 py-3 px-6" disabled={isButtonDisabled}>Save</button>
+      <div className="flex items-center justify-end gap-x-6">
+        <button type="button" onClick={handleCancel} className="w-32 bg-transparent hover:bg-[#6A1B9A]  text-[#6A1B9A] ] font-semibold hover:text-white py-2 px-4 border border-[#6A1B9A]  hover:border-transparent rounded">Cancel</button>
+        <button type="submit" className="w-32 rounded-md bg-[#6A1B9A] px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-[#4A0F70] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 py-3 px-6" disabled={isButtonDisabled}>Save</button>
       </div>
     </form>
   </div>

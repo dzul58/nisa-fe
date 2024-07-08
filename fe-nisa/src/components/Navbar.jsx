@@ -23,7 +23,7 @@ const Navbar = () => {
             Moving Address
           </Link>
         </h2>
-        <div className="flex items-center">
+        {/* <div className="flex items-center">
           <button
             className="bg-white text-[#6A1B9A] px-4 py-2 rounded-md mr-4 hover:bg-gray-200"
             onClick={handleLogout}
@@ -38,7 +38,7 @@ const Navbar = () => {
               <RiMenuFoldLine className="w-6 h-6" />
             )}
           </button>
-        </div>
+        </div> */}
       </div>
     </div>
   );

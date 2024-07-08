@@ -142,7 +142,7 @@ const DetailHomepass = () => {
                     href={data.house_photo} 
                     target="_blank" 
                     rel="noopener noreferrer" 
-                    className="px-4 py-1 text-lg font-medium bg-purple-500 text-white rounded-lg cursor-pointer"
+                    className="px-4 py-1 text-lg font-medium bg-[#6A1B9A] text-white rounded-lg cursor-pointer"
                 >
                     Image
                 </a>
@@ -237,21 +237,21 @@ const DetailHomepass = () => {
         <div className="flex items-center justify-end gap-x-6">
             <Link 
                 to="/" 
-                className="w-32 text-center bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+                className="w-32 text-center bg-transparent hover:bg-[#6A1B9A] text-[#6A1B9A] font-semibold hover:text-white py-2 px-4 border border-[#6A1B9A] hover:border-transparent rounded"
             >
                 Back
             </Link>
             {isAdmin() ? (
             <Link 
               to={`/updatehomepass/${data.id}`} 
-              className="w-32 text-center bg-green-500 text-white font-semibold hover:bg-green-700 py-2 px-4 border border-green-500 hover:border-transparent rounded"
+              className="w-32 text-center bg-[#6A1B9A] text-white font-semibold hover:bg-[#4A0F70] py-2 px-4 border border-green-500 hover:border-transparent rounded"
             >
               Update
             </Link>
             ) : (
             <button 
               onClick={handleUpdateClick}
-              className="w-32 text-center bg-green-500 text-white font-semibold hover:bg-green-700 py-2 px-4 border border-green-500 hover:border-transparent rounded"
+              className="w-32 text-center bg-[#6A1B9A] text-white font-semibold hover:bg-[#4A0F70] py-2 px-4 border border-green-500 hover:border-transparent rounded"
             >
               Update
             </button>
