@@ -203,7 +203,7 @@ const CreateHomepass = () => {
               <div className="mt-4 flex text-sm leading-6 text-gray-600">
                 <label
                   htmlFor="house_photo"
-                  className="relative cursor-pointer rounded-md bg-white font-semibold text-[#6A1B9A] focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500"
+                  className="relative cursor-pointer rounded-md bg-white font-semibold text-[#662b81] focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500"
                 >
                   <span>Upload a file</span>
                   <input
@@ -226,8 +226,8 @@ const CreateHomepass = () => {
       </div>
 
       <div className="flex items-center justify-end gap-x-6">
-      <button type="button" onClick={handleCancel} className="w-32 bg-transparent hover:bg-[#6A1B9A]  text-[#6A1B9A] ] font-semibold hover:text-white py-2 px-4 border border-[#6A1B9A]  hover:border-transparent rounded">Cancel</button>
-      <button type="submit" className="w-32 rounded-md bg-[#6A1B9A] px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-[#4A0F70] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 py-3 px-6" disabled={isButtonDisabled}>Save</button>
+      <button type="button" onClick={handleCancel} className="w-32 bg-transparent hover:bg-[#662b81]  text-[#662b81] ] font-semibold hover:text-white py-2 px-4 border border-[#662b81]  hover:border-transparent rounded">Cancel</button>
+      <button type="submit" className="w-32 rounded-md bg-[#662b81] px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-[#4A0F70] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 py-3 px-6" disabled={isButtonDisabled}>Save</button>
       </div>
     </form>
     </div>
