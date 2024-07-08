@@ -16,7 +16,7 @@ const Navbar = () => {
   }
 
   return (
-    <div className="bg-purple-500 text-white md:relative">
+    <div className="bg-[#6A1B9A] text-white md:relative">
       <div className="p-4 flex justify-between items-center">
         <h2 className="text-2xl font-bold">
           <Link to="/" className="hover:text-white">
@@ -25,7 +25,7 @@ const Navbar = () => {
         </h2>
         <div className="flex items-center">
           <button
-            className="bg-white text-purple-500 px-4 py-2 rounded-md mr-4 hover:bg-gray-200"
+            className="bg-white text-[#6A1B9A] px-4 py-2 rounded-md mr-4 hover:bg-gray-200"
             onClick={handleLogout}
           >
             <RiLogoutBoxLine className="inline-block mr-2" />

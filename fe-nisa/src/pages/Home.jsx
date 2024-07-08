@@ -34,7 +34,7 @@ const Home = () => {
   const fetchData = async () => {
     try {
       const queryParams = new URLSearchParams({ ...filterValues, page }).toString();
-      const response = await axios.get(`https://moving-address-be.oss.myrepublic.co.id/api/homepass?${queryParams}`, {
+      const response = await axios.get(`http://localhost:8000/api/homepass?${queryParams}`, {
         headers: {
           Authorization: `Bearer ${localStorage.access_token}`,
         },
@@ -48,7 +48,7 @@ const Home = () => {
 
   const fetchUserRole = async () => {
     try {
-      const response = await axios.get('https://moving-address-be.oss.myrepublic.co.id/api/authorization-cs', {
+      const response = await axios.get('http://localhost:8000/api/authorization-cs', {
         headers: {
           Authorization: `Bearer ${localStorage.access_token}`,
         },
