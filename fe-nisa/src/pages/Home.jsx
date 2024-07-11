@@ -78,7 +78,7 @@ const Home = () => {
   const showUnauthorizedAlert = () => {
     Swal.fire({
       title: 'Unauthorized',
-      text: 'You do not have permission to perform this action. Only Administrators are allowed.',
+      text: 'You do not have permission to perform this action. Only Customer Services are allowed.',
       icon: 'error',
       confirmButtonText: 'OK'
     }).then(() => {
@@ -86,7 +86,7 @@ const Home = () => {
     });
   };
 
-  const isAdmin = () => userRole === 'Administrator';
+  const isAdmin = () => userRole === 'Customer Service';
 
   const handleCreateClick = () => {
     if (isAdmin()) {
@@ -117,36 +117,9 @@ const Home = () => {
       </div>
       <table className="min-w-full bg-white border border-gray-300 shadow-lg rounded-lg">
         <thead>
-        <tr>
+          <tr>
             <th className="border-b px-4 py-2" colSpan="12">
               <div className="grid grid-cols-12 gap-3">
-                {/* <input
-                  type="text"
-                  id="fullNamePic"
-                  name="fullNamePic"
-                  value={filterValues.fullNamePic}
-                  onChange={handleFilterChange}
-                  placeholder="Nama Lengkap PIC yg mengajukan"
-                  className="border border-gray-300 rounded-md py-2 px-3 col-span-3"
-                /> */}
-                {/* <input
-                  type="text"
-                  id="submissionFrom"
-                  name="submissionFrom"
-                  value={filterValues.submissionFrom}
-                  onChange={handleFilterChange}
-                  placeholder="Pengajuan dari"
-                  className="border border-gray-300 rounded-md py-2 px-3 col-span-2"
-                />
-                <input
-                  type="text"
-                  id="requestSource"
-                  name="requestSource"
-                  value={filterValues.requestSource}
-                  onChange={handleFilterChange}
-                  placeholder="Sumber Permintaan"
-                  className="border border-gray-300 rounded-md py-2 px-3 col-span-2"
-                /> */}
                 <input
                   type="text"
                   id="customerCid"
@@ -205,44 +178,37 @@ const Home = () => {
             </th>
           </tr>
           <tr>
-            <th className="border-b px-4 py-2 bg-gray-200">No</th>
-            <th className="border-b px-4 py-2 bg-gray-200">Timestamp</th>
-            {/* <th className="border-b px-4 py-2 bg-gray-200 whitespace-nowrap">Nama Lengkap PIC yg mengajukan</th> */}
-            {/* <th className="border-b px-4 py-2 bg-gray-200">Pengajuan dari</th> */}
-            {/* <th className="border-b px-4 py-2 bg-gray-200">Sumber Permintaan</th> */}
-            <th className="border-b px-4 py-2 bg-gray-200">CID Pelanggan</th>
-            <th className="border-b px-4 py-2 bg-gray-200">Tujuan Permintaan</th>
-            <th className="border-b px-4 py-2 bg-gray-200">Homepass ID</th>
-            <th className="border-b px-4 py-2 bg-gray-200">Network</th>
-            <th className="border-b px-4 py-2 bg-gray-200">Status Home-ID</th>
-            <th className="border-b px-4 py-2 bg-gray-200">PIC HPM</th>
-            <th className="border-b px-4 py-2 bg-gray-200">Status</th>
-            <th className="border-b px-4 py-2 bg-gray-200">Actions</th>
+            <th className="border-b px-2 py-1 bg-gray-200">No</th>
+            <th className="border-b px-3 py-1 bg-gray-200">Timestamp</th>
+            <th className="border-b px-3 py-1 bg-gray-200">CID Pelanggan</th>
+            <th className="border-b px-3 py-1 bg-gray-200 w-2/12">Tujuan Permintaan</th>
+            <th className="border-b px-3 py-1 bg-gray-200">Homepass ID</th>
+            <th className="border-b px-3 py-1 bg-gray-200">Network</th>
+            <th className="border-b px-3 py-1 bg-gray-200">Status Home-ID</th>
+            <th className="border-b px-3 py-1 bg-gray-200">PIC HPM</th>
+            <th className="border-b px-3 py-1 bg-gray-200">Status</th>
+            <th className="border-b px-3 py-1 bg-gray-200">Actions</th>
           </tr>
         </thead>
         <tbody>
           {data.map((row, index) => (
             <tr key={row.id} className={index % 2 === 0 ? 'bg-gray-50' : 'bg-white'}>
-              <td className="border-b px-4 py-2">{(page - 1) * 10 + index + 1}</td>
-              <td className="border-b px-4 py-2">{formatDate(row.timestamp)}</td>
-              {/* <td className="border-b px-4 py-2 whitespace-nowrap">{row.full_name_pic}</td> */}
-              {/* <td className="border-b px-4 py-2">{row.submission_from}</td> */}
-              {/* <td className="border-b px-4 py-2">{row.request_source}</td> */}
-              <td className="border-b px-4 py-2">{row.customer_cid}</td>
-              <td className="border-b px-4 py-2">{row.request_purpose}</td>
-              <td className="border-b px-4 py-2">{row.homepass_id}</td>
-              <td className="border-b px-4 py-2">{row.network}</td>
-              <td className="border-b px-4 py-2">{row.home_id_status}</td>
-              <td className="border-b px-4 py-2">{row.hpm_pic}</td>
-              <td className="border-b px-4 py-2">{row.status}</td>
-              <td className="border-b px-4 py-2">
+              <td className="border-b px-2 py-1 text-center">{(page - 1) * 10 + index + 1}</td>
+              <td className="border-b px-3 py-1 text-center">{formatDate(row.timestamp)}</td>
+              <td className="border-b px-3 py-1 text-center">{row.customer_cid}</td>
+              <td className="border-b px-3 py-1 w-3/12">{row.request_purpose}</td>
+              <td className="border-b px-3 py-1">{row.homepass_id}</td>
+              <td className="border-b px-3 py-1">{row.network}</td>
+              <td className="border-b px-3 py-1">{row.home_id_status}</td>
+              <td className="border-b px-3 py-1">{row.hpm_pic}</td>
+              <td className="border-b px-3 py-1">{row.status}</td>
+              <td className="border-b px-3 py-1 text-center">
                 <Link
                   to={`/hmpdetails/${row.id}`}
                   className="bg-[#662b81] hover:bg-[#4A0F70] text-white font-bold py-1 px-2 rounded mr-2"
                 >
                    Detail
                 </Link>
-              {/* {isAdmin() && ( */}
                 <Link
                   to={`/edithomepass/${row.id}`}
                   onClick={(e) => handleEditClick(e, row.id)}
@@ -250,7 +216,6 @@ const Home = () => {
                 >
                     Edit
                 </Link>
-              {/* )} */}
               </td>
             </tr>
           ))}

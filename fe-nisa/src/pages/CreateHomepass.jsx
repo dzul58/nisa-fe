@@ -16,7 +16,7 @@ const CreateHomepass = () => {
     coordinate_point: "",
     house_photo: null,
     request_purpose: "Moving Address (Pindah Rumah)",
-    email_address: "",
+    // email_address: "",
   });
 
   const handleSubmit = async (e) => {
@@ -110,10 +110,17 @@ const CreateHomepass = () => {
       <div className="border-b border-gray-900/10 pb-12">
         <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
 
-          <div className="sm:col-span-4">
+          {/* <div className="sm:col-span-4">
             <label htmlFor="email_address" className="block text-sm font-medium leading-6 text-gray-900">Email Address:</label>
             <div className="mt-2">
               <input  type="email" id="email_address" name="email_address" value={formData.email_address} onChange={handleChange} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+            </div>
+          </div> */}
+
+          <div className="sm:col-span-4">
+            <label htmlFor="customer_cid" className="block text-sm font-medium leading-6 text-gray-900">CID Pelanggan:</label>
+            <div className="mt-2">
+              <input type="text" id="customer_cid" name="customer_cid" value={formData.customer_cid} onChange={handleChange} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
             </div>
           </div>
 
@@ -140,17 +147,11 @@ const CreateHomepass = () => {
                   <option>Email, Soc-Med, Whatsapp</option>
                   <option>Walk In Customer</option>
                   <option>Retain RWB</option>
+                  <option>Inbound Call CS</option>
                 </select>
               </div>
             </div>
 
-
-          <div className="sm:col-span-3">
-            <label htmlFor="customer_cid" className="block text-sm font-medium leading-6 text-gray-900">CID Pelanggan:</label>
-            <div className="mt-2">
-              <input type="text" id="customer_cid" name="customer_cid" value={formData.customer_cid} onChange={handleChange} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
-            </div>
-          </div>
 
           <div className="sm:col-span-3">
             <label htmlFor="coordinate_point" className="block text-sm font-medium leading-6 text-gray-900">Titik Koordinat:</label>
@@ -164,6 +165,9 @@ const CreateHomepass = () => {
               <div className="mt-2">
                 <select id="request_purpose" name="request_purpose" value={formData.request_purpose} onChange={handleChange} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
                   <option>Moving Address (Pindah Rumah)</option>
+                  <option>Moving Network (Partner &gt;&gt; Own-Net MyRepublic)</option>
+                  <option>Perbaikan Alamat System</option>
+                  <option>Request Moving MDU</option>
                 </select>
               </div>
             </div>
