@@ -127,7 +127,121 @@ const DetailHomepass = () => {
 
           <div className="col-span-3">
           <label htmlFor="house_photo" className="block text-sm font-medium leading-6 text-gray-900">
-                Foto Rumah
+              Photo Front of house
+            </label>
+            <div className="relative inline-block group flex items-center space-x-2">
+                <input 
+                    type="text" 
+                    id="request_purpose" 
+                    name="request_purpose" 
+                    value={data.house_photo} 
+                    readOnly 
+                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" 
+                />
+                <a 
+                    href={data.house_photo} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="px-4 py-1 text-lg font-medium bg-[#662b81] text-white rounded-lg cursor-pointer"
+                >
+                    Image
+                </a>
+                <img 
+                    src={data.house_photo} 
+                    alt="image" 
+                    className="absolute top-0 left-full ml-2 w-150 border border-gray-300 bg-white p-2 hidden group-hover:block"
+                />
+            </div>
+            </div>
+
+            <div className="col-span-3">
+          <label htmlFor="house_photo" className="block text-sm font-medium leading-6 text-gray-900">
+            Photo Old FAT
+            </label>
+            <div className="relative inline-block group flex items-center space-x-2">
+                <input 
+                    type="text" 
+                    id="request_purpose" 
+                    name="request_purpose" 
+                    value={data.house_photo} 
+                    readOnly 
+                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" 
+                />
+                <a 
+                    href={data.house_photo} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="px-4 py-1 text-lg font-medium bg-[#662b81] text-white rounded-lg cursor-pointer"
+                >
+                    Image
+                </a>
+                <img 
+                    src={data.house_photo} 
+                    alt="image" 
+                    className="absolute top-0 left-full ml-2 w-150 border border-gray-300 bg-white p-2 hidden group-hover:block"
+                />
+            </div>
+            </div>
+
+            <div className="col-span-3">
+          <label htmlFor="house_photo" className="block text-sm font-medium leading-6 text-gray-900">
+                Photo Left of Home
+            </label>
+            <div className="relative inline-block group flex items-center space-x-2">
+                <input 
+                    type="text" 
+                    id="request_purpose" 
+                    name="request_purpose" 
+                    value={data.house_photo} 
+                    readOnly 
+                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" 
+                />
+                <a 
+                    href={data.house_photo} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="px-4 py-1 text-lg font-medium bg-[#662b81] text-white rounded-lg cursor-pointer"
+                >
+                    Image
+                </a>
+                <img 
+                    src={data.house_photo} 
+                    alt="image" 
+                    className="absolute top-0 left-full ml-2 w-150 border border-gray-300 bg-white p-2 hidden group-hover:block"
+                />
+            </div>
+            </div>
+            <div className="col-span-3">
+          <label htmlFor="house_photo" className="block text-sm font-medium leading-6 text-gray-900">
+                Photo New FAT
+            </label>
+            <div className="relative inline-block group flex items-center space-x-2">
+                <input 
+                    type="text" 
+                    id="request_purpose" 
+                    name="request_purpose" 
+                    value={data.house_photo} 
+                    readOnly 
+                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" 
+                />
+                <a 
+                    href={data.house_photo} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="px-4 py-1 text-lg font-medium bg-[#662b81] text-white rounded-lg cursor-pointer"
+                >
+                    Image
+                </a>
+                <img 
+                    src={data.house_photo} 
+                    alt="image" 
+                    className="absolute top-0 left-full ml-2 w-150 border border-gray-300 bg-white p-2 hidden group-hover:block"
+                />
+            </div>
+            </div>
+            <div className="col-span-3">
+          <label htmlFor="house_photo" className="block text-sm font-medium leading-6 text-gray-900">
+                Photo Right of Home
             </label>
             <div className="relative inline-block group flex items-center space-x-2">
                 <input 

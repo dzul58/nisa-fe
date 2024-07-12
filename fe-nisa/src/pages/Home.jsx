@@ -185,7 +185,7 @@ const Home = () => {
             <th className="border-b px-3 py-1 bg-gray-200">Homepass ID</th>
             <th className="border-b px-3 py-1 bg-gray-200">Network</th>
             <th className="border-b px-3 py-1 bg-gray-200">Status Home-ID</th>
-            <th className="border-b px-3 py-1 bg-gray-200">PIC HPM</th>
+            <th className="border-b px-3 py-1 bg-gray-200 w-2/5">PIC HPM</th>
             <th className="border-b px-3 py-1 bg-gray-200">Status</th>
             <th className="border-b px-3 py-1 bg-gray-200">Actions</th>
           </tr>
