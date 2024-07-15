@@ -220,48 +220,13 @@ const CreateHomepass = () => {
         id="photo_front_of_house"
         name="photo_front_of_house"
         onChange={handleFileChange}
-        className="mt-2 block w-full text-sm text-gray-500
+        className="mt-2 block w-full text-sm text-gray-500 bg-white
           file:mr-4 file:py-2 file:px-4
           file:rounded-md file:border-0
           file:text-sm file:font-semibold
           file:bg-violet-50 file:text-violet-700
-          hover:file:bg-violet-100"
-      />
-    </div>
-
-    <div>
-      <label htmlFor="photo_left_of_house" className="block text-sm font-medium leading-6 text-gray-900">
-        Left of House Photo
-      </label>
-      <input
-        type="file"
-        id="photo_left_of_house"
-        name="photo_left_of_house"
-        onChange={handleFileChange}
-        className="mt-2 block w-full text-sm text-gray-500
-          file:mr-4 file:py-2 file:px-4
-          file:rounded-md file:border-0
-          file:text-sm file:font-semibold
-          file:bg-violet-50 file:text-violet-700
-          hover:file:bg-violet-100"
-      />
-    </div>
-
-    <div>
-      <label htmlFor="photo_right_of_house" className="block text-sm font-medium leading-6 text-gray-900">
-        Right of House Photo
-      </label>
-      <input
-        type="file"
-        id="photo_right_of_house"
-        name="photo_right_of_house"
-        onChange={handleFileChange}
-        className="mt-2 block w-full text-sm text-gray-500
-          file:mr-4 file:py-2 file:px-4
-          file:rounded-md file:border-0
-          file:text-sm file:font-semibold
-          file:bg-violet-50 file:text-violet-700
-          hover:file:bg-violet-100"
+          hover:file:bg-violet-100
+          border border-gray-300 rounded-md"
       />
     </div>
 
@@ -274,14 +239,37 @@ const CreateHomepass = () => {
         id="photo_old_fat"
         name="photo_old_fat"
         onChange={handleFileChange}
-        className="mt-2 block w-full text-sm text-gray-500
+        className="mt-2 block w-full text-sm text-gray-500 bg-white
           file:mr-4 file:py-2 file:px-4
           file:rounded-md file:border-0
           file:text-sm file:font-semibold
           file:bg-violet-50 file:text-violet-700
-          hover:file:bg-violet-100"
+          hover:file:bg-violet-100
+          border border-gray-300 rounded-md"
       />
     </div>
+
+
+    <div>
+      <label htmlFor="photo_right_of_house" className="block text-sm font-medium leading-6 text-gray-900">
+        Right of House Photo
+      </label>
+      <input
+        type="file"
+        id="photo_right_of_house"
+        name="photo_right_of_house"
+        onChange={handleFileChange}
+        className="mt-2 block w-full text-sm text-gray-500 bg-white
+          file:mr-4 file:py-2 file:px-4
+          file:rounded-md file:border-0
+          file:text-sm file:font-semibold
+          file:bg-violet-50 file:text-violet-700
+          hover:file:bg-violet-100
+          border border-gray-300 rounded-md"
+      />
+    </div>
+
+
 
     <div>
       <label htmlFor="photo_new_fat" className="block text-sm font-medium leading-6 text-gray-900">
@@ -292,12 +280,32 @@ const CreateHomepass = () => {
         id="photo_new_fat"
         name="photo_new_fat"
         onChange={handleFileChange}
-        className="mt-2 block w-full text-sm text-gray-500
+        className="mt-2 block w-full text-sm text-gray-500 bg-white
           file:mr-4 file:py-2 file:px-4
           file:rounded-md file:border-0
           file:text-sm file:font-semibold
           file:bg-violet-50 file:text-violet-700
-          hover:file:bg-violet-100"
+          hover:file:bg-violet-100
+          border border-gray-300 rounded-md"
+      />
+    </div>
+
+    <div>
+      <label htmlFor="photo_left_of_house" className="block text-sm font-medium leading-6 text-gray-900">
+        Left of House Photo
+      </label>
+      <input
+        type="file"
+        id="photo_left_of_house"
+        name="photo_left_of_house"
+        onChange={handleFileChange}
+        className="mt-2 block w-full text-sm text-gray-500 bg-white
+          file:mr-4 file:py-2 file:px-4
+          file:rounded-md file:border-0
+          file:text-sm file:font-semibold
+          file:bg-violet-50 file:text-violet-700
+          hover:file:bg-violet-100
+          border border-gray-300 rounded-md"
       />
     </div>
   </div>
