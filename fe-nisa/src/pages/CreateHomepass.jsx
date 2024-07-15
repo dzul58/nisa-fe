@@ -13,21 +13,12 @@ const CreateHomepass = () => {
     current_address: "",
     destination_address: "",
     coordinate_point: "",
-    house_photo: null,
     request_purpose: "Moving Address (Pindah Rumah)",
     photo_front_of_house: null,
     photo_left_of_house: null,
     photo_right_of_house: null,
     photo_old_fat: null,
     photo_new_fat: null,
-  });
-
-  const [imageUrls, setImageUrls] = useState({
-    imageUrlFrontOfHouse: "",
-    imageUrlLeftOfHouse: "",
-    imageUrlRightOfHouse: "",
-    imageUrlOldFat: "",
-    imageUrlNewFat: "",
   });
 
   const handleSubmit = async (e) => {
@@ -38,28 +29,15 @@ const CreateHomepass = () => {
         submissionFrom: formData.submission_from,
         requestSource: formData.request_source,
         customerCid: formData.customer_cid,
-        housePhotoUrl: "",
       };
 
-      if (formData.house_photo) {
-        const housePhotoFormData = new FormData();
-        housePhotoFormData.append("file", formData.house_photo);
-        const uploadResponse = await axios.post("http://localhost:8000/api/upload", housePhotoFormData, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-            Authorization: `Bearer ${localStorage.access_token}`,
-          },
-        });
-        uploadResult.housePhotoUrl = uploadResponse.data.imageUrl;
-      }
-
       // Upload additional photos
-      await uploadAdditionalPhotos();
+      const photoUploadResults = await uploadAdditionalPhotos();
 
       const dataToSend = { 
         ...formData, 
         uploadResult,
-        ...imageUrls
+        ...photoUploadResults
       };
       
       if (!formData.completion_date) {
@@ -91,26 +69,54 @@ const CreateHomepass = () => {
 
   const uploadAdditionalPhotos = async () => {
     const photoTypes = [
-      { key: 'photo_front_of_house', url: 'imageUrlFrontOfHouse', endpoint: 'upload-photo-front-of-house' },
-      { key: 'photo_left_of_house', url: 'imageUrlLeftOfHouse', endpoint: 'upload-photo-left-of-house' },
-      { key: 'photo_right_of_house', url: 'imageUrlRightOfHouse', endpoint: 'upload-photo-right-of-house' },
-      { key: 'photo_old_fat', url: 'imageUrlOldFat', endpoint: 'upload-photo-old-fat' },
-      { key: 'photo_new_fat', url: 'imageUrlNewFat', endpoint: 'upload-photo-new-fat' },
+      { key: 'photo_front_of_house', endpoint: 'upload-photo-front-of-house', resultKey: 'imageUrlFrontOfHouse' },
+      { key: 'photo_left_of_house', endpoint: 'upload-photo-left-of-house', resultKey: 'imageUrlLeftOfHouse' },
+      { key: 'photo_right_of_house', endpoint: 'upload-photo-right-of-house', resultKey: 'imageUrlRightOfHouse' },
+      { key: 'photo_old_fat', endpoint: 'upload-photo-old-fat', resultKey: 'imageUrlOldFat' },
+      { key: 'photo_new_fat', endpoint: 'upload-photo-new-fat', resultKey: 'imageUrlNewFat' },
     ];
+
+    const results = {};
 
     for (const photo of photoTypes) {
       if (formData[photo.key]) {
         const photoFormData = new FormData();
         photoFormData.append(photo.key, formData[photo.key]);
-        const uploadResponse = await axios.post(`http://localhost:8000/api/${photo.endpoint}`, photoFormData, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-            Authorization: `Bearer ${localStorage.access_token}`,
-          },
-        });
-        setImageUrls(prev => ({ ...prev, [photo.url]: uploadResponse.data[photo.url] }));
+        try {
+          const uploadResponse = await axios.post(`http://localhost:8000/api/${photo.endpoint}`, photoFormData, {
+            headers: {
+              "Content-Type": "multipart/form-data",
+              Authorization: `Bearer ${localStorage.access_token}`,
+            },
+          });
+          results[photo.resultKey] = uploadResponse.data[photo.resultKey];
+        } catch (error) {
+          console.error(`Error uploading ${photo.key}:`, error);
+        }
       }
     }
+
+    return results;
+  };
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  const handleFileChange = (event) => {
+    const { name, files } = event.target;
+    setFormData({
+      ...formData,
+      [name]: files[0],
+    });
+  };
+
+  const handleCancel = () => {
+    navigate("/");
   };
 
 
@@ -201,70 +207,101 @@ const CreateHomepass = () => {
             </div>
           </div>
 
-          <div className="col-span-full">
-          <label htmlFor="photo_front_of_house" className="block text-sm font-medium leading-6 text-gray-900">
-            Front of House Photo
-          </label>
-          <input
-            type="file"
-            id="photo_front_of_house"
-            name="photo_front_of_house"
-            onChange={handleFileChange}
-            className="mt-2"
-          />
-        </div>
+          <div className="col-span-full space-y-6">
+  <h3 className="text-lg font-medium leading-6 text-gray-900">Upload Photos</h3>
+  
+  <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+    <div>
+      <label htmlFor="photo_front_of_house" className="block text-sm font-medium leading-6 text-gray-900">
+        Front of House Photo
+      </label>
+      <input
+        type="file"
+        id="photo_front_of_house"
+        name="photo_front_of_house"
+        onChange={handleFileChange}
+        className="mt-2 block w-full text-sm text-gray-500
+          file:mr-4 file:py-2 file:px-4
+          file:rounded-md file:border-0
+          file:text-sm file:font-semibold
+          file:bg-violet-50 file:text-violet-700
+          hover:file:bg-violet-100"
+      />
+    </div>
 
-        <div className="col-span-full">
-          <label htmlFor="photo_left_of_house" className="block text-sm font-medium leading-6 text-gray-900">
-            Left of House Photo
-          </label>
-          <input
-            type="file"
-            id="photo_left_of_house"
-            name="photo_left_of_house"
-            onChange={handleFileChange}
-            className="mt-2"
-          />
-        </div>
+    <div>
+      <label htmlFor="photo_left_of_house" className="block text-sm font-medium leading-6 text-gray-900">
+        Left of House Photo
+      </label>
+      <input
+        type="file"
+        id="photo_left_of_house"
+        name="photo_left_of_house"
+        onChange={handleFileChange}
+        className="mt-2 block w-full text-sm text-gray-500
+          file:mr-4 file:py-2 file:px-4
+          file:rounded-md file:border-0
+          file:text-sm file:font-semibold
+          file:bg-violet-50 file:text-violet-700
+          hover:file:bg-violet-100"
+      />
+    </div>
 
-        <div className="col-span-full">
-          <label htmlFor="photo_right_of_house" className="block text-sm font-medium leading-6 text-gray-900">
-            Right of House Photo
-          </label>
-          <input
-            type="file"
-            id="photo_right_of_house"
-            name="photo_right_of_house"
-            onChange={handleFileChange}
-            className="mt-2"
-          />
-        </div>
+    <div>
+      <label htmlFor="photo_right_of_house" className="block text-sm font-medium leading-6 text-gray-900">
+        Right of House Photo
+      </label>
+      <input
+        type="file"
+        id="photo_right_of_house"
+        name="photo_right_of_house"
+        onChange={handleFileChange}
+        className="mt-2 block w-full text-sm text-gray-500
+          file:mr-4 file:py-2 file:px-4
+          file:rounded-md file:border-0
+          file:text-sm file:font-semibold
+          file:bg-violet-50 file:text-violet-700
+          hover:file:bg-violet-100"
+      />
+    </div>
 
-        <div className="col-span-full">
-          <label htmlFor="photo_old_fat" className="block text-sm font-medium leading-6 text-gray-900">
-            Old FAT Photo
-          </label>
-          <input
-            type="file"
-            id="photo_old_fat"
-            name="photo_old_fat"
-            onChange={handleFileChange}
-            className="mt-2"
-          />
-        </div>
+    <div>
+      <label htmlFor="photo_old_fat" className="block text-sm font-medium leading-6 text-gray-900">
+        Old FAT Photo
+      </label>
+      <input
+        type="file"
+        id="photo_old_fat"
+        name="photo_old_fat"
+        onChange={handleFileChange}
+        className="mt-2 block w-full text-sm text-gray-500
+          file:mr-4 file:py-2 file:px-4
+          file:rounded-md file:border-0
+          file:text-sm file:font-semibold
+          file:bg-violet-50 file:text-violet-700
+          hover:file:bg-violet-100"
+      />
+    </div>
 
-        <div className="col-span-full">
-          <label htmlFor="photo_new_fat" className="block text-sm font-medium leading-6 text-gray-900">
-            New FAT Photo
-          </label>
-          <input
-            type="file"
-            id="photo_new_fat"
-            name="photo_new_fat"
-            onChange={handleFileChange}
-            className="mt-2"
-          />
-        </div>
+    <div>
+      <label htmlFor="photo_new_fat" className="block text-sm font-medium leading-6 text-gray-900">
+        New FAT Photo
+      </label>
+      <input
+        type="file"
+        id="photo_new_fat"
+        name="photo_new_fat"
+        onChange={handleFileChange}
+        className="mt-2 block w-full text-sm text-gray-500
+          file:mr-4 file:py-2 file:px-4
+          file:rounded-md file:border-0
+          file:text-sm file:font-semibold
+          file:bg-violet-50 file:text-violet-700
+          hover:file:bg-violet-100"
+      />
+    </div>
+  </div>
+</div>
 
         </div>
       </div>

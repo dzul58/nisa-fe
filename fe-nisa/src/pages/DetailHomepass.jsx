@@ -126,7 +126,7 @@ const DetailHomepass = () => {
           </div>
 
           <div className="col-span-3">
-          <label htmlFor="house_photo" className="block text-sm font-medium leading-6 text-gray-900">
+          <label htmlFor="photo_front_of_house_url" className="block text-sm font-medium leading-6 text-gray-900">
               Photo Front of house
             </label>
             <div className="relative inline-block group flex items-center space-x-2">
@@ -134,12 +134,12 @@ const DetailHomepass = () => {
                     type="text" 
                     id="request_purpose" 
                     name="request_purpose" 
-                    value={data.house_photo} 
+                    value={data.photo_front_of_house_url} 
                     readOnly 
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" 
                 />
                 <a 
-                    href={data.house_photo} 
+                    href={data.photo_front_of_house_url} 
                     target="_blank" 
                     rel="noopener noreferrer" 
                     className="px-4 py-1 text-lg font-medium bg-[#662b81] text-white rounded-lg cursor-pointer"
@@ -147,7 +147,7 @@ const DetailHomepass = () => {
                     Image
                 </a>
                 <img 
-                    src={data.house_photo} 
+                    src={data.photo_front_of_house_url} 
                     alt="image" 
                     className="absolute top-0 left-full ml-2 w-150 border border-gray-300 bg-white p-2 hidden group-hover:block"
                 />
@@ -155,7 +155,7 @@ const DetailHomepass = () => {
             </div>
 
             <div className="col-span-3">
-          <label htmlFor="house_photo" className="block text-sm font-medium leading-6 text-gray-900">
+          <label htmlFor="photo_old_fat_url" className="block text-sm font-medium leading-6 text-gray-900">
             Photo Old FAT
             </label>
             <div className="relative inline-block group flex items-center space-x-2">
@@ -163,12 +163,12 @@ const DetailHomepass = () => {
                     type="text" 
                     id="request_purpose" 
                     name="request_purpose" 
-                    value={data.house_photo} 
+                    value={data.photo_old_fat_url} 
                     readOnly 
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" 
                 />
                 <a 
-                    href={data.house_photo} 
+                    href={data.photo_old_fat_url} 
                     target="_blank" 
                     rel="noopener noreferrer" 
                     className="px-4 py-1 text-lg font-medium bg-[#662b81] text-white rounded-lg cursor-pointer"
@@ -176,7 +176,7 @@ const DetailHomepass = () => {
                     Image
                 </a>
                 <img 
-                    src={data.house_photo} 
+                    src={data.photo_old_fat_url} 
                     alt="image" 
                     className="absolute top-0 left-full ml-2 w-150 border border-gray-300 bg-white p-2 hidden group-hover:block"
                 />
@@ -184,7 +184,7 @@ const DetailHomepass = () => {
             </div>
 
             <div className="col-span-3">
-          <label htmlFor="house_photo" className="block text-sm font-medium leading-6 text-gray-900">
+          <label htmlFor="photo_left_of_home_url" className="block text-sm font-medium leading-6 text-gray-900">
                 Photo Left of Home
             </label>
             <div className="relative inline-block group flex items-center space-x-2">
@@ -192,12 +192,12 @@ const DetailHomepass = () => {
                     type="text" 
                     id="request_purpose" 
                     name="request_purpose" 
-                    value={data.house_photo} 
+                    value={data.photo_left_of_home_url} 
                     readOnly 
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" 
                 />
                 <a 
-                    href={data.house_photo} 
+                    href={data.photo_left_of_home_url} 
                     target="_blank" 
                     rel="noopener noreferrer" 
                     className="px-4 py-1 text-lg font-medium bg-[#662b81] text-white rounded-lg cursor-pointer"
@@ -205,14 +205,14 @@ const DetailHomepass = () => {
                     Image
                 </a>
                 <img 
-                    src={data.house_photo} 
+                    src={data.photo_left_of_home_url} 
                     alt="image" 
                     className="absolute top-0 left-full ml-2 w-150 border border-gray-300 bg-white p-2 hidden group-hover:block"
                 />
             </div>
             </div>
             <div className="col-span-3">
-          <label htmlFor="house_photo" className="block text-sm font-medium leading-6 text-gray-900">
+          <label htmlFor="photo_new_fat_url" className="block text-sm font-medium leading-6 text-gray-900">
                 Photo New FAT
             </label>
             <div className="relative inline-block group flex items-center space-x-2">
@@ -220,12 +220,12 @@ const DetailHomepass = () => {
                     type="text" 
                     id="request_purpose" 
                     name="request_purpose" 
-                    value={data.house_photo} 
+                    value={data.photo_new_fat_url} 
                     readOnly 
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" 
                 />
                 <a 
-                    href={data.house_photo} 
+                    href={data.photo_new_fat_url} 
                     target="_blank" 
                     rel="noopener noreferrer" 
                     className="px-4 py-1 text-lg font-medium bg-[#662b81] text-white rounded-lg cursor-pointer"
@@ -233,14 +233,14 @@ const DetailHomepass = () => {
                     Image
                 </a>
                 <img 
-                    src={data.house_photo} 
+                    src={data.photo_new_fat_url} 
                     alt="image" 
                     className="absolute top-0 left-full ml-2 w-150 border border-gray-300 bg-white p-2 hidden group-hover:block"
                 />
             </div>
             </div>
             <div className="col-span-3">
-          <label htmlFor="house_photo" className="block text-sm font-medium leading-6 text-gray-900">
+          <label htmlFor="photo_right_of_home_url" className="block text-sm font-medium leading-6 text-gray-900">
                 Photo Right of Home
             </label>
             <div className="relative inline-block group flex items-center space-x-2">
@@ -248,12 +248,12 @@ const DetailHomepass = () => {
                     type="text" 
                     id="request_purpose" 
                     name="request_purpose" 
-                    value={data.house_photo} 
+                    value={data.photo_right_of_home_url} 
                     readOnly 
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" 
                 />
                 <a 
-                    href={data.house_photo} 
+                    href={data.photo_right_of_home_url} 
                     target="_blank" 
                     rel="noopener noreferrer" 
                     className="px-4 py-1 text-lg font-medium bg-[#662b81] text-white rounded-lg cursor-pointer"
@@ -261,7 +261,7 @@ const DetailHomepass = () => {
                     Image
                 </a>
                 <img 
-                    src={data.house_photo} 
+                    src={data.photo_right_of_home_url} 
                     alt="image" 
                     className="absolute top-0 left-full ml-2 w-150 border border-gray-300 bg-white p-2 hidden group-hover:block"
                 />
