@@ -6,7 +6,6 @@ import Swal from "sweetalert2";
 const EditHomepass = () => {
   const navigate = useNavigate();
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
-  const [isNewPhotoUploaded, setIsNewPhotoUploaded] = useState(false);
   const { id } = useParams();
   const [formData, setFormData] = useState({
     full_name_pic: "",
@@ -16,9 +15,13 @@ const EditHomepass = () => {
     current_address: "",
     destination_address: "",
     coordinate_point: "",
-    house_photo: null,
     request_purpose: "Moving Address (Pindah Rumah)",
     email_address: "",
+    photo_front_of_house: null,
+    photo_left_of_house: null,
+    photo_right_of_house: null,
+    photo_old_fat: null,
+    photo_new_fat: null,
   });
 
   useEffect(() => {
@@ -40,29 +43,23 @@ const EditHomepass = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsButtonDisabled(true); // Nonaktifkan tombol save setelah ditekan
+    setIsButtonDisabled(true);
     try {
       let uploadResult = {
         fullNamePic: formData.full_name_pic,
         submissionFrom: formData.submission_from,
         requestSource: formData.request_source,
         customerCid: formData.customer_cid,
-        housePhotoUrl: formData.house_photo || "", // Gunakan nilai lama jika tidak ada gambar baru diunggah
       };
 
-      if (isNewPhotoUploaded) {
-        const housePhotoFormData = new FormData();
-        housePhotoFormData.append("file", formData.house_photo);
-        const uploadResponse = await axios.post("http://localhost:8000/api/upload", housePhotoFormData, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-            Authorization: `Bearer ${localStorage.access_token}`,
-          },
-        });
-        uploadResult.housePhotoUrl = uploadResponse.data.imageUrl;
-      }
+      // Upload additional photos
+      const photoUploadResults = await uploadAdditionalPhotos();
 
-      const dataToSend = { ...formData, uploadResult };
+      const dataToSend = { 
+        ...formData, 
+        uploadResult,
+        ...photoUploadResults
+      };
 
       const response = await axios.put(`http://localhost:8000/api/edit-homepass/${id}`, dataToSend, {
         headers: {
@@ -83,8 +80,40 @@ const EditHomepass = () => {
         text: "There was an error while editing the request.",
       });
     } finally {
-      setIsButtonDisabled(false); // Aktifkan kembali tombol save setelah proses selesai
+      setIsButtonDisabled(false);
     }
+  };
+
+  const uploadAdditionalPhotos = async () => {
+    const photoTypes = [
+      { key: 'photo_front_of_house', endpoint: 'upload-photo-front-of-house', resultKey: 'imageUrlFrontOfHouse' },
+      { key: 'photo_left_of_house', endpoint: 'upload-photo-left-of-house', resultKey: 'imageUrlLeftOfHouse' },
+      { key: 'photo_right_of_house', endpoint: 'upload-photo-right-of-house', resultKey: 'imageUrlRightOfHouse' },
+      { key: 'photo_old_fat', endpoint: 'upload-photo-old-fat', resultKey: 'imageUrlOldFat' },
+      { key: 'photo_new_fat', endpoint: 'upload-photo-new-fat', resultKey: 'imageUrlNewFat' },
+    ];
+
+    const results = {};
+
+    for (const photo of photoTypes) {
+      if (formData[photo.key] && formData[photo.key] instanceof File) {
+        const photoFormData = new FormData();
+        photoFormData.append(photo.key, formData[photo.key]);
+        try {
+          const uploadResponse = await axios.post(`http://localhost:8000/api/${photo.endpoint}`, photoFormData, {
+            headers: {
+              "Content-Type": "multipart/form-data",
+              Authorization: `Bearer ${localStorage.access_token}`,
+            },
+          });
+          results[photo.resultKey] = uploadResponse.data[photo.resultKey];
+        } catch (error) {
+          console.error(`Error uploading ${photo.key}:`, error);
+        }
+      }
+    }
+
+    return results;
   };
 
   const handleChange = (event) => {
@@ -96,11 +125,11 @@ const EditHomepass = () => {
   };
 
   const handleFileChange = (event) => {
+    const { name, files } = event.target;
     setFormData({
       ...formData,
-      house_photo: event.target.files[0],
+      [name]: files[0],
     });
-    setIsNewPhotoUploaded(true);
   };
 
   const handleCancel = () => {
@@ -195,46 +224,106 @@ const EditHomepass = () => {
             </div>
           </div>
 
-          <div className="col-span-full">
-          <label htmlFor="cover-photo" className="block text-sm font-medium leading-6 text-gray-900">
-            Foto Rumah
-          </label>
-          <div className="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
-            <div className="text-center">
-              <svg
-                className="mx-auto h-12 w-12 text-gray-300"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                aria-hidden="true"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M1.5 6a2.25 2.25 0 012.25-2.25h16.5A2.25 2.25 0 0122.5 6v12a2.25 2.25 0 01-2.25 2.25H3.75A2.25 2.25 0 011.5 18V6zM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0021 18v-1.94l-2.69-2.689a1.5 1.5 0 00-2.12 0l-.88.879.97.97a.75.75 0 11-1.06 1.06l-5.16-5.159a1.5 1.5 0 00-2.12 0L3 16.061zm10.125-7.81a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0z"
-                  clipRule="evenodd"
-                />
-              </svg>
-              <div className="mt-4 flex text-sm leading-6 text-gray-600">
-                <label
-                  htmlFor="house_photo"
-                  className="relative cursor-pointer rounded-md bg-white font-semibold text-[#662b81] focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500"
-                >
-                  <span>Upload a file</span>
-                  <input
-                    id="house_photo"
-                    name="house_photo"
-                    type="file"
-                    accept="image/*"
-                    onChange={handleFileChange}
-                    className="sr-only"
-                  />
-                </label>
-                <p className="pl-1">or drag and drop</p>
-              </div>
-                <p className="text-xs leading-5 text-gray-600">PNG, JPG</p>
-              </div>
+          <div className="col-span-full space-y-6">
+          <h3 className="text-lg font-medium leading-6 text-gray-900">Upload Photos</h3>
+          
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+            <div>
+              <label htmlFor="photo_front_of_house" className="block text-sm font-medium leading-6 text-gray-900">
+                Front of House Photo
+              </label>
+              <input
+                type="file"
+                id="photo_front_of_house"
+                name="photo_front_of_house"
+                onChange={handleFileChange}
+                className="mt-2 block w-full text-sm text-gray-500 bg-white
+                  file:mr-4 file:py-2 file:px-4
+                  file:rounded-md file:border-0
+                  file:text-sm file:font-semibold
+                  file:bg-violet-50 file:text-violet-700
+                  hover:file:bg-violet-100
+                  border border-gray-300 rounded-md"
+              />
+            </div>
+
+            <div>
+              <label htmlFor="photo_old_fat" className="block text-sm font-medium leading-6 text-gray-900">
+                Old FAT Photo
+              </label>
+              <input
+                type="file"
+                id="photo_old_fat"
+                name="photo_old_fat"
+                onChange={handleFileChange}
+                className="mt-2 block w-full text-sm text-gray-500 bg-white
+                  file:mr-4 file:py-2 file:px-4
+                  file:rounded-md file:border-0
+                  file:text-sm file:font-semibold
+                  file:bg-violet-50 file:text-violet-700
+                  hover:file:bg-violet-100
+                  border border-gray-300 rounded-md"
+              />
+            </div>
+
+            <div>
+              <label htmlFor="photo_right_of_house" className="block text-sm font-medium leading-6 text-gray-900">
+                Right of House Photo
+              </label>
+              <input
+                type="file"
+                id="photo_right_of_house"
+                name="photo_right_of_house"
+                onChange={handleFileChange}
+                className="mt-2 block w-full text-sm text-gray-500 bg-white
+                  file:mr-4 file:py-2 file:px-4
+                  file:rounded-md file:border-0
+                  file:text-sm file:font-semibold
+                  file:bg-violet-50 file:text-violet-700
+                  hover:file:bg-violet-100
+                  border border-gray-300 rounded-md"
+              />
+            </div>
+
+            <div>
+              <label htmlFor="photo_new_fat" className="block text-sm font-medium leading-6 text-gray-900">
+                New FAT Photo
+              </label>
+              <input
+                type="file"
+                id="photo_new_fat"
+                name="photo_new_fat"
+                onChange={handleFileChange}
+                className="mt-2 block w-full text-sm text-gray-500 bg-white
+                  file:mr-4 file:py-2 file:px-4
+                  file:rounded-md file:border-0
+                  file:text-sm file:font-semibold
+                  file:bg-violet-50 file:text-violet-700
+                  hover:file:bg-violet-100
+                  border border-gray-300 rounded-md"
+              />
+            </div>
+
+            <div>
+              <label htmlFor="photo_left_of_house" className="block text-sm font-medium leading-6 text-gray-900">
+                Left of House Photo
+              </label>
+              <input
+                type="file"
+                id="photo_left_of_house"
+                name="photo_left_of_house"
+                onChange={handleFileChange}
+                className="mt-2 block w-full text-sm text-gray-500 bg-white
+                  file:mr-4 file:py-2 file:px-4
+                  file:rounded-md file:border-0
+                  file:text-sm file:font-semibold
+                  file:bg-violet-50 file:text-violet-700
+                  hover:file:bg-violet-100
+                  border border-gray-300 rounded-md"
+              />
             </div>
           </div>
-
+        </div>
         </div>
       </div>
 
