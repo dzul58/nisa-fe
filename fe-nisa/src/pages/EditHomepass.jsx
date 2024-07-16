@@ -51,22 +51,22 @@ const EditHomepass = () => {
         requestSource: formData.request_source,
         customerCid: formData.customer_cid,
       };
-
+  
       // Upload additional photos
       const photoUploadResults = await uploadAdditionalPhotos();
-
+  
       const dataToSend = { 
         ...formData, 
         uploadResult,
         ...photoUploadResults
       };
-
+  
       const response = await axios.put(`https://moving-address-be.oss.myrepublic.co.id/api/edit-homepass/${id}`, dataToSend, {
         headers: {
           Authorization: `Bearer ${localStorage.access_token}`,
         },
       });
-
+  
       Swal.fire({
         icon: "success",
         title: "The request has been successfully edited!",
@@ -97,7 +97,7 @@ const EditHomepass = () => {
   
     for (const photo of photoTypes) {
       if (formData[photo.key] instanceof File) {
-        // If a new file is selected, upload it
+        // Jika ada file baru, unggah file tersebut
         const photoFormData = new FormData();
         photoFormData.append(photo.key, formData[photo.key]);
         try {
@@ -112,7 +112,7 @@ const EditHomepass = () => {
           console.error(`Error uploading ${photo.key}:`, error);
         }
       } else if (formData[photo.resultKey]) {
-        // If no new file is selected, keep the existing URL
+        // Jika tidak ada file baru, gunakan URL yang sudah ada
         results[photo.resultKey] = formData[photo.resultKey];
       }
     }
