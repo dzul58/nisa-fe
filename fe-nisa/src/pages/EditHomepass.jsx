@@ -58,7 +58,7 @@ const EditHomepass = () => {
       const dataToSend = { 
         ...formData, 
         uploadResult,
-        ...photoUploadResults
+        ...photoUploadResults  // Ini hanya akan berisi URL gambar yang baru diupload
       };
   
       const response = await axios.put(`https://moving-address-be.oss.myrepublic.co.id/api/edit-homepass/${id}`, dataToSend, {
@@ -97,7 +97,7 @@ const EditHomepass = () => {
   
     for (const photo of photoTypes) {
       if (formData[photo.key] instanceof File) {
-        // Jika ada file baru, unggah file tersebut
+        // Hanya upload jika ada file baru
         const photoFormData = new FormData();
         photoFormData.append(photo.key, formData[photo.key]);
         try {
@@ -111,10 +111,8 @@ const EditHomepass = () => {
         } catch (error) {
           console.error(`Error uploading ${photo.key}:`, error);
         }
-      } else if (formData[photo.resultKey]) {
-        // Jika tidak ada file baru, gunakan URL yang sudah ada
-        results[photo.resultKey] = formData[photo.resultKey];
       }
+      // Jika tidak ada file baru, tidak perlu menambahkan apa-apa ke results
     }
   
     return results;
