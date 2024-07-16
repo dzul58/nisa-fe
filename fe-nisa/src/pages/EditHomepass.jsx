@@ -92,11 +92,12 @@ const EditHomepass = () => {
       { key: 'photo_old_fat', endpoint: 'upload-photo-old-fat', resultKey: 'imageUrlOldFat' },
       { key: 'photo_new_fat', endpoint: 'upload-photo-new-fat', resultKey: 'imageUrlNewFat' },
     ];
-
+  
     const results = {};
-
+  
     for (const photo of photoTypes) {
-      if (formData[photo.key] && formData[photo.key] instanceof File) {
+      if (formData[photo.key] instanceof File) {
+        // If a new file is selected, upload it
         const photoFormData = new FormData();
         photoFormData.append(photo.key, formData[photo.key]);
         try {
@@ -110,9 +111,12 @@ const EditHomepass = () => {
         } catch (error) {
           console.error(`Error uploading ${photo.key}:`, error);
         }
+      } else if (formData[photo.resultKey]) {
+        // If no new file is selected, keep the existing URL
+        results[photo.resultKey] = formData[photo.resultKey];
       }
     }
-
+  
     return results;
   };
 
