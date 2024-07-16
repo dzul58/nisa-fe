@@ -44,7 +44,7 @@ const CreateHomepass = () => {
         delete dataToSend.completion_date;
       }
 
-      const response = await axios.post("https://moving-address-be.oss.myrepublic.co.id/api/homepass", dataToSend, {
+      const response = await axios.post("http://localhost:8000/api/homepass", dataToSend, {
         headers: {
           Authorization: `Bearer ${localStorage.access_token}`,
         },
@@ -83,7 +83,7 @@ const CreateHomepass = () => {
         const photoFormData = new FormData();
         photoFormData.append(photo.key, formData[photo.key]);
         try {
-          const uploadResponse = await axios.post(`https://moving-address-be.oss.myrepublic.co.id/api/${photo.endpoint}`, photoFormData, {
+          const uploadResponse = await axios.post(`http://localhost:8000/api/${photo.endpoint}`, photoFormData, {
             headers: {
               "Content-Type": "multipart/form-data",
               Authorization: `Bearer ${localStorage.access_token}`,

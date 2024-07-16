@@ -27,7 +27,7 @@ const EditHomepass = () => {
   useEffect(() => {
     const fetchHomepassData = async () => {
       try {
-        const response = await axios.get(`https://moving-address-be.oss.myrepublic.co.id/api/homepass/${id}`, {
+        const response = await axios.get(`http://localhost:8000/api/homepass/${id}`, {
           headers: {
             Authorization: `Bearer ${localStorage.access_token}`,
           },
@@ -61,7 +61,7 @@ const EditHomepass = () => {
         ...photoUploadResults  // Ini hanya akan berisi URL gambar yang baru diupload
       };
   
-      const response = await axios.put(`https://moving-address-be.oss.myrepublic.co.id/api/edit-homepass/${id}`, dataToSend, {
+      const response = await axios.put(`http://localhost:8000/api/edit-homepass/${id}`, dataToSend, {
         headers: {
           Authorization: `Bearer ${localStorage.access_token}`,
         },
@@ -101,7 +101,7 @@ const EditHomepass = () => {
         const photoFormData = new FormData();
         photoFormData.append(photo.key, formData[photo.key]);
         try {
-          const uploadResponse = await axios.post(`https://moving-address-be.oss.myrepublic.co.id/api/${photo.endpoint}`, photoFormData, {
+          const uploadResponse = await axios.post(`http://localhost:8000/api/${photo.endpoint}`, photoFormData, {
             headers: {
               "Content-Type": "multipart/form-data",
               Authorization: `Bearer ${localStorage.access_token}`,

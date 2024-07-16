@@ -27,7 +27,7 @@ const UpdateHomepass = () => {
   useEffect(() => {
     const fetchHomepassData = async () => {
       try {
-        const response = await axios.get(`https://moving-address-be.oss.myrepublic.co.id/api/homepass/${id}`, {
+        const response = await axios.get(`http://localhost:8000/api/homepass/${id}`, {
           headers: {
             Authorization: `Bearer ${localStorage.access_token}`,
           },
@@ -71,7 +71,7 @@ const UpdateHomepass = () => {
         completion_date: formData.completion_date,
       };
 
-      const response = await axios.put(`https://moving-address-be.oss.myrepublic.co.id/api/update-homepass/${id}`, payload, {
+      const response = await axios.put(`http://localhost:8000/api/update-homepass/${id}`, payload, {
         headers: {
           Authorization: `Bearer ${localStorage.access_token}`,
           "Content-Type": "application/json",
