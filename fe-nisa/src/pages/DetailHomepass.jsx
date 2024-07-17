@@ -9,6 +9,8 @@ const DetailHomepass = () => {
   const { id: detailId } = useParams();
   const [data, setData] = useState(null);
   const [userRole, setUserRole] = useState('');
+  const [isImageModalOpen, setImageModalOpen] = useState(false);
+  const [imageSrc, setImageSrc] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -60,10 +62,19 @@ const DetailHomepass = () => {
     }
   };
 
+  const openImageModal = (src) => {
+    setImageSrc(src);
+    setImageModalOpen(true);
+  };
+
+  const closeImageModal = () => {
+    setImageModalOpen(false);
+    setImageSrc('');
+  };
+
   if (!data) {
     return <div>Loading...</div>;
   }
-  
 
   return (
     <div>
@@ -125,7 +136,7 @@ const DetailHomepass = () => {
             </div>
           </div>
 
-          <div className="col-span-3">
+          {/* <div className="col-span-3">
           <label htmlFor="photo_front_of_house_url" className="block text-sm font-medium leading-6 text-gray-900">
               Photo Front of house
             </label>
@@ -267,7 +278,143 @@ const DetailHomepass = () => {
                     className="absolute top-0 left-full ml-2 w-150 border border-gray-300 bg-white p-2 hidden group-hover:block"
                 />
             </div>
-            </div>
+            </div> */}
+
+<div className="col-span-3">
+  <label htmlFor="photo_front_of_house_url" className="block text-sm font-medium leading-6 text-gray-900">
+    Photo Front of house
+  </label>
+  <div className="relative inline-block group flex items-center space-x-2">
+    <input 
+      type="text" 
+      id="photo_front_of_house_url" 
+      name="photo_front_of_house_url" 
+      value={data.photo_front_of_house_url} 
+      readOnly 
+      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" 
+    />
+    <button 
+      type="button"
+      onClick={() => openImageModal(data.photo_front_of_house_url)}
+      className="px-4 py-1 text-lg font-medium bg-[#662b81] text-white rounded-lg cursor-pointer"
+    >
+      Image
+    </button>
+  </div>
+</div>
+
+<div className="col-span-3">
+  <label htmlFor="photo_old_fat_url" className="block text-sm font-medium leading-6 text-gray-900">
+    Photo Old FAT
+  </label>
+  <div className="relative inline-block group flex items-center space-x-2">
+    <input 
+      type="text" 
+      id="photo_old_fat_url" 
+      name="photo_old_fat_url" 
+      value={data.photo_old_fat_url} 
+      readOnly 
+      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" 
+    />
+    <button 
+      type="button"
+      onClick={() => openImageModal(data.photo_old_fat_url)}
+      className="px-4 py-1 text-lg font-medium bg-[#662b81] text-white rounded-lg cursor-pointer"
+    >
+      Image
+    </button>
+  </div>
+</div>
+
+<div className="col-span-3">
+  <label htmlFor="photo_right_of_home_url" className="block text-sm font-medium leading-6 text-gray-900">
+    Photo Right of Home
+  </label>
+  <div className="relative inline-block group flex items-center space-x-2">
+    <input 
+      type="text" 
+      id="photo_right_of_home_url" 
+      name="photo_right_of_home_url" 
+      value={data.photo_right_of_home_url} 
+      readOnly 
+      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" 
+    />
+    <button 
+      type="button"
+      onClick={() => openImageModal(data.photo_right_of_home_url)}
+      className="px-4 py-1 text-lg font-medium bg-[#662b81] text-white rounded-lg cursor-pointer"
+    >
+      Image
+    </button>
+  </div>
+</div>
+
+<div className="col-span-3">
+  <label htmlFor="photo_new_fat_url" className="block text-sm font-medium leading-6 text-gray-900">
+    Photo New FAT
+  </label>
+  <div className="relative inline-block group flex items-center space-x-2">
+    <input 
+      type="text" 
+      id="photo_new_fat_url" 
+      name="photo_new_fat_url" 
+      value={data.photo_new_fat_url} 
+      readOnly 
+      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" 
+    />
+    <button 
+      type="button"
+      onClick={() => openImageModal(data.photo_new_fat_url)}
+      className="px-4 py-1 text-lg font-medium bg-[#662b81] text-white rounded-lg cursor-pointer"
+    >
+      Image
+    </button>
+  </div>
+</div>
+
+<div className="col-span-3">
+  <label htmlFor="photo_left_of_home_url" className="block text-sm font-medium leading-6 text-gray-900">
+    Photo Left of Home
+  </label>
+  <div className="relative inline-block group flex items-center space-x-2">
+    <input 
+      type="text" 
+      id="photo_left_of_home_url" 
+      name="photo_left_of_home_url" 
+      value={data.photo_left_of_home_url} 
+      readOnly 
+      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" 
+    />
+    <button 
+      type="button"
+      onClick={() => openImageModal(data.photo_left_of_home_url)}
+      className="px-4 py-1 text-lg font-medium bg-[#662b81] text-white rounded-lg cursor-pointer"
+    >
+      Image
+    </button>
+  </div>
+</div>
+
+{/* Image Modal */}
+{isImageModalOpen && (
+  <div className="fixed inset-0 flex items-center justify-center z-50">
+    <div className="fixed inset-0 bg-black opacity-50" onClick={closeImageModal}></div>
+    <div className="bg-white rounded shadow-lg z-50 w-11/12 max-w-3xl max-h-[90vh] flex flex-col relative">
+      <button 
+        className="absolute top-2 right-2 text-gray-600 hover:text-gray-900"
+        onClick={closeImageModal}
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+      <div className="p-4 flex-grow overflow-auto">
+        <img src={imageSrc} alt="Modal" className="w-full h-auto object-contain" />
+      </div>
+    </div>
+  </div>
+)}
+
 
           <div className="sm:col-span-4">
             <label htmlFor="request_purpose" className="block text-sm font-medium leading-6 text-gray-900">Tujuan Permintaan:</label>
