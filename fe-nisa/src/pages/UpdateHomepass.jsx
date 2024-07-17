@@ -147,10 +147,14 @@ const UpdateHomepass = () => {
                 <div className="mt-2">
                   <select id="network" name="network" value={formData.network} onChange={handleChange} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
                     <option> </option>
-                    <option>SMT</option>
                     <option>MyRepublic</option>
-                    <option>Fiberstar</option>
                     <option>MTI</option>
+                    <option>Icon+</option>
+                    <option>BIT</option>
+                    <option>SMT</option>
+                    <option>Fiberstar</option>
+                    <option>Cemara Asri</option>
+                    <option>IBS Ancol</option>
                   </select>
                 </div>
             </div>
@@ -160,10 +164,16 @@ const UpdateHomepass = () => {
                 <div className="mt-2">
                   <select id="remarks" name="remarks" value={formData.remarks} onChange={handleChange} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
                     <option> </option>
-                    <option>Data Not Valid (tidak sesuai)</option>
-                    <option>Tidak tercover jaringan MyRep & Partner</option>
                     <option>Add Pole (membutuhkan tiang tambahan)</option>
+                    <option>Data Not Valid (tidak sesuai)</option>
+                    <option>Crossing Cluster wall (melompati pembatas cluster)</option>
+                    <option>Crossing other Property (melompati rumah lain)</option>
+                    <option>Update Homepass Not HEP (ajukan perbaikan alamat ke IT)</option>
                     <option>Installation Not Standart (tidak standar)</option>
+                    <option>Drop cable too Far (tarikan terlalu jauh)</option>
+                    <option>Tidak tercover jaringan MyRep & Partner</option>
+                    <option>Double Request</option>
+                    <option>Add sling wire to NRO team</option>
                   </select>
                 </div>
             </div>

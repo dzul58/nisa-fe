@@ -104,105 +104,91 @@ const Home = () => {
   };
 
   return (
-    <div className="overflow-x-auto p-5 bg-slate-50">
-      <div className="mb-4">
-        {/* {isAdmin() && ( */}
-          <button
-            onClick={handleCreateClick}
-            className="bg-[#662b81] hover:bg-[#4A0F70] text-white font-bold py-2 px-4 rounded"
-          >
-            Create Request
-          </button>
-        {/* )} */}
+    <div className="p-2 bg-slate-50">
+      <div className="mb-2">
+        <button
+          onClick={handleCreateClick}
+          className="bg-[#662b81] hover:bg-[#4A0F70] text-white font-bold py-1 px-2 rounded text-xs"
+        >
+          Create Request
+        </button>
+
+        <div className="flex flex-wrap gap-2 mb-2">
+          <input
+            type="text"
+            name="request_purpose"
+            placeholder="Search Request Purpose"
+            value={filterValues.request_purpose}
+            onChange={handleFilterChange}
+            className="border rounded p-1 text-xs w-40"
+          />
+          <input
+            type="text"
+            name="customerCid"
+            placeholder="Search CID"
+            value={filterValues.customerCid}
+            onChange={handleFilterChange}
+            className="border rounded p-1 text-xs w-32"
+          />
+          <input
+            type="text"
+            name="homepassId"
+            placeholder="Search Homepass ID"
+            value={filterValues.homepassId}
+            onChange={handleFilterChange}
+            className="border rounded p-1 text-xs w-36"
+          />
+          <input
+            type="text"
+            name="network"
+            placeholder="Search Network"
+            value={filterValues.network}
+            onChange={handleFilterChange}
+            className="border rounded p-1 text-xs w-32"
+          />
+          <input
+            type="text"
+            name="status"
+            placeholder="Search Status"
+            value={filterValues.status}
+            onChange={handleFilterChange}
+            className="border rounded p-1 text-xs w-32"
+          />
+        </div>
       </div>
-      <table className="min-w-full bg-white border border-gray-300 shadow-lg rounded-lg">
-        <thead>
-          <tr>
-            <th className="border-b px-4 py-2" colSpan="12">
-              <div className="grid grid-cols-12 gap-3">
-                <input
-                  type="text"
-                  id="customerCid"
-                  name="customerCid"
-                  value={filterValues.customerCid}
-                  onChange={handleFilterChange}
-                  placeholder="CID Pelanggan"
-                  className="border border-gray-300 rounded-md py-2 px-3 col-span-2"
-                />
-                <input
-                  type="text"
-                  id="homepassId"
-                  name="homepassId"
-                  value={filterValues.homepassId}
-                  onChange={handleFilterChange}
-                  placeholder="Homepass ID"
-                  className="border border-gray-300 rounded-md py-2 px-3 col-span-2"
-                />
-                <input
-                  type="text"
-                  id="network"
-                  name="network"
-                  value={filterValues.network}
-                  onChange={handleFilterChange}
-                  placeholder="Network"
-                  className="border border-gray-300 rounded-md py-2 px-3 col-span-2"
-                />
-                <input
-                  type="text"
-                  id="homeIdStatus"
-                  name="homeIdStatus"
-                  value={filterValues.homeIdStatus}
-                  onChange={handleFilterChange}
-                  placeholder="Status Home-ID"
-                  className="border border-gray-300 rounded-md py-2 px-3 col-span-2"
-                />
-                <input
-                  type="text"
-                  id="hpmPic"
-                  name="hpmPic"
-                  value={filterValues.hpmPic}
-                  onChange={handleFilterChange}
-                  placeholder="PIC HPM"
-                  className="border border-gray-300 rounded-md py-2 px-3 col-span-2"
-                />
-                <input
-                  type="text"
-                  id="status"
-                  name="status"
-                  value={filterValues.status}
-                  onChange={handleFilterChange}
-                  placeholder="Status"
-                  className="border border-gray-300 rounded-md py-2 px-3 col-span-2"
-                />
-              </div>
-            </th>
-          </tr>
-          <tr>
-            <th className="border-b px-2 py-1 bg-gray-200">No</th>
-            <th className="border-b px-3 py-1 bg-gray-200">Timestamp</th>
-            <th className="border-b px-3 py-1 bg-gray-200">CID Pelanggan</th>
-            <th className="border-b px-3 py-1 bg-gray-200 w-2/12">Tujuan Permintaan</th>
-            <th className="border-b px-3 py-1 bg-gray-200">Homepass ID</th>
-            <th className="border-b px-3 py-1 bg-gray-200">Network</th>
-            <th className="border-b px-3 py-1 bg-gray-200">Status Home-ID</th>
-            <th className="border-b px-3 py-1 bg-gray-200 w-2/5">PIC HPM</th>
-            <th className="border-b px-3 py-1 bg-gray-200">Status</th>
-            <th className="border-b px-3 py-1 bg-gray-200">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {data.map((row, index) => (
-            <tr key={row.id} className={index % 2 === 0 ? 'bg-gray-50' : 'bg-white'}>
-              <td className="border-b px-2 py-1 text-center">{(page - 1) * 10 + index + 1}</td>
-              <td className="border-b px-3 py-1 text-center">{formatDate(row.timestamp)}</td>
-              <td className="border-b px-3 py-1 text-center">{row.customer_cid}</td>
-              <td className="border-b px-3 py-1 w-3/12">{row.request_purpose}</td>
-              <td className="border-b px-3 py-1">{row.homepass_id}</td>
-              <td className="border-b px-3 py-1">{row.network}</td>
-              <td className="border-b px-3 py-1">{row.home_id_status}</td>
-              <td className="border-b px-3 py-1">{row.hpm_pic}</td>
-              <td className="border-b px-3 py-1">{row.status}</td>
-              <td className="border-b px-3 py-1 text-center">
+      
+
+      <div className="overflow-x-auto">
+        <table className="w-full bg-white border border-gray-300 shadow-lg rounded-lg text-xs">
+          <thead>
+            <tr className="bg-gray-200">
+              <th className="border-b p-1">No</th>
+              <th className="border-b p-1">Timestamp</th>
+              <th className="border-b p-1">Ticket</th>
+              <th className="border-b p-1">Tujuan Permintaan</th>
+              <th className="border-b p-1">CID</th>
+              <th className="border-b p-1">Homepass ID</th>
+              <th className="border-b p-1">Network</th>
+              <th className="border-b p-1">Home-ID</th>
+              <th className="border-b p-1">PIC HPM</th>
+              <th className="border-b p-1">Status</th>
+              <th className="border-b p-1">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {data.map((row, index) => (
+              <tr key={row.id} className={index % 2 === 0 ? 'bg-gray-50' : 'bg-white'}>
+                <td className="border-b p-1 text-center">{(page - 1) * 10 + index + 1}</td>
+                <td className="border-b p-1 text-center">{format(new Date(row.timestamp), "yyyy/dd/MM HH:mm")}</td>
+                <td className="border-b p-1 text-center">{row.id}</td>
+                <td className="border-b p-1 text-center">{row.request_purpose.substring(0, 20)}..</td>
+                <td className="border-b p-1 text-center">{row.customer_cid}</td>
+                <td className="border-b p-1 text-center">{row.homepass_id}</td>
+                <td className="border-b p-1 text-center">{row.network}</td>
+                <td className="border-b p-1 text-center">{row.home_id_status}</td>
+                <td className="border-b p-1 text-center">{row.hpm_pic}</td>
+                <td className="border-b p-1 text-center">{row.status}</td>
+                <td className="border-b px-3 py-1 text-center">
                 <Link
                   to={`/hmpdetails/${row.id}`}
                   className="bg-[#662b81] hover:bg-[#4A0F70] text-white font-bold py-1 px-2 rounded mr-2"
@@ -217,25 +203,26 @@ const Home = () => {
                     Edit
                 </Link>
               </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      <div className="flex justify-between mt-4">
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <div className="flex justify-between mt-2">
         <button
           onClick={() => handlePageChange(page - 1)}
           disabled={page === 1}
-          className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded disabled:opacity-50"
+          className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-1 px-2 rounded disabled:opacity-50 text-xs"
         >
-          Previous
+          Prev
         </button>
-        <span className="text-gray-700">
+        <span className="text-gray-700 text-xs">
           Page {page} of {totalPages}
         </span>
         <button
           onClick={() => handlePageChange(page + 1)}
           disabled={page === totalPages}
-          className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded disabled:opacity-50"
+          className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-1 px-2 rounded disabled:opacity-50 text-xs"
         >
           Next
         </button>
