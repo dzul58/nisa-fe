@@ -212,6 +212,24 @@ const EditHomepass = () => {
               </div>
             </div>
 
+            <div className="sm:col-span-3">
+            <label htmlFor="response_hpm_location" className="block text-sm font-medium leading-6 text-gray-900">Area:</label>
+            <div className="mt-2">
+              <input type="text" id="response_hpm_location" name="response_hpm_location" value={formData.response_hpm_location} onChange={handleChange} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+            </div>
+          </div>
+
+          <div className="sm:col-span-3">
+              <label htmlFor="response_hpm_source" className="block text-sm font-medium leading-6 text-gray-900">Tujuan Permintaan:</label>
+              <div className="mt-2">
+                <select id="response_hpm_source" name="response_hpm_source" value={formData.response_hpm_source} onChange={handleChange} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+                  <option> </option>
+                  <option>BOSS</option>
+                  <option>Astri</option>
+                </select>
+              </div>
+            </div>
+
           <div className="col-span-full">
             <label htmlFor="current_address" className="block text-sm font-medium leading-6 text-gray-900">Alamat Saat Ini:</label>
             <div className="mt-2">
