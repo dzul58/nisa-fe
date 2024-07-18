@@ -17,6 +17,8 @@ const EditHomepass = () => {
     coordinate_point: "",
     request_purpose: "Moving Address (Pindah Rumah)",
     email_address: "",
+    response_hpm_location: "",
+    response_hpm_source: "",
     photo_front_of_house: null,
     photo_left_of_house: null,
     photo_right_of_house: null,
