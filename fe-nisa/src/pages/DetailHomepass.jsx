@@ -399,7 +399,7 @@ const DetailHomepass = () => {
 {isImageModalOpen && (
   <div className="fixed inset-0 flex items-center justify-center z-50">
     <div className="fixed inset-0 bg-black opacity-50" onClick={closeImageModal}></div>
-    <div className="bg-white rounded shadow-lg z-50 w-11/12 max-w-3xl max-h-[90vh] flex flex-col relative">
+    <div className="bg-white rounded shadow-lg z-50 w-11/12 max-w-3xl max-h-[90vh] flex flex-col relative p-4">
       <button 
         className="absolute top-2 right-2 text-gray-600 hover:text-gray-900"
         onClick={closeImageModal}
@@ -408,7 +408,7 @@ const DetailHomepass = () => {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
         </svg>
       </button>
-      <div className="p-4 flex-grow overflow-auto">
+      <div className="flex-grow overflow-auto">
         <img src={imageSrc} alt="Modal" className="w-full h-auto object-contain" />
       </div>
     </div>
