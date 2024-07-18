@@ -121,6 +121,19 @@ const DetailHomepass = () => {
             </div>
           </div>
 
+          <div className="sm:col-span-3">
+              <label htmlFor="response_hpm_location" className="block text-sm font-medium leading-6 text-gray-900">Area:</label>
+              <div className="mt-2">
+                <input type="text" id="response_hpm_location" name="response_hpm_location" value={data.response_hpm_location} readOnly className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+              </div>
+            </div>
+
+            <div className="sm:col-span-3">
+            <label htmlFor="response_hpm_source" className="block text-sm font-medium leading-6 text-gray-900">Source:</label>
+            <div className="mt-2">
+              <input type="text" id="response_hpm_source" name="response_hpm_source" value={data.response_hpm_source} readOnly className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+            </div>
+          </div>
 
           <div className="col-span-full">
             <label htmlFor="current_address" className="block text-sm font-medium leading-6 text-gray-900">Alamat Saat Ini:</label>
@@ -136,6 +149,7 @@ const DetailHomepass = () => {
             </div>
           </div>
 
+          
           {/* <div className="col-span-3">
           <label htmlFor="photo_front_of_house_url" className="block text-sm font-medium leading-6 text-gray-900">
               Photo Front of house
@@ -423,12 +437,19 @@ const DetailHomepass = () => {
             </div>
           </div>
 
-          <div className="sm:col-span-4">
+          <div className="sm:col-span-3">
             <label htmlFor="email_address" className="block text-sm font-medium leading-6 text-gray-900">Email Address:</label>
             <div className="mt-2">
               <input  type="email" id="email_address" name="email_address" value={data.email_address} readOnly className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
             </div>
           </div>
+
+          <div className="sm:col-span-2">
+              <label htmlFor="response_hpm_timestamp" className="block text-sm font-medium leading-6 text-gray-900"> Respone Time HPM PIC:</label>
+              <div className="mt-2">
+                <input type="text" id="response_hpm_timestamp" name="response_hpm_timestamp" value={data.response_hpm_timestamp ? formatDate(data.response_hpm_timestamp) : ''} readOnly className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+              </div>
+            </div>
 
           <div className="sm:col-span-3">
               <label htmlFor="hpm_check_result" className="block text-sm font-medium leading-6 text-gray-900">HPM Check Result:</label>
