@@ -13,6 +13,8 @@ const CreateHomepass = () => {
     current_address: "",
     destination_address: "",
     coordinate_point: "",
+    response_hpm_location: "",
+    response_hpm_source: "",
     request_purpose: "Moving Address (Pindah Rumah)",
     photo_front_of_house: null,
     photo_left_of_house: null,
@@ -146,6 +148,43 @@ const CreateHomepass = () => {
           </div>
 
           <div className="sm:col-span-3">
+            <label htmlFor="coordinate_point" className="block text-sm font-medium leading-6 text-gray-900">Titik Koordinat:</label>
+            <div className="mt-2">
+              <input type="text" id="coordinate_point" name="coordinate_point" value={formData.coordinate_point} onChange={handleChange} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+            </div>
+          </div>
+
+          <div className="sm:col-span-3">
+              <label htmlFor="request_purpose" className="block text-sm font-medium leading-6 text-gray-900">Tujuan Permintaan:</label>
+              <div className="mt-2">
+                <select id="request_purpose" name="request_purpose" value={formData.request_purpose} onChange={handleChange} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+                  <option>Moving Address (Pindah Rumah)</option>
+                  <option>Moving Network (Partner &gt;&gt; Own-Net MyRepublic)</option>
+                  <option>Perbaikan Alamat System</option>
+                  <option>Request Moving MDU</option>
+                </select>
+              </div>
+          </div>
+          
+          <div className="sm:col-span-3">
+            <label htmlFor="response_hpm_location" className="block text-sm font-medium leading-6 text-gray-900">Area:</label>
+            <div className="mt-2">
+              <input type="text" id="response_hpm_location" name="response_hpm_location" value={formData.response_hpm_location} onChange={handleChange} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+            </div>
+          </div>
+
+          <div className="sm:col-span-3">
+              <label htmlFor="response_hpm_source" className="block text-sm font-medium leading-6 text-gray-900">Tujuan Permintaan:</label>
+              <div className="mt-2">
+                <select id="response_hpm_source" name="response_hpm_source" value={formData.response_hpm_source} onChange={handleChange} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+                  <option> </option>
+                  <option>BOSS</option>
+                  <option>Astri</option>
+                </select>
+              </div>
+            </div>
+
+            <div className="sm:col-span-3">
               <label htmlFor="submission_from" className="block text-sm font-medium leading-6 text-gray-900">Pengajuan dari:</label>
               <div className="mt-2">
                 <select id="submission_from" name="submission_from" value={formData.submission_from} onChange={handleChange} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
@@ -169,26 +208,6 @@ const CreateHomepass = () => {
                   <option>Walk In Customer</option>
                   <option>Retain RWB</option>
                   <option>Inbound Call CS</option>
-                </select>
-              </div>
-            </div>
-
-
-          <div className="sm:col-span-3">
-            <label htmlFor="coordinate_point" className="block text-sm font-medium leading-6 text-gray-900">Titik Koordinat:</label>
-            <div className="mt-2">
-              <input type="text" id="coordinate_point" name="coordinate_point" value={formData.coordinate_point} onChange={handleChange} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
-            </div>
-          </div>
-
-          <div className="sm:col-span-3">
-              <label htmlFor="request_purpose" className="block text-sm font-medium leading-6 text-gray-900">Tujuan Permintaan:</label>
-              <div className="mt-2">
-                <select id="request_purpose" name="request_purpose" value={formData.request_purpose} onChange={handleChange} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
-                  <option>Moving Address (Pindah Rumah)</option>
-                  <option>Moving Network (Partner &gt;&gt; Own-Net MyRepublic)</option>
-                  <option>Perbaikan Alamat System</option>
-                  <option>Request Moving MDU</option>
                 </select>
               </div>
             </div>
