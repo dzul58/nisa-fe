@@ -103,8 +103,25 @@ const UpdateHomepass = () => {
     });
   };
 
-  const handleCancel = () => {
-    navigate(`/hmpdetails/${id}`);
+  const handleCancel = async () => {
+    try {
+      // Panggil endpoint status
+      await axios.get(`http://localhost:8000/api/status-untaken/${id}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.access_token}`,
+        },
+      });
+      console.log();
+      // Navigasi kembali ke halaman detail
+      navigate(`/hmpdetails/${id}`);
+    } catch (error) {
+      console.error('Error:', error);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "There was an error while cancelling the update.",
+      });
+    }
   };
 
 

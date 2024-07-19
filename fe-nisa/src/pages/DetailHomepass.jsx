@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { format } from 'date-fns';
 import { id } from 'date-fns/locale';
@@ -11,6 +11,7 @@ const DetailHomepass = () => {
   const [userRole, setUserRole] = useState('');
   const [isImageModalOpen, setImageModalOpen] = useState(false);
   const [imageSrc, setImageSrc] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -48,14 +49,31 @@ const DetailHomepass = () => {
     return format(date, "dd MMMM yyyy HH:mm", { locale: id });
   };
 
-  const isAdmin = () => userRole === 'HPM';
+  const isAdmin = () => userRole === 'HPM'&& data.response_hpm_status === 'Untaken';
+
+  const handleAdminUpdate = async () => {
+    try {
+      // Panggil endpoint status
+      await axios.get(`http://localhost:8000/api/status-taken/${detailId}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.access_token}`,
+        },
+      });
+      
+      // Navigasi ke halaman update
+      navigate(`/updatehomepass/${detailId}`);
+    } catch (error) {
+      console.error('Error:', error);
+      // Handle error (misalnya, tampilkan pesan error)
+    }
+  };
 
   const handleUpdateClick = (e) => {
     if (!isAdmin()) {
       e.preventDefault();
       Swal.fire({
         title: 'Unauthorized',
-        text: 'You do not have permission to update. Only HPM are allowed.',
+        text: 'You do not have permission to update this request.',
         icon: 'error',
         confirmButtonText: 'OK'
       });
@@ -526,7 +544,7 @@ const DetailHomepass = () => {
             </Link>
             {isAdmin() ? (
             <Link 
-              to={`/updatehomepass/${data.id}`} 
+              onClick={handleAdminUpdate}
               className="w-32 text-center bg-[#662b81] text-white font-semibold hover:bg-[#4A0F70] py-2 px-4 border border-green-500 hover:border-transparent rounded"
             >
               Update
