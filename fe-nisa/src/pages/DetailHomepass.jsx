@@ -97,10 +97,19 @@ const DetailHomepass = () => {
   return (
     <div>
       <form className="space-y-12">
-        <div className="border-b border-gray-900/10 pb-12">
-          <h2 className="text-base font-semibold leading-7 text-gray-900">Detail Moving Address Request</h2>
-          <p className="mt-1 text-sm leading-6 text-gray-600">View and review the details of the moving address request.</p>
-        </div>
+      <div className="border-b border-gray-900/10 pb-12">
+  <div className="flex justify-between items-center">
+    <div>
+      <h2 className="text-base font-semibold leading-7 text-gray-900">Detail Moving Address Request</h2>
+      <p className="mt-1 text-sm leading-6 text-gray-600">View and review the details of the moving address request.</p>
+    </div>
+    <div className={`px-3 py-1 rounded-full text-white font-semibold ${
+      data.response_hpm_status === 'Taken' ? 'bg-red-500' : 'bg-green-500'
+    }`}>
+      Status: {data.response_hpm_status}
+    </div>
+  </div>
+</div>
 
         <div className="border-b border-gray-900/10 pb-12">
           <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
