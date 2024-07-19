@@ -113,7 +113,7 @@ const Home = () => {
           Create Request
         </button>
 
-        <div className="flex flex-wrap gap-2 mb-2">
+        <div className="overflow-x-auto flex flex-wrap gap-2 mb-2 pt-2">
           <input
             type="text"
             name="request_purpose"
@@ -151,6 +151,38 @@ const Home = () => {
             name="status"
             placeholder="Search Status"
             value={filterValues.status}
+            onChange={handleFilterChange}
+            className="border rounded p-1 text-xs w-32"
+          />
+                    <input
+            type="text"
+            name="request_purpose"
+            placeholder="Search Request Purpose"
+            value={filterValues.request_purpose}
+            onChange={handleFilterChange}
+            className="border rounded p-1 text-xs w-40"
+          />
+          <input
+            type="text"
+            name="customerCid"
+            placeholder="Search CID"
+            value={filterValues.customerCid}
+            onChange={handleFilterChange}
+            className="border rounded p-1 text-xs w-32"
+          />
+          <input
+            type="text"
+            name="homepassId"
+            placeholder="Search Homepass ID"
+            value={filterValues.homepassId}
+            onChange={handleFilterChange}
+            className="border rounded p-1 text-xs w-36"
+          />
+          <input
+            type="text"
+            name="network"
+            placeholder="Search Network"
+            value={filterValues.network}
             onChange={handleFilterChange}
             className="border rounded p-1 text-xs w-32"
           />
