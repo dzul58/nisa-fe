@@ -4,6 +4,7 @@ import axios from 'axios';
 import { format } from 'date-fns';
 import { id } from 'date-fns/locale';
 import Swal from 'sweetalert2';
+import loadingGif from '../assets/loading_image.gif'
 
 const DetailHomepass = () => {
   const { id: detailId } = useParams();
@@ -91,7 +92,9 @@ const DetailHomepass = () => {
   };
 
   if (!data) {
-    return <div>Loading...</div>;
+    return   <div className="flex justify-center items-center h-screen">
+    <img src={loadingGif} alt="Loading..." className="w-16 h-16" />
+  </div>
   }
 
   return (

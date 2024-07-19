@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import loadingGif from '../assets/loading_image.gif'
 
 const AutoLogin = () => {
   const navigate = useNavigate();
@@ -41,7 +42,9 @@ const AutoLogin = () => {
     }
   };
 
-  return <div>Logging in...</div>;
+  return  <div className="flex justify-center items-center h-screen">
+  <img src={loadingGif} alt="Loading..." className="w-16 h-16" />
+</div>
 };
 
 export default AutoLogin;
