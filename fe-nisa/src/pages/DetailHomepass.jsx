@@ -556,7 +556,7 @@ const DetailHomepass = () => {
 
                 <div className="col-span-3">
                   <label htmlFor="photo1_survey_ops" className="block text-sm font-medium leading-6 text-gray-900">
-                    Photo 3 Survey Ops
+                    Photo 1 Survey Ops
                   </label>
                   <div className="relative inline-block group flex items-center space-x-2">
                     <input 
