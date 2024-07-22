@@ -91,6 +91,8 @@ const DetailHomepass = () => {
     setImageSrc('');
   };
 
+  // const showSurveyOpsFields = data.hpm_check_result === "Survey Ops.";
+
   if (!data) {
     return   <div className="flex justify-center items-center h-screen">
     <img src={loadingGif} alt="Loading..." className="w-16 h-16" />
@@ -544,8 +546,119 @@ const DetailHomepass = () => {
                 <input type="text" id="completion_date" name="completion_date" value={data.completion_date ? formatDate(data.completion_date) : ''} readOnly className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
               </div>
             </div>
+{/* dari sini */}
+            <div className="sm:col-span-4">
+                  <label htmlFor="freitag_survey_ops" className="block text-sm font-medium leading-6 text-gray-900">Freitag Survey Ops:</label>
+                  <div className="mt-2">
+                    <input type="text" id="freitag_survey_ops" name="freitag_survey_ops" value={data.freitag_survey_ops || ''} readOnly className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                  </div>
+                </div>
+
+                <div className="col-span-3">
+                  <label htmlFor="photo1_survey_ops" className="block text-sm font-medium leading-6 text-gray-900">
+                    Photo 3 Survey Ops
+                  </label>
+                  <div className="relative inline-block group flex items-center space-x-2">
+                    <input 
+                      type="text" 
+                      id="photo1_survey_ops" 
+                      name="photo1_survey_ops" 
+                      value={data.photo1_survey_ops || ''} 
+                      readOnly 
+                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" 
+                    />
+                    <button 
+                      type="button"
+                      onClick={() => openImageModal(data.photo1_survey_ops)}
+                      className="px-4 py-1 text-lg font-medium bg-[#662b81] text-white rounded-lg cursor-pointer"
+                    >
+                      Image
+                    </button>
+                  </div>
+                </div>
+
+                <div className="col-span-3">
+                  <label htmlFor="photo2_survey_ops" className="block text-sm font-medium leading-6 text-gray-900">
+                    Photo 2 Survey Ops
+                  </label>
+                  <div className="relative inline-block group flex items-center space-x-2">
+                    <input 
+                      type="text" 
+                      id="photo2_survey_ops" 
+                      name="photo2_survey_ops" 
+                      value={data.photo2_survey_ops || ''} 
+                      readOnly 
+                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" 
+                    />
+                    <button 
+                      type="button"
+                      onClick={() => openImageModal(data.photo2_survey_ops)}
+                      className="px-4 py-1 text-lg font-medium bg-[#662b81] text-white rounded-lg cursor-pointer"
+                    >
+                      Image
+                    </button>
+                  </div>
+                </div>
+
+                <div className="col-span-3">
+                  <label htmlFor="photo3_survey_ops" className="block text-sm font-medium leading-6 text-gray-900">
+                    Photo 3 Survey Ops
+                  </label>
+                  <div className="relative inline-block group flex items-center space-x-2">
+                    <input 
+                      type="text" 
+                      id="photo3_survey_ops" 
+                      name="photo3_survey_ops" 
+                      value={data.photo3_survey_ops || ''} 
+                      readOnly 
+                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" 
+                    />
+                    <button 
+                      type="button"
+                      onClick={() => openImageModal(data.photo3_survey_ops)}
+                      className="px-4 py-1 text-lg font-medium bg-[#662b81] text-white rounded-lg cursor-pointer"
+                    >
+                      Image
+                    </button>
+                  </div>
+                </div>
+
+                <div className="col-span-3">
+                  <label htmlFor="photo4_survey_ops" className="block text-sm font-medium leading-6 text-gray-900">
+                    Photo 4 Survey Ops
+                  </label>
+                  <div className="relative inline-block group flex items-center space-x-2">
+                    <input 
+                      type="text" 
+                      id="photo4_survey_ops" 
+                      name="photo4_survey_ops" 
+                      value={data.photo4_survey_ops || ''} 
+                      readOnly 
+                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" 
+                    />
+                    <button 
+                      type="button"
+                      onClick={() => openImageModal(data.photo4_survey_ops)}
+                      className="px-4 py-1 text-lg font-medium bg-[#662b81] text-white rounded-lg cursor-pointer"
+                    >
+                      Image
+                    </button>
+                  </div>
+                </div>
+
+                {/* Add photo2_survey_ops, photo3_survey_ops, photo4_survey_ops fields here */}
+
+                <div className="col-span-full">
+                  <label htmlFor="notes_survey_ops" className="block text-sm font-medium leading-6 text-gray-900">Notes Survey Ops:</label>
+                  <div className="mt-2">
+                    <textarea id="notes_survey_ops" name="notes_survey_ops" value={data.notes_survey_ops || ''} readOnly rows="3" className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></textarea>
+                  </div>
+                </div>
+
           </div>
         </div>
+
+        
 
         <div className="flex items-center justify-end gap-x-6">
             <Link 
