@@ -8,6 +8,7 @@ import Login from '../pages/Login';
 import UpdateHomepass from '../pages/UpdateHomepass';
 import AutoLogin from '../pages/AutoLogin';
 import ErrorPage from '../pages/ErrorPage';
+import UpdateSurveyHomepass from '../pages/UpdateSurveyHomepass';
 
 
 const aunthBeforeLogin = () => {
@@ -63,7 +64,7 @@ const router = createBrowserRouter([
         },
         {
           path: "/updatesurvey/:id",
-          element: <UpdateHomepass />,
+          element: <UpdateSurveyHomepass />,
         },
       ],
       loader: aunthBeforeLogin,
