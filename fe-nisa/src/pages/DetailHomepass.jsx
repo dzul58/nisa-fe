@@ -50,22 +50,24 @@ const DetailHomepass = () => {
     return format(date, "dd MMMM yyyy HH:mm", { locale: id });
   };
 
-  const isAdmin = () => userRole === 'HPM'&& data.response_hpm_status === 'Untaken';
+  const isAdmin = () => data.response_hpm_status === 'Untaken' && userRole === 'HPM' || userRole === 'Survey Ops.';
+  // const isAdmin = () => data.response_hpm_status === 'Untaken';
 
   const handleAdminUpdate = async () => {
     try {
-      // Panggil endpoint status
       await axios.get(`http://localhost:8000/api/status-taken/${detailId}`, {
         headers: {
           Authorization: `Bearer ${localStorage.access_token}`,
         },
       });
       
-      // Navigasi ke halaman update
-      navigate(`/updatehomepass/${detailId}`);
+      if (data.hpm_check_result === "Survey Ops.") {
+        navigate(`/updatesurvey/${detailId}`);
+      } else {
+        navigate(`/updatehomepass/${detailId}`);
+      }
     } catch (error) {
       console.error('Error:', error);
-      // Handle error (misalnya, tampilkan pesan error)
     }
   };
 
@@ -91,12 +93,14 @@ const DetailHomepass = () => {
     setImageSrc('');
   };
 
-  // const showSurveyOpsFields = data.hpm_check_result === "Survey Ops.";
+  const showSurveyOpsFields = data && data?.hpm_check_result === "Survey Ops.";
 
   if (!data) {
-    return   <div className="flex justify-center items-center h-screen">
-    <img src={loadingGif} alt="Loading..." className="w-16 h-16" />
-  </div>
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <img src={loadingGif} alt="Loading..." className="w-16 h-16" />
+      </div>
+    );
   }
 
   return (
@@ -547,7 +551,17 @@ const DetailHomepass = () => {
               </div>
             </div>
 {/* dari sini */}
+
+{showSurveyOpsFields && (
+              <>
             <div className="sm:col-span-4">
+                  <label htmlFor="freitag_survey_ops" className="block text-sm font-medium leading-6 text-gray-900">Freitag Survey Ops:</label>
+                  <div className="mt-2">
+                    <input type="text" id="freitag_survey_ops" name="freitag_survey_ops" value={data.freitag_survey_ops || ''} readOnly className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                  </div>
+                </div>
+
+                <div className="sm:col-span-4">
                   <label htmlFor="freitag_survey_ops" className="block text-sm font-medium leading-6 text-gray-900">Freitag Survey Ops:</label>
                   <div className="mt-2">
                     <input type="text" id="freitag_survey_ops" name="freitag_survey_ops" value={data.freitag_survey_ops || ''} readOnly className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
@@ -646,8 +660,6 @@ const DetailHomepass = () => {
                   </div>
                 </div>
 
-                {/* Add photo2_survey_ops, photo3_survey_ops, photo4_survey_ops fields here */}
-
                 <div className="col-span-full">
                   <label htmlFor="notes_survey_ops" className="block text-sm font-medium leading-6 text-gray-900">Notes Survey Ops:</label>
                   <div className="mt-2">
@@ -655,6 +667,15 @@ const DetailHomepass = () => {
                   </div>
                 </div>
 
+
+                <div className="col-span-full">
+                  <label htmlFor="notes_survey_ops" className="block text-sm font-medium leading-6 text-gray-900">Notes Survey Ops:</label>
+                  <div className="mt-2">
+                    <textarea id="notes_survey_ops" name="notes_survey_ops" value={data.notes_survey_ops || ''} readOnly rows="3" className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></textarea>
+                  </div>
+                </div>
+                </>
+            )}
           </div>
         </div>
 

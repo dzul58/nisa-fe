@@ -33,23 +33,60 @@ const UpdateSurveyHomepass = () => {
     fetchHomepassData();
   }, [id]);
 
+  const uploadSurveyPhotos = async () => {
+    const photoTypes = [
+      { key: 'photo1_survey_ops', endpoint: 'upload-survey-ops-photo1', resultKey: 'imageUrlSurveyOps1', formDataKey: 'photo_survey_ops1' },
+      { key: 'photo2_survey_ops', endpoint: 'upload-survey-ops-photo2', resultKey: 'imageUrlSurveyOps2', formDataKey: 'photo_survey_ops2' },
+      { key: 'photo3_survey_ops', endpoint: 'upload-survey-ops-photo3', resultKey: 'imageUrlSurveyOps3', formDataKey: 'photo_survey_ops3' },
+      { key: 'photo4_survey_ops', endpoint: 'upload-survey-ops-photo4', resultKey: 'imageUrlSurveyOps4', formDataKey: 'photo_survey_ops4' },
+    ];
+  
+    const results = {};
+  
+    for (const photo of photoTypes) {
+      if (formData[photo.key] instanceof File) {
+        const photoFormData = new FormData();
+        photoFormData.append(photo.formDataKey, formData[photo.key]);
+        try {
+          const uploadResponse = await axios.post(`http://localhost:8000/api/${photo.endpoint}`, photoFormData, {
+            headers: {
+              "Content-Type": "multipart/form-data",
+              Authorization: `Bearer ${localStorage.access_token}`,
+            },
+          });
+          if (uploadResponse.data && uploadResponse.data[photo.resultKey]) {
+            results[photo.key] = uploadResponse.data[photo.resultKey];
+          }
+        } catch (error) {
+          console.error(`Error uploading ${photo.key}:`, error);
+        }
+      }
+    }
+  
+    return results;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsButtonDisabled(true);
     try {
       const photoUploadResults = await uploadSurveyPhotos();
-  
-      const dataToSend = { 
-        ...formData, 
-        ...photoUploadResults
-      };
-  
-      const response = await axios.put(`http://localhost:8000/api/update-ops/${id}`, dataToSend, {
+
+      const updatedFormData = new FormData();
+      updatedFormData.append('freitag_survey_ops', formData.freitag_survey_ops);
+      updatedFormData.append('notes_survey_ops', formData.notes_survey_ops);
+
+      ['photo1_survey_ops', 'photo2_survey_ops', 'photo3_survey_ops', 'photo4_survey_ops'].forEach(photoKey => {
+        updatedFormData.append(photoKey, photoUploadResults[photoKey] || formData[photoKey] || '');
+      });
+
+      const response = await axios.put(`http://localhost:8000/api/update-ops/${id}`, updatedFormData, {
         headers: {
+          'Content-Type': 'multipart/form-data',
           Authorization: `Bearer ${localStorage.access_token}`,
         },
       });
-  
+
       Swal.fire({
         icon: "success",
         title: "The survey has been successfully updated!",
@@ -67,39 +104,6 @@ const UpdateSurveyHomepass = () => {
     }
   };
 
-const uploadSurveyPhotos = async () => {
-  const photoTypes = [
-    { key: 'photo1_survey_ops', endpoint: 'upload-survey-ops-photo1', resultKey: 'imageUrlSurveyOps1', formDataKey: 'photo_survey_ops1' },
-    { key: 'photo2_survey_ops', endpoint: 'upload-survey-ops-photo2', resultKey: 'imageUrlSurveyOps2', formDataKey: 'photo_survey_ops2' },
-    { key: 'photo3_survey_ops', endpoint: 'upload-survey-ops-photo3', resultKey: 'imageUrlSurveyOps3', formDataKey: 'photo_survey_ops3' },
-    { key: 'photo4_survey_ops', endpoint: 'upload-survey-ops-photo4', resultKey: 'imageUrlSurveyOps4', formDataKey: 'photo_survey_ops4' },
-  ];
-
-  const results = {};
-
-  for (const photo of photoTypes) {
-    if (formData[photo.key] instanceof File) {
-      const photoFormData = new FormData();
-      photoFormData.append(photo.formDataKey, formData[photo.key]);
-      try {
-        const uploadResponse = await axios.post(`http://localhost:8000/api/${photo.endpoint}`, photoFormData, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-            Authorization: `Bearer ${localStorage.access_token}`,
-          },
-        });
-        if (uploadResponse.data && uploadResponse.data[photo.resultKey]) {
-          results[photo.key] = uploadResponse.data[photo.resultKey];
-        }
-      } catch (error) {
-        console.error(`Error uploading ${photo.key}:`, error);
-      }
-    }
-  }
-
-  return results;
-};
-
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormData({
@@ -116,8 +120,25 @@ const uploadSurveyPhotos = async () => {
     });
   };
 
-  const handleCancel = () => {
-    navigate("/");
+  const handleCancel = async () => {
+    try {
+      // Panggil endpoint status
+      await axios.get(`http://localhost:8000/api/status-untaken/${id}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.access_token}`,
+        },
+      });
+      console.log("Status updated to untaken");
+      // Navigasi kembali ke halaman detail
+      navigate(`/hmpdetails/${id}`);
+    } catch (error) {
+      console.error('Error:', error);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "There was an error while cancelling the update.",
+      });
+    }
   };
 
   return (
