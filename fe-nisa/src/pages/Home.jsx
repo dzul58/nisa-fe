@@ -8,14 +8,10 @@ import Swal from 'sweetalert2';
 const Home = () => {
   const [data, setData] = useState([]);
   const [filterValues, setFilterValues] = useState({
-    fullNamePic: '',
-    submissionFrom: '',
-    requestSource: '',
+    request_purpose: '',
     customerCid: '',
     homepassId: '',
     network: '',
-    homeIdStatus: '',
-    hpmPic: '',
     status: '',
   });
   const [page, setPage] = useState(1);
@@ -62,7 +58,7 @@ const Home = () => {
   useEffect(() => {
     fetchData();
     fetchUserRole();
-  }, [filterValues, page]);
+  }, [page]);
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -105,15 +101,23 @@ const Home = () => {
 
   return (
     <div className="p-2 bg-slate-50">
-      <div className="mb-2">
+      <div className="flex justify-between items-center mb-4">
         <button
           onClick={handleCreateClick}
-          className="bg-[#662b81] hover:bg-[#4A0F70] text-white font-bold py-1 px-2 rounded text-xs"
+          className="bg-[#662b81] hover:bg-[#4A0F70] text-white font-bold py-2 px-4 rounded text-sm"
         >
           Create Request
         </button>
-
-        <div className="overflow-x-auto flex flex-wrap gap-2 mb-2 pt-2">
+  
+        <div className="flex gap-2">
+          <input
+            type="text"
+            name="id"
+            placeholder="Search Ticket"
+            value={filterValues.id}
+            onChange={handleFilterChange}
+            className="border rounded p-1 text-xs w-32"
+          />
           <input
             type="text"
             name="request_purpose"
@@ -124,17 +128,17 @@ const Home = () => {
           />
           <input
             type="text"
-            name="customerCid"
+            name="customer_cid"
             placeholder="Search CID"
-            value={filterValues.customerCid}
+            value={filterValues.customer_cid}
             onChange={handleFilterChange}
             className="border rounded p-1 text-xs w-32"
           />
           <input
             type="text"
-            name="homepassId"
+            name="homepass_id"
             placeholder="Search Homepass ID"
-            value={filterValues.homepassId}
+            value={filterValues.homepass_id}
             onChange={handleFilterChange}
             className="border rounded p-1 text-xs w-36"
           />
@@ -143,6 +147,22 @@ const Home = () => {
             name="network"
             placeholder="Search Network"
             value={filterValues.network}
+            onChange={handleFilterChange}
+            className="border rounded p-1 text-xs w-32"
+          />
+          <input
+            type="text"
+            name="home_id_status"
+            placeholder="Search Home-ID Status"
+            value={filterValues.home_id_status}
+            onChange={handleFilterChange}
+            className="border rounded p-1 text-xs w-40"
+          />
+          <input
+            type="text"
+            name="full_name_pic"
+            placeholder="Search PIC HPM"
+            value={filterValues.full_name_pic}
             onChange={handleFilterChange}
             className="border rounded p-1 text-xs w-32"
           />
@@ -154,42 +174,15 @@ const Home = () => {
             onChange={handleFilterChange}
             className="border rounded p-1 text-xs w-32"
           />
-                    <input
-            type="text"
-            name="request_purpose"
-            placeholder="Search Request Purpose"
-            value={filterValues.request_purpose}
-            onChange={handleFilterChange}
-            className="border rounded p-1 text-xs w-40"
-          />
-          <input
-            type="text"
-            name="customerCid"
-            placeholder="Search CID"
-            value={filterValues.customerCid}
-            onChange={handleFilterChange}
-            className="border rounded p-1 text-xs w-32"
-          />
-          <input
-            type="text"
-            name="homepassId"
-            placeholder="Search Homepass ID"
-            value={filterValues.homepassId}
-            onChange={handleFilterChange}
-            className="border rounded p-1 text-xs w-36"
-          />
-          <input
-            type="text"
-            name="network"
-            placeholder="Search Network"
-            value={filterValues.network}
-            onChange={handleFilterChange}
-            className="border rounded p-1 text-xs w-32"
-          />
+          <button
+            onClick={fetchData}
+            className="bg-[#662b81] hover:bg-[#4A0F70] text-white font-bold py-1 px-2 rounded text-xs"
+          >
+            Search
+          </button>
         </div>
       </div>
-      
-
+  
       <div className="overflow-x-auto">
         <table className="w-full bg-white border border-gray-300 shadow-lg rounded-lg text-xs">
           <thead>
@@ -221,20 +214,20 @@ const Home = () => {
                 <td className="border-b p-1 text-center">{row.hpm_pic}</td>
                 <td className="border-b p-1 text-center">{row.status}</td>
                 <td className="border-b px-3 py-1 text-center">
-                <Link
-                  to={`/hmpdetails/${row.id}`}
-                  className="bg-[#662b81] hover:bg-[#4A0F70] text-white font-bold py-1 px-2 rounded mr-2"
-                >
-                   Detail
-                </Link>
-                <Link
-                  to={`/edithomepass/${row.id}`}
-                  onClick={(e) => handleEditClick(e, row.id)}
-                  className="bg-[#662b81] hover:bg-[#4A0F70] text-white font-bold py-1 px-2 rounded"
-                >
+                  <Link
+                    to={`/hmpdetails/${row.id}`}
+                    className="bg-[#662b81] hover:bg-[#4A0F70] text-white font-bold py-1 px-2 rounded mr-2"
+                  >
+                    Detail
+                  </Link>
+                  <Link
+                    to={`/edithomepass/${row.id}`}
+                    onClick={(e) => handleEditClick(e, row.id)}
+                    className="bg-[#662b81] hover:bg-[#4A0F70] text-white font-bold py-1 px-2 rounded"
+                  >
                     Edit
-                </Link>
-              </td>
+                  </Link>
+                </td>
               </tr>
             ))}
           </tbody>
