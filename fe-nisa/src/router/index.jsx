@@ -61,6 +61,10 @@ const router = createBrowserRouter([
           path: "/updatehomepass/:id",
           element: <UpdateHomepass />,
         },
+        {
+          path: "/updatesurvey/:id",
+          element: <UpdateHomepass />,
+        },
       ],
       loader: aunthBeforeLogin,
     },
