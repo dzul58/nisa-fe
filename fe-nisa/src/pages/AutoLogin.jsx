@@ -22,7 +22,7 @@ const AutoLogin = () => {
 
   const handleAutoLogin = async (username, password) => {
     try {
-      const { data } = await axios.get(`http://localhost:8000/auto-login?username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`);
+      const { data } = await axios.get(`https://moving-address-be.oss.myrepublic.co.id/auto-login?username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`);
       localStorage.setItem("access_token", data.access_token);
       
       Swal.fire({

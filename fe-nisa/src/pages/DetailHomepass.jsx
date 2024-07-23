@@ -61,10 +61,10 @@ const DetailHomepass = () => {
         },
       });
       
-      if (data.hpm_check_result === "Survey Ops.") {
-        navigate(`/updatesurvey/${detailId}`);
-      } else {
+      if (userRole !== "Survey Ops.") {
         navigate(`/updatehomepass/${detailId}`);
+      } else {
+        navigate(`/updatesurvey/${detailId}`);
       }
     } catch (error) {
       console.error('Error:', error);
@@ -554,19 +554,12 @@ const DetailHomepass = () => {
 
 {showSurveyOpsFields && (
               <>
-            <div className="sm:col-span-4">
+                {/* <div className="sm:col-span-4">
                   <label htmlFor="freitag_survey_ops" className="block text-sm font-medium leading-6 text-gray-900">Freitag Survey Ops:</label>
                   <div className="mt-2">
                     <input type="text" id="freitag_survey_ops" name="freitag_survey_ops" value={data.freitag_survey_ops || ''} readOnly className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                   </div>
-                </div>
-
-                <div className="sm:col-span-4">
-                  <label htmlFor="freitag_survey_ops" className="block text-sm font-medium leading-6 text-gray-900">Freitag Survey Ops:</label>
-                  <div className="mt-2">
-                    <input type="text" id="freitag_survey_ops" name="freitag_survey_ops" value={data.freitag_survey_ops || ''} readOnly className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
-                  </div>
-                </div>
+                </div> */}
 
                 <div className="col-span-3">
                   <label htmlFor="photo1_survey_ops" className="block text-sm font-medium leading-6 text-gray-900">
@@ -659,14 +652,6 @@ const DetailHomepass = () => {
                     </button>
                   </div>
                 </div>
-
-                <div className="col-span-full">
-                  <label htmlFor="notes_survey_ops" className="block text-sm font-medium leading-6 text-gray-900">Notes Survey Ops:</label>
-                  <div className="mt-2">
-                    <textarea id="notes_survey_ops" name="notes_survey_ops" value={data.notes_survey_ops || ''} readOnly rows="3" className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></textarea>
-                  </div>
-                </div>
-
 
                 <div className="col-span-full">
                   <label htmlFor="notes_survey_ops" className="block text-sm font-medium leading-6 text-gray-900">Notes Survey Ops:</label>

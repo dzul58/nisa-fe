@@ -71,22 +71,23 @@ const UpdateSurveyHomepass = () => {
     setIsButtonDisabled(true);
     try {
       const photoUploadResults = await uploadSurveyPhotos();
-
-      const updatedFormData = new FormData();
-      updatedFormData.append('freitag_survey_ops', formData.freitag_survey_ops);
-      updatedFormData.append('notes_survey_ops', formData.notes_survey_ops);
-
-      ['photo1_survey_ops', 'photo2_survey_ops', 'photo3_survey_ops', 'photo4_survey_ops'].forEach(photoKey => {
-        updatedFormData.append(photoKey, photoUploadResults[photoKey] || formData[photoKey] || '');
-      });
-
+  
+      const updatedFormData = {
+        freitag_survey_ops: formData.freitag_survey_ops,
+        notes_survey_ops: formData.notes_survey_ops,
+        photo1_survey_ops: photoUploadResults.photo1_survey_ops || formData.photo1_survey_ops,
+        photo2_survey_ops: photoUploadResults.photo2_survey_ops || formData.photo2_survey_ops,
+        photo3_survey_ops: photoUploadResults.photo3_survey_ops || formData.photo3_survey_ops,
+        photo4_survey_ops: photoUploadResults.photo4_survey_ops || formData.photo4_survey_ops,
+      };
+  
       const response = await axios.put(`http://localhost:8000/api/update-ops/${id}`, updatedFormData, {
         headers: {
-          'Content-Type': 'multipart/form-data',
+          'Content-Type': 'application/json',
           Authorization: `Bearer ${localStorage.access_token}`,
         },
       });
-
+  
       Swal.fire({
         icon: "success",
         title: "The survey has been successfully updated!",
@@ -151,12 +152,12 @@ const UpdateSurveyHomepass = () => {
 
         <div className="border-b border-gray-900/10 pb-12">
           <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-            <div className="sm:col-span-4">
+            {/* <div className="sm:col-span-4">
               <label htmlFor="freitag_survey_ops" className="block text-sm font-medium leading-6 text-gray-900">Freitag Survey OPS:</label>
               <div className="mt-2">
                 <input type="text" id="freitag_survey_ops" name="freitag_survey_ops" value={formData.freitag_survey_ops} onChange={handleChange} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
               </div>
-            </div>
+            </div> */}
 
             <div className="col-span-full">
               <label htmlFor="notes_survey_ops" className="block text-sm font-medium leading-6 text-gray-900">Notes Survey OPS:</label>
