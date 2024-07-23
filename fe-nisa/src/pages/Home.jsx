@@ -116,7 +116,7 @@ const Home = () => {
             placeholder="Search Ticket"
             value={filterValues.id}
             onChange={handleFilterChange}
-            className="border rounded p-1 text-xs w-32"
+            className="border rounded p-1 text-xs w-28"
           />
           <input
             type="text"
@@ -124,7 +124,7 @@ const Home = () => {
             placeholder="Search Request Purpose"
             value={filterValues.request_purpose}
             onChange={handleFilterChange}
-            className="border rounded p-1 text-xs w-40"
+            className="border rounded p-1 text-xs w-36"
           />
           <input
             type="text"
@@ -132,7 +132,7 @@ const Home = () => {
             placeholder="Search CID"
             value={filterValues.customer_cid}
             onChange={handleFilterChange}
-            className="border rounded p-1 text-xs w-32"
+            className="border rounded p-1 text-xs w-28"
           />
           <input
             type="text"
@@ -140,7 +140,7 @@ const Home = () => {
             placeholder="Search Homepass ID"
             value={filterValues.homepass_id}
             onChange={handleFilterChange}
-            className="border rounded p-1 text-xs w-36"
+            className="border rounded p-1 text-xs w-32"
           />
           <input
             type="text"
@@ -148,7 +148,7 @@ const Home = () => {
             placeholder="Search Network"
             value={filterValues.network}
             onChange={handleFilterChange}
-            className="border rounded p-1 text-xs w-32"
+            className="border rounded p-1 text-xs w-28"
           />
           <input
             type="text"
@@ -156,7 +156,7 @@ const Home = () => {
             placeholder="Search Home-ID Status"
             value={filterValues.home_id_status}
             onChange={handleFilterChange}
-            className="border rounded p-1 text-xs w-40"
+            className="border rounded p-1 text-xs w-36"
           />
           <input
             type="text"
@@ -164,7 +164,7 @@ const Home = () => {
             placeholder="Search PIC HPM"
             value={filterValues.full_name_pic}
             onChange={handleFilterChange}
-            className="border rounded p-1 text-xs w-32"
+            className="border rounded p-1 text-xs w-28"
           />
           <input
             type="text"
@@ -172,7 +172,7 @@ const Home = () => {
             placeholder="Search hpm_check_result"
             value={filterValues.hpm_check_result}
             onChange={handleFilterChange}
-            className="border rounded p-1 text-xs w-32"
+            className="border rounded p-1 text-xs w-28"
           />
           <input
             type="text"
@@ -180,7 +180,7 @@ const Home = () => {
             placeholder="Search Status"
             value={filterValues.status}
             onChange={handleFilterChange}
-            className="border rounded p-1 text-xs w-32"
+            className="border rounded p-1 text-xs w-28"
           />
           <button
             onClick={fetchData}
