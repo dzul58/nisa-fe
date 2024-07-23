@@ -204,6 +204,7 @@ const Home = () => {
               <th className="border-b p-1">Network</th>
               <th className="border-b p-1">Home-ID</th>
               <th className="border-b p-1">PIC HPM</th>
+              <th className="border-b p-1">Check Result</th>
               <th className="border-b p-1">Status</th>
               <th className="border-b p-1">Actions</th>
             </tr>
@@ -220,6 +221,7 @@ const Home = () => {
                 <td className="border-b p-1 text-center">{row.network}</td>
                 <td className="border-b p-1 text-center">{row.home_id_status}</td>
                 <td className="border-b p-1 text-center">{row.hpm_pic}</td>
+                <td className="border-b p-1 text-center">{row.hpm_check_result}</td>
                 <td className="border-b p-1 text-center">{row.status}</td>
                 <td className="border-b px-3 py-1 text-center">
                   <Link
