@@ -101,95 +101,97 @@ const Home = () => {
 
   return (
     <div className="p-2 bg-slate-50">
-      <div className="flex justify-between items-center mb-4">
-        <button
-          onClick={handleCreateClick}
-          className="bg-[#662b81] hover:bg-[#4A0F70] text-white font-bold py-2 px-4 rounded text-sm"
-        >
-          Create Request
-        </button>
+<div className="flex flex-col mb-4">
+  <div className="flex justify-between items-center mb-2">
+    <button
+      onClick={handleCreateClick}
+      className="bg-[#662b81] hover:bg-[#4A0F70] text-white font-bold py-2 px-4 rounded text-sm"
+    >
+      Create Request
+    </button>
+    <button
+      onClick={fetchData}
+      className="bg-[#662b81] hover:bg-[#4A0F70] text-white font-bold py-1 px-2 rounded text-xs"
+    >
+      Search
+    </button>
+  </div>
   
-        <div className="flex gap-2">
-          <input
-            type="text"
-            name="id"
-            placeholder="Search Ticket"
-            value={filterValues.id}
-            onChange={handleFilterChange}
-            className="border rounded p-1 text-xs w-32"
-          />
-          <input
-            type="text"
-            name="request_purpose"
-            placeholder="Search Request Purpose"
-            value={filterValues.request_purpose}
-            onChange={handleFilterChange}
-            className="border rounded p-1 text-xs w-40"
-          />
-          <input
-            type="text"
-            name="customer_cid"
-            placeholder="Search CID"
-            value={filterValues.customer_cid}
-            onChange={handleFilterChange}
-            className="border rounded p-1 text-xs w-32"
-          />
-          <input
-            type="text"
-            name="homepass_id"
-            placeholder="Search Homepass ID"
-            value={filterValues.homepass_id}
-            onChange={handleFilterChange}
-            className="border rounded p-1 text-xs w-36"
-          />
-          <input
-            type="text"
-            name="network"
-            placeholder="Search Network"
-            value={filterValues.network}
-            onChange={handleFilterChange}
-            className="border rounded p-1 text-xs w-32"
-          />
-          <input
-            type="text"
-            name="home_id_status"
-            placeholder="Search Home-ID Status"
-            value={filterValues.home_id_status}
-            onChange={handleFilterChange}
-            className="border rounded p-1 text-xs w-40"
-          />
-          <input
-            type="text"
-            name="full_name_pic"
-            placeholder="Search PIC HPM"
-            value={filterValues.full_name_pic}
-            onChange={handleFilterChange}
-            className="border rounded p-1 text-xs w-32"
-          />
-          <input
-            type="text"
-            name="hpm_check_result"
-            placeholder="Search hpm_check_result"
-            value={filterValues.hpm_check_result}
-            onChange={handleFilterChange}
-            className="border rounded p-1 text-xs w-32"
-          />
-          <input
-            type="text"
-            name="status"
-            placeholder="Search Status"
-            value={filterValues.status}
-            onChange={handleFilterChange}
-            className="border rounded p-1 text-xs w-32"
-          />
-          <button
-            onClick={fetchData}
-            className="bg-[#662b81] hover:bg-[#4A0F70] text-white font-bold py-1 px-2 rounded text-xs"
-          >
-            Search
-          </button>
-        </div>
-      </div>
+  <div className="grid grid-cols-5 gap-2">
+    <input
+      type="text"
+      name="id"
+      placeholder="Ticket"
+      value={filterValues.id}
+      onChange={handleFilterChange}
+      className="border rounded p-1 text-xs w-full"
+    />
+    <input
+      type="text"
+      name="request_purpose"
+      placeholder="Request Purpose"
+      value={filterValues.request_purpose}
+      onChange={handleFilterChange}
+      className="border rounded p-1 text-xs w-full"
+    />
+    <input
+      type="text"
+      name="customer_cid"
+      placeholder="CID"
+      value={filterValues.customer_cid}
+      onChange={handleFilterChange}
+      className="border rounded p-1 text-xs w-full"
+    />
+    <input
+      type="text"
+      name="homepass_id"
+      placeholder="Homepass ID"
+      value={filterValues.homepass_id}
+      onChange={handleFilterChange}
+      className="border rounded p-1 text-xs w-full"
+    />
+    <input
+      type="text"
+      name="network"
+      placeholder="Network"
+      value={filterValues.network}
+      onChange={handleFilterChange}
+      className="border rounded p-1 text-xs w-full"
+    />
+    <input
+      type="text"
+      name="home_id_status"
+      placeholder="Home-ID Status"
+      value={filterValues.home_id_status}
+      onChange={handleFilterChange}
+      className="border rounded p-1 text-xs w-full"
+    />
+    <input
+      type="text"
+      name="full_name_pic"
+      placeholder="PIC HPM"
+      value={filterValues.full_name_pic}
+      onChange={handleFilterChange}
+      className="border rounded p-1 text-xs w-full"
+    />
+    <input
+      type="text"
+      name="hpm_check_result"
+      placeholder="HPM Check Result"
+      value={filterValues.hpm_check_result}
+      onChange={handleFilterChange}
+      className="border rounded p-1 text-xs w-full"
+    />
+    <input
+      type="text"
+      name="status"
+      placeholder="Status"
+      value={filterValues.status}
+      onChange={handleFilterChange}
+      className="border rounded p-1 text-xs w-full"
+    />
+  </div>
+</div>
   
       <div className="overflow-x-auto">
         <table className="w-full bg-white border border-gray-300 shadow-lg rounded-lg text-xs">
