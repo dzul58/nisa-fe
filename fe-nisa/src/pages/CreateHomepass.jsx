@@ -174,12 +174,12 @@ const CreateHomepass = () => {
           </div>
 
           <div className="sm:col-span-3">
-              <label htmlFor="response_hpm_source" className="block text-sm font-medium leading-6 text-gray-900">Tujuan Permintaan:</label>
+              <label htmlFor="response_hpm_source" className="block text-sm font-medium leading-6 text-gray-900">Source:</label>
               <div className="mt-2">
                 <select id="response_hpm_source" name="response_hpm_source" value={formData.response_hpm_source} onChange={handleChange} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
                   <option> </option>
                   <option>BOSS</option>
-                  <option>Astri</option>
+                  <option>STELLA</option>
                 </select>
               </div>
             </div>
