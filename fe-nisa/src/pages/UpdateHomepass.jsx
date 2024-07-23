@@ -106,7 +106,7 @@ const UpdateHomepass = () => {
   const handleCancel = async () => {
     try {
       // Panggil endpoint status
-      await axios.get(`http://localhost:8000/api/status-untaken/${id}`, {
+      await axios.get(`https://moving-address-be.oss.myrepublic.co.id/api/status-untaken/${id}`, {
         headers: {
           Authorization: `Bearer ${localStorage.access_token}`,
         },
