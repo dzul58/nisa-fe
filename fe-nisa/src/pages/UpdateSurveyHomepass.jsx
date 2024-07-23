@@ -19,7 +19,7 @@ const UpdateSurveyHomepass = () => {
   useEffect(() => {
     const fetchHomepassData = async () => {
       try {
-        const response = await axios.get(`http://localhost:8000/api/homepass/${id}`, {
+        const response = await axios.get(`https://moving-address-be.oss.myrepublic.co.id/api/homepass/${id}`, {
           headers: {
             Authorization: `Bearer ${localStorage.access_token}`,
           },
@@ -48,7 +48,7 @@ const UpdateSurveyHomepass = () => {
         const photoFormData = new FormData();
         photoFormData.append(photo.formDataKey, formData[photo.key]);
         try {
-          const uploadResponse = await axios.post(`http://localhost:8000/api/${photo.endpoint}`, photoFormData, {
+          const uploadResponse = await axios.post(`https://moving-address-be.oss.myrepublic.co.id/api/${photo.endpoint}`, photoFormData, {
             headers: {
               "Content-Type": "multipart/form-data",
               Authorization: `Bearer ${localStorage.access_token}`,
@@ -81,7 +81,7 @@ const UpdateSurveyHomepass = () => {
         photo4_survey_ops: photoUploadResults.photo4_survey_ops || formData.photo4_survey_ops,
       };
   
-      const response = await axios.put(`http://localhost:8000/api/update-ops/${id}`, updatedFormData, {
+      const response = await axios.put(`https://moving-address-be.oss.myrepublic.co.id/api/update-ops/${id}`, updatedFormData, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${localStorage.access_token}`,
@@ -124,7 +124,7 @@ const UpdateSurveyHomepass = () => {
   const handleCancel = async () => {
     try {
       // Panggil endpoint status
-      await axios.get(`http://localhost:8000/api/status-untaken/${id}`, {
+      await axios.get(`https://moving-address-be.oss.myrepublic.co.id/api/status-untaken/${id}`, {
         headers: {
           Authorization: `Bearer ${localStorage.access_token}`,
         },
