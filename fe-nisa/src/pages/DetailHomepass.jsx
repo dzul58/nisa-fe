@@ -17,7 +17,7 @@ const DetailHomepass = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://localhost:8000/api/homepass/${detailId}`, {
+        const response = await axios.get(`https://moving-address-be.oss.myrepublic.co.id/api/homepass/${detailId}`, {
           headers: {
             Authorization: `Bearer ${localStorage.access_token}`,
           },
@@ -30,7 +30,7 @@ const DetailHomepass = () => {
 
     const fetchUserRole = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/api/authorization-hpm', {
+        const response = await axios.get('https://moving-address-be.oss.myrepublic.co.id/api/authorization-hpm', {
           headers: {
             Authorization: `Bearer ${localStorage.access_token}`,
           },
@@ -55,7 +55,7 @@ const DetailHomepass = () => {
 
   const handleAdminUpdate = async () => {
     try {
-      await axios.get(`http://localhost:8000/api/status-taken/${detailId}`, {
+      await axios.get(`https://moving-address-be.oss.myrepublic.co.id/api/status-taken/${detailId}`, {
         headers: {
           Authorization: `Bearer ${localStorage.access_token}`,
         },
