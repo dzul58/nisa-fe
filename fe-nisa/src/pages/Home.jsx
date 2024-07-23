@@ -113,15 +113,15 @@ const Home = () => {
   <input
     type="text"
     name="id"
-    placeholder="Search Ticket"
+    placeholder="Ticket"
     value={filterValues.id}
     onChange={handleFilterChange}
-    className="border rounded p-1 text-xs w-24"
+    className="border rounded p-1 text-xs w-28"
   />
   <input
     type="text"
     name="request_purpose"
-    placeholder="Search Request Purpose"
+    placeholder="Request Purpose"
     value={filterValues.request_purpose}
     onChange={handleFilterChange}
     className="border rounded p-1 text-xs w-28"
@@ -129,15 +129,15 @@ const Home = () => {
   <input
     type="text"
     name="customer_cid"
-    placeholder="Search CID"
+    placeholder="CID"
     value={filterValues.customer_cid}
     onChange={handleFilterChange}
-    className="border rounded p-1 text-xs w-24"
+    className="border rounded p-1 text-xs w-28"
   />
   <input
     type="text"
     name="homepass_id"
-    placeholder="Search Homepass ID"
+    placeholder="Homepass ID"
     value={filterValues.homepass_id}
     onChange={handleFilterChange}
     className="border rounded p-1 text-xs w-28"
@@ -145,15 +145,15 @@ const Home = () => {
   <input
     type="text"
     name="network"
-    placeholder="Search Network"
+    placeholder="Network"
     value={filterValues.network}
     onChange={handleFilterChange}
-    className="border rounded p-1 text-xs w-24"
+    className="border rounded p-1 text-xs w-28"
   />
   <input
     type="text"
     name="home_id_status"
-    placeholder="Search Home-ID Status"
+    placeholder="Home-ID Status"
     value={filterValues.home_id_status}
     onChange={handleFilterChange}
     className="border rounded p-1 text-xs w-28"
@@ -161,26 +161,26 @@ const Home = () => {
   <input
     type="text"
     name="full_name_pic"
-    placeholder="Search PIC HPM"
+    placeholder="PIC HPM"
     value={filterValues.full_name_pic}
     onChange={handleFilterChange}
-    className="border rounded p-1 text-xs w-24"
+    className="border rounded p-1 text-xs w-28"
   />
   <input
     type="text"
     name="hpm_check_result"
-    placeholder="Search hpm_check_result"
+    placeholder="Check Result"
     value={filterValues.hpm_check_result}
     onChange={handleFilterChange}
-    className="border rounded p-1 text-xs w-24"
+    className="border rounded p-1 text-xs w-28"
   />
   <input
     type="text"
     name="status"
-    placeholder="Search Status"
+    placeholder="Status"
     value={filterValues.status}
     onChange={handleFilterChange}
-    className="border rounded p-1 text-xs w-24"
+    className="border rounded p-1 text-xs w-28"
   />
   <button
     onClick={fetchData}
