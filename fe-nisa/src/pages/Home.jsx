@@ -168,6 +168,14 @@ const Home = () => {
           />
           <input
             type="text"
+            name="hpm_check_result"
+            placeholder="Search hpm_check_result"
+            value={filterValues.hpm_check_result}
+            onChange={handleFilterChange}
+            className="border rounded p-1 text-xs w-32"
+          />
+          <input
+            type="text"
             name="status"
             placeholder="Search Status"
             value={filterValues.status}
