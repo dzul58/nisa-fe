@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 const CreateHomepass = () => {
   const navigate = useNavigate();
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+  const [areaSuggestions, setAreaSuggestions] = useState([]);
   const [formData, setFormData] = useState({
     submission_from: "",
     request_source: "",
@@ -121,6 +122,29 @@ const CreateHomepass = () => {
     navigate("/");
   };
 
+  const handleAreaChange = async (event) => {
+    const { name, value } = event.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+
+    if (value.length > 2) {
+      try {
+        const response = await axios.get(`https://moving-address-be.oss.myrepublic.co.id/api/areas?query=${value}`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.access_token}`,
+          },
+        });
+        setAreaSuggestions(response.data.map(item => item.msar_area_name));
+      } catch (error) {
+        console.error("Error fetching area suggestions:", error);
+      }
+    } else {
+      setAreaSuggestions([]);
+    }
+  };
+
 
   return (
     <div>
@@ -166,12 +190,32 @@ const CreateHomepass = () => {
               </div>
           </div>
           
-          <div className="sm:col-span-3">
+          {/* <div className="sm:col-span-3">
             <label htmlFor="response_hpm_location" className="block text-sm font-medium leading-6 text-gray-900">Area:</label>
             <div className="mt-2">
               <input type="text" id="response_hpm_location" name="response_hpm_location" value={formData.response_hpm_location} onChange={handleChange} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
             </div>
-          </div>
+          </div> */}
+
+<div className="sm:col-span-3">
+      <label htmlFor="response_hpm_location" className="block text-sm font-medium leading-6 text-gray-900">Area:</label>
+      <div className="mt-2">
+        <input
+          type="text"
+          id="response_hpm_location"
+          name="response_hpm_location"
+          value={formData.response_hpm_location}
+          onChange={handleAreaChange}
+          list="areaSuggestions"
+          className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+        />
+        <datalist id="areaSuggestions">
+          {areaSuggestions.map((suggestion, index) => (
+            <option key={index} value={suggestion} />
+          ))}
+        </datalist>
+      </div>
+    </div>
 
           <div className="sm:col-span-3">
               <label htmlFor="response_hpm_source" className="block text-sm font-medium leading-6 text-gray-900">Source:</label>
