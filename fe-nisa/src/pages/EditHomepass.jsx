@@ -50,24 +50,24 @@ const EditHomepass = () => {
         });
       }
     };
-
+  
     fetchHomepassData();
   }, [id]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    // Validate form
-    const errors = {};
-    if (!formData.response_hpm_location || !areaOptions.includes(formData.response_hpm_location)) {
-      errors.response_hpm_location = "Please select a valid area from the suggestions";
-    }
-    
-    // If there are errors, set them and stop submission
-    if (Object.keys(errors).length > 0) {
-      setFormErrors(errors);
-      return;
-    }
+  // Validate form
+  const errors = {};
+  if (!formData.response_hpm_location) {
+    errors.response_hpm_location = "Please select an area";
+  }
+  
+  // If there are errors, set them and stop submission
+  if (Object.keys(errors).length > 0) {
+    setFormErrors(errors);
+    return;
+  }
     
     setIsButtonDisabled(true);
     try {
