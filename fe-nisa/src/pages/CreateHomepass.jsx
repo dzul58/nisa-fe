@@ -10,6 +10,7 @@ const CreateHomepass = () => {
   const [showSuggestions, setShowSuggestions] = useState(false);
   const suggestionRef = useRef(null);
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+  const [formErrors, setFormErrors] = useState({});
   const [formData, setFormData] = useState({
     submission_from: "",
     request_source: "",
@@ -29,6 +30,19 @@ const CreateHomepass = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    // Validate form
+    const errors = {};
+    if (!formData.response_hpm_location || !areaOptions.includes(formData.response_hpm_location)) {
+      errors.response_hpm_location = "Please select a valid area from the suggestions";
+    }
+    
+    // If there are errors, set them and stop submission
+    if (Object.keys(errors).length > 0) {
+      setFormErrors(errors);
+      return;
+    }
+    
     setIsButtonDisabled(true);
     try {
       let uploadResult = {
@@ -125,7 +139,6 @@ const CreateHomepass = () => {
     navigate("/");
   };
 
-
   const searchAreas = async (query) => {
     if (query.length < 2) return;
     try {
@@ -144,7 +157,16 @@ const CreateHomepass = () => {
   const handleAreaInputChange = (e) => {
     const value = e.target.value;
     setAreaInput(value);
+    setFormData({
+      ...formData,
+      response_hpm_location: '', // Clear the selected area when typing
+    });
     searchAreas(value);
+    // Clear error when user starts typing
+    setFormErrors({
+      ...formErrors,
+      response_hpm_location: undefined,
+    });
   };
 
   const handleAreaSelect = (area) => {
@@ -154,7 +176,13 @@ const CreateHomepass = () => {
       response_hpm_location: area,
     });
     setShowSuggestions(false);
+    // Clear error when a valid area is selected
+    setFormErrors({
+      ...formErrors,
+      response_hpm_location: undefined,
+    });
   };
+
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -220,33 +248,35 @@ const CreateHomepass = () => {
             </div>
           </div> */}
 
-<div className="sm:col-span-3 relative">
-      <label htmlFor="response_hpm_location" className="block text-sm font-medium leading-6 text-gray-900">Area:</label>
-      <div className="mt-2">
-        <input
-          type="text"
-          id="response_hpm_location"
-          name="response_hpm_location"
-          value={areaInput}
-          onChange={handleAreaInputChange}
-          className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-          placeholder="Type to search area..."
-        />
-        {showSuggestions && areaOptions.length > 0 && (
-          <ul ref={suggestionRef} className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-            {areaOptions.map((area, index) => (
-              <li
-                key={index}
-                onClick={() => handleAreaSelect(area)}
-                className="cursor-pointer select-none py-2 pl-3 pr-9 text-gray-900 hover:bg-indigo-600 hover:text-white"
-              >
-                {area}
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
-    </div>
+            <div className="sm:col-span-3 relative">
+              <label htmlFor="response_hpm_location" className="block text-sm font-medium leading-6 text-gray-900">Area:</label>
+              <div className="mt-2">
+                <input
+                  type="text"
+                  id="response_hpm_location"
+                  name="response_hpm_location"
+                  value={areaInput}
+                  onChange={handleAreaInputChange}
+                  className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ${formErrors.response_hpm_location ? 'ring-red-500' : 'ring-gray-300'} placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`}
+                />
+                {formErrors.response_hpm_location && (
+                  <p className="mt-2 text-sm text-red-600">{formErrors.response_hpm_location}</p>
+                )}
+              </div>
+              {showSuggestions && areaOptions.length > 0 && (
+                <ul ref={suggestionRef} className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                  {areaOptions.map((area, index) => (
+                    <li
+                      key={index}
+                      onClick={() => handleAreaSelect(area)}
+                      className="cursor-pointer select-none py-2 pl-3 pr-9 text-gray-900 hover:bg-indigo-600 hover:text-white"
+                    >
+                      {area}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
 
           <div className="sm:col-span-3">
               <label htmlFor="response_hpm_source" className="block text-sm font-medium leading-6 text-gray-900">Source:</label>
