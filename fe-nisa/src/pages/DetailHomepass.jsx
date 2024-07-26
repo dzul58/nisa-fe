@@ -11,6 +11,8 @@ const DetailHomepass = () => {
   const [data, setData] = useState(null);
   const [userRole, setUserRole] = useState('');
   const [isImageModalOpen, setImageModalOpen] = useState(false);
+  const [isVideoModalOpen, setVideoModalOpen] = useState(false);
+  const [videoSrc, setVideoSrc] = useState('');
   const [imageSrc, setImageSrc] = useState('');
   const navigate = useNavigate();
 
@@ -91,6 +93,16 @@ const DetailHomepass = () => {
   const closeImageModal = () => {
     setImageModalOpen(false);
     setImageSrc('');
+  };
+
+  const openVideoModal = (src) => {
+    setVideoSrc(src);
+    setVideoModalOpen(true);
+  };
+  
+  const closeVideoModal = () => {
+    setVideoModalOpen(false);
+    setVideoSrc('');
   };
 
   const showSurveyOpsFields = data && data?.hpm_check_result === "Survey Ops.";
@@ -631,27 +643,47 @@ const DetailHomepass = () => {
                 </div>
 
                 <div className="col-span-3">
-                  <label htmlFor="photo4_survey_ops" className="block text-sm font-medium leading-6 text-gray-900">
-                    Video Survey Ops
-                  </label>
-                  <div className="relative inline-block group flex items-center space-x-2">
-                    <input 
-                      type="text" 
-                      id="photo4_survey_ops" 
-                      name="photo4_survey_ops" 
-                      value={data.photo4_survey_ops || ''} 
-                      readOnly 
-                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" 
-                    />
-                    <button 
-                      type="button"
-                      onClick={() => openImageModal(data.photo4_survey_ops)}
-                      className="px-4 py-1 text-lg font-medium bg-[#662b81] text-white rounded-lg cursor-pointer"
-                    >
-                      Image
-                    </button>
-                  </div>
-                </div>
+  <label htmlFor="photo4_survey_ops" className="block text-sm font-medium leading-6 text-gray-900">
+    Video Survey Ops
+  </label>
+  <div className="relative inline-block group flex items-center space-x-2">
+    <input 
+      type="text" 
+      id="photo4_survey_ops" 
+      name="photo4_survey_ops" 
+      value={data.photo4_survey_ops || ''} 
+      readOnly 
+      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" 
+    />
+    <button 
+      type="button"
+      onClick={() => openVideoModal(data.photo4_survey_ops)}
+      className="px-4 py-1 text-lg font-medium bg-[#662b81] text-white rounded-lg cursor-pointer"
+    >
+      Video
+    </button>
+  </div>
+</div>
+
+{/* Video Modal */}
+{isVideoModalOpen && (
+  <div className="fixed inset-0 flex items-center justify-center z-50">
+    <div className="fixed inset-0 bg-black opacity-50" onClick={closeVideoModal}></div>
+    <div className="bg-white rounded shadow-lg z-50 w-11/12 max-w-3xl max-h-[90vh] flex flex-col relative p-4">
+      <button 
+        className="absolute top-2 right-2 text-gray-600 hover:text-gray-900"
+        onClick={closeVideoModal}
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+      <div className="flex-grow overflow-auto">
+        <video src={videoSrc} controls className="w-full h-auto" />
+      </div>
+    </div>
+  </div>
+)}
 
                 <div className="col-span-full">
                   <label htmlFor="notes_survey_ops" className="block text-sm font-medium leading-6 text-gray-900">Notes Survey Ops:</label>
