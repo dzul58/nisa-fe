@@ -21,7 +21,7 @@ const UpdateHomepass = () => {
     remarks: "",
     notes_recommendations: "",
     status: "",
-    completion_date: "",
+    // completion_date: "",
   });
 
   useEffect(() => {
@@ -68,7 +68,7 @@ const UpdateHomepass = () => {
         notes_recommendations: formData.notes_recommendations,
         // hpm_pic: formData.hpm_pic,
         status: formData.status,
-        completion_date: formData.completion_date,
+        // completion_date: formData.completion_date,
       };
 
       const response = await axios.put(`https://moving-address-be.oss.myrepublic.co.id/api/update-homepass/${id}`, payload, {
@@ -238,12 +238,12 @@ const UpdateHomepass = () => {
               </div>
             </div>
   
-            <div className="sm:col-span-2">
+            {/* <div className="sm:col-span-2">
               <label htmlFor="completion_date" className="block text-sm font-medium leading-6 text-gray-900">Completion Date and Time:</label>
               <div className="mt-2">
                 <input type="datetime-local" id="completion_date" name="completion_date" value={formData.completion_date} onChange={handleChange} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
   
