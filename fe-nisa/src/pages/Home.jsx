@@ -71,25 +71,26 @@ const Home = () => {
     }
   };
 
-  const showUnauthorizedAlert = () => {
-    Swal.fire({
-      title: 'Unauthorized',
-      text: 'You do not have permission to perform this action. Only Customer Services are allowed.',
-      icon: 'error',
-      confirmButtonText: 'OK'
-    }).then(() => {
-      navigate('/');
-    });
-  };
+  // const showUnauthorizedAlert = () => {
+  //   Swal.fire({
+  //     title: 'Unauthorized',
+  //     text: 'You do not have permission to perform this action. Only Customer Services are allowed.',
+  //     icon: 'error',
+  //     confirmButtonText: 'OK'
+  //   }).then(() => {
+  //     navigate('/');
+  //   });
+  // };
 
   const isAdmin = () => userRole === 'Customer Service';
 
   const handleCreateClick = () => {
     if (isAdmin()) {
       navigate('/createhomepass');
-    } else {
-      showUnauthorizedAlert()
-    }
+    } 
+    // else {
+    //   showUnauthorizedAlert()
+    // }
   };
 
   const handleEditClick = (e, id) => {
