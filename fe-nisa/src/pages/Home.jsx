@@ -96,7 +96,7 @@ const Home = () => {
   const handleEditClick = (e, id) => {
     if (!isAdmin()) {
       e.preventDefault();
-      showUnauthorizedAlert()
+      // showUnauthorizedAlert()
     }
   };
 
