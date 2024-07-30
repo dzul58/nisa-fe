@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { format } from 'date-fns';
 import { id } from 'date-fns/locale';
-import { useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const DetailHomepass = () => {
   const { id: detailId } = useParams();
