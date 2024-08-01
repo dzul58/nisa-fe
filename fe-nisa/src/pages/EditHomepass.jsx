@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -7,10 +7,7 @@ const EditHomepass = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
-  const [areaOptions, setAreaOptions] = useState([]);
-  const [areaInput, setAreaInput] = useState('');
-  const [showSuggestions, setShowSuggestions] = useState(false);
-  const suggestionRef = useRef(null);
+  const [areas, setAreas] = useState([]);
   const [formErrors, setFormErrors] = useState({});
   const [formData, setFormData] = useState({
     full_name_pic: "",
@@ -40,7 +37,6 @@ const EditHomepass = () => {
           },
         });
         setFormData(response.data);
-        setAreaInput(response.data.response_hpm_location);
       } catch (error) {
         console.error("Error fetching homepass data:", error);
         Swal.fire({
@@ -50,24 +46,43 @@ const EditHomepass = () => {
         });
       }
     };
-  
+
+    const fetchAreas = async () => {
+      try {
+        const response = await axios.get("https://moving-address-be.oss.myrepublic.co.id/api/areas", {
+          headers: {
+            Authorization: `Bearer ${localStorage.access_token}`,
+          },
+        });
+        setAreas(response.data);
+      } catch (error) {
+        console.error("Error fetching areas:", error);
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Failed to fetch areas. Please try again later.",
+        });
+      }
+    };
+
     fetchHomepassData();
+    fetchAreas();
   }, [id]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-  // Validate form
-  const errors = {};
-  if (!formData.response_hpm_location) {
-    errors.response_hpm_location = "Please select an area";
-  }
-  
-  // If there are errors, set them and stop submission
-  if (Object.keys(errors).length > 0) {
-    setFormErrors(errors);
-    return;
-  }
+    // Validate form
+    const errors = {};
+    if (!formData.response_hpm_location) {
+      errors.response_hpm_location = "Please select an area";
+    }
+    
+    // If there are errors, set them and stop submission
+    if (Object.keys(errors).length > 0) {
+      setFormErrors(errors);
+      return;
+    }
     
     setIsButtonDisabled(true);
     try {
@@ -148,6 +163,11 @@ const EditHomepass = () => {
       ...formData,
       [name]: value,
     });
+    // Clear error when user makes a change
+    setFormErrors({
+      ...formErrors,
+      [name]: undefined,
+    });
   };
 
   const handleFileChange = (event) => {
@@ -161,63 +181,6 @@ const EditHomepass = () => {
   const handleCancel = () => {
     navigate("/");
   };
-
-  const searchAreas = async (query) => {
-    if (query.length < 2) return;
-    try {
-      const response = await axios.get(`https://moving-address-be.oss.myrepublic.co.id/api/areas?query=${query}`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.access_token}`,
-        },
-      });
-      setAreaOptions(response.data);
-      setShowSuggestions(true);
-    } catch (error) {
-      console.error("Error searching areas:", error);
-    }
-  };
-
-  const handleAreaInputChange = (e) => {
-    const value = e.target.value;
-    setAreaInput(value);
-    setFormData({
-      ...formData,
-      response_hpm_location: '', // Clear the selected area when typing
-    });
-    searchAreas(value);
-    // Clear error when user starts typing
-    setFormErrors({
-      ...formErrors,
-      response_hpm_location: undefined,
-    });
-  };
-
-  const handleAreaSelect = (area) => {
-    setAreaInput(area);
-    setFormData({
-      ...formData,
-      response_hpm_location: area,
-    });
-    setShowSuggestions(false);
-    // Clear error when a valid area is selected
-    setFormErrors({
-      ...formErrors,
-      response_hpm_location: undefined,
-    });
-  };
-
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (suggestionRef.current && !suggestionRef.current.contains(event.target)) {
-        setShowSuggestions(false);
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
 
 
   return (
@@ -300,7 +263,7 @@ const EditHomepass = () => {
             </div>
           </div> */}
 
-<div className="sm:col-span-3 relative">
+{/* <div className="sm:col-span-3 relative">
           <label htmlFor="response_hpm_location" className="block text-sm font-medium leading-6 text-gray-900">Area:</label>
           <div className="mt-2">
             <input
@@ -328,6 +291,30 @@ const EditHomepass = () => {
               ))}
             </ul>
           )}
+        </div> */}
+
+
+<div className="sm:col-span-3">
+          <label htmlFor="response_hpm_location" className="block text-sm font-medium leading-6 text-gray-900">Area:</label>
+          <div className="mt-2">
+            <select
+              id="response_hpm_location"
+              name="response_hpm_location"
+              value={formData.response_hpm_location}
+              onChange={handleChange}
+              className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ${formErrors.response_hpm_location ? 'ring-red-500' : 'ring-gray-300'} focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6`}
+            >
+              <option value="">Select an area</option>
+              {areas.map((area, index) => (
+                <option key={index} value={area}>
+                  {area}
+                </option>
+              ))}
+            </select>
+            {formErrors.response_hpm_location && (
+              <p className="mt-2 text-sm text-red-600">{formErrors.response_hpm_location}</p>
+            )}
+          </div>
         </div>
 
           <div className="sm:col-span-3">

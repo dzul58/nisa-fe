@@ -246,7 +246,7 @@ const CreateHomepass = () => {
             </div> */}
 
 
-<div className="sm:col-span-3">
+          <div className="sm:col-span-3">
               <label htmlFor="response_hpm_location" className="block text-sm font-medium leading-6 text-gray-900">Area:</label>
               <div className="mt-2">
                 <select
