@@ -52,6 +52,14 @@ const router = createBrowserRouter([
           element: <CreateHomepass />,
         },
         {
+          path: "/untaken-homepass-moving-address-response_hpm_status",
+          element: <UpdateTaken />,
+        },
+        {
+          path: "/hpm-history",
+          element: <CreateHomepass />,
+        },
+        {
           path: "/hmpdetails/:id",
           element: <DetailHomepass />,
         },
@@ -66,10 +74,6 @@ const router = createBrowserRouter([
         {
           path: "/updatesurvey/:id",
           element: <UpdateSurveyHomepass />,
-        },
-        {
-          path: "/untaken-homepass-moving-address-response_hpm_status",
-          element: <UpdateTaken />,
         },
       ],
       loader: aunthBeforeLogin,
