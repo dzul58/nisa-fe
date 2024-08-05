@@ -9,6 +9,7 @@ import UpdateHomepass from '../pages/UpdateHomepass';
 import AutoLogin from '../pages/AutoLogin';
 import ErrorPage from '../pages/ErrorPage';
 import UpdateSurveyHomepass from '../pages/UpdateSurveyHomepass';
+import UpdateTaken from '../pages/UpdateTaken';
 
 
 const aunthBeforeLogin = () => {
@@ -65,6 +66,10 @@ const router = createBrowserRouter([
         {
           path: "/updatesurvey/:id",
           element: <UpdateSurveyHomepass />,
+        },
+        {
+          path: "/untaken-homepass-moving-address-response_hpm_status",
+          element: <UpdateTaken />,
         },
       ],
       loader: aunthBeforeLogin,
