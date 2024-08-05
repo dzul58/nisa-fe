@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const UpdateTaken = () => {
-  const navigate = useNavigate();
   const [ticketId, setTicketId] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
@@ -12,7 +10,7 @@ const UpdateTaken = () => {
     e.preventDefault();
     setIsLoading(true);
     try {
-      const response = await axios.put(
+      await axios.put(
         'https://moving-address-be.oss.myrepublic.co.id/api/update-ticket-taken',
         { id: ticketId },
         {
@@ -24,10 +22,11 @@ const UpdateTaken = () => {
 
       Swal.fire({
         icon: "success",
-        title: "The ticket has been set to Untaken!",
+        title: "Success!",
+        text: "The ticket has been set to Untaken!",
       });
       
-      navigate('/'); // Assuming you want to navigate to the home page after successful update
+      setTicketId(""); // Clear the input field after successful update
     } catch (error) {
       console.error("Error updating ticket status:", error);
       Swal.fire({
@@ -38,10 +37,6 @@ const UpdateTaken = () => {
     } finally {
       setIsLoading(false);
     }
-  };
-
-  const handleCancel = () => {
-    navigate('/');
   };
 
   return (
@@ -55,7 +50,7 @@ const UpdateTaken = () => {
             id="ticket"
             value={ticketId}
             onChange={(e) => setTicketId(e.target.value)}
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 py-2 px-3 border border-gray-300"
             required
           />
         </div>
@@ -63,7 +58,7 @@ const UpdateTaken = () => {
         <div className="flex justify-center space-x-4">
           <button
             type="button"
-            onClick={handleCancel}
+            onClick={() => setTicketId("")}
             className="px-6 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400 transition duration-300"
           >
             Cancel
