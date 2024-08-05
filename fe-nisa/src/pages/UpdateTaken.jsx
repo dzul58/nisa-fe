@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { useNavigate } from 'react-router-dom';
 
 const UpdateTaken = () => {
   const [ticketId, setTicketId] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate(); // Inisialisasi navigate
 
   const handleUntaken = async (e) => {
     e.preventDefault();
@@ -39,6 +41,10 @@ const UpdateTaken = () => {
     }
   };
 
+  const handleCancel = () => {
+    navigate('/'); // Arahkan ke halaman '/'
+  };
+
   return (
     <div className="max-w-2xl mx-auto mt-10 p-6 bg-white rounded-lg shadow-xl">
       <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">Update Ticket Status</h2>
@@ -58,7 +64,7 @@ const UpdateTaken = () => {
         <div className="flex justify-center space-x-4">
           <button
             type="button"
-            onClick={() => setTicketId("")}
+            onClick={handleCancel} // Panggil handleCancel saat tombol Cancel ditekan
             className="px-6 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400 transition duration-300"
           >
             Cancel
