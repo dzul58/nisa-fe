@@ -10,6 +10,7 @@ import AutoLogin from '../pages/AutoLogin';
 import ErrorPage from '../pages/ErrorPage';
 import UpdateSurveyHomepass from '../pages/UpdateSurveyHomepass';
 import UpdateTaken from '../pages/UpdateTaken';
+import HistorysUpdate from '../pages/HistorysUpdate';
 
 
 const aunthBeforeLogin = () => {
@@ -57,7 +58,7 @@ const router = createBrowserRouter([
         },
         {
           path: "/hpm-history",
-          element: <CreateHomepass />,
+          element: <HistorysUpdate />,
         },
         {
           path: "/hmpdetails/:id",
