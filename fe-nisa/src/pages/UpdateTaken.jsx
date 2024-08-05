@@ -50,7 +50,7 @@ const UpdateTaken = () => {
             id="ticket"
             value={ticketId}
             onChange={(e) => setTicketId(e.target.value)}
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 py-2 px-3 border border-gray-300"
+            className="mt-1 pl-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 py-2 px-3 border border-gray-300"
             required
           />
         </div>

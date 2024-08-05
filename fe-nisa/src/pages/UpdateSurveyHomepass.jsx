@@ -177,7 +177,7 @@ const UpdateSurveyHomepass = () => {
                   value={formData.notes_survey_ops} 
                   onChange={handleChange} 
                   rows="3" 
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className="block pl-1 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 ></textarea>
               </div>
             </div>
@@ -197,7 +197,7 @@ const UpdateSurveyHomepass = () => {
                       name={photoKey}
                       onChange={handleFileChange}
                       accept="image/*"
-                      className="mt-2 block w-full text-sm text-gray-500 bg-white
+                      className="mt-2 pl-1 block w-full text-sm text-gray-500 bg-white
                         file:mr-4 file:py-2 file:px-4
                         file:rounded-md file:border-0
                         file:text-sm file:font-semibold
@@ -217,7 +217,7 @@ const UpdateSurveyHomepass = () => {
                     name="video_survey_ops"
                     onChange={handleFileChange}
                     accept="video/*"
-                    className="mt-2 block w-full text-sm text-gray-500 bg-white
+                    className="mt-2 pl-1 block w-full text-sm text-gray-500 bg-white
                       file:mr-4 file:py-2 file:px-4
                       file:rounded-md file:border-0
                       file:text-sm file:font-semibold

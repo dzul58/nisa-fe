@@ -204,14 +204,14 @@ const EditHomepass = () => {
           <div className="sm:col-span-4">
             <label htmlFor="customer_cid" className="block text-sm font-medium leading-6 text-gray-900">CID Pelanggan:</label>
             <div className="mt-2">
-              <input type="text" id="customer_cid" name="customer_cid" value={formData.customer_cid} onChange={handleChange} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+              <input type="text" id="customer_cid" name="customer_cid" value={formData.customer_cid} onChange={handleChange} className="block pl-1 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
             </div>
           </div>
 
           <div className="sm:col-span-3">
               <label htmlFor="submission_from" className="block text-sm font-medium leading-6 text-gray-900">Pengajuan dari:</label>
               <div className="mt-2">
-                <select id="submission_from" name="submission_from" value={formData.submission_from} onChange={handleChange} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+                <select id="submission_from" name="submission_from" value={formData.submission_from} onChange={handleChange} className="block pl-1 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
                   <option> </option>
                   <option>CS SIM</option>
                   <option>CS WIC</option>
@@ -226,7 +226,7 @@ const EditHomepass = () => {
             <div className="sm:col-span-3">
               <label htmlFor="request_source" className="block text-sm font-medium leading-6 text-gray-900">Sumber Permintaan:</label>
               <div className="mt-2">
-                <select id="request_source" name="request_source" value={formData.request_source} onChange={handleChange} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+                <select id="request_source" name="request_source" value={formData.request_source} onChange={handleChange} className="block pl-1 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
                   <option> </option>
                   <option>Email, Soc-Med, Whatsapp</option>
                   <option>Walk In Customer</option>
@@ -240,14 +240,14 @@ const EditHomepass = () => {
           <div className="sm:col-span-3">
             <label htmlFor="coordinate_point" className="block text-sm font-medium leading-6 text-gray-900">Titik Koordinat:</label>
             <div className="mt-2">
-              <input type="text" id="coordinate_point" name="coordinate_point" value={formData.coordinate_point} onChange={handleChange} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+              <input type="text" id="coordinate_point" name="coordinate_point" value={formData.coordinate_point} onChange={handleChange} className="block pl-1 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
             </div>
           </div>
 
           <div className="sm:col-span-3">
               <label htmlFor="request_purpose" className="block text-sm font-medium leading-6 text-gray-900">Tujuan Permintaan:</label>
               <div className="mt-2">
-                <select id="request_purpose" name="request_purpose" value={formData.request_purpose} onChange={handleChange} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+                <select id="request_purpose" name="request_purpose" value={formData.request_purpose} onChange={handleChange} className="block pl-1 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
                   <option>Moving Address (Pindah Rumah)</option>
                   <option>Moving Network (Partner &gt;&gt; Own-Net MyRepublic)</option>
                   <option>Perbaikan Alamat System</option>
@@ -302,7 +302,7 @@ const EditHomepass = () => {
               name="response_hpm_location"
               value={formData.response_hpm_location}
               onChange={handleChange}
-              className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ${formErrors.response_hpm_location ? 'ring-red-500' : 'ring-gray-300'} focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6`}
+              className={`block w-full pl-1 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ${formErrors.response_hpm_location ? 'ring-red-500' : 'ring-gray-300'} focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6`}
             >
               <option value="">Select an area</option>
               {areas.map((area, index) => (
@@ -320,7 +320,7 @@ const EditHomepass = () => {
           <div className="sm:col-span-3">
               <label htmlFor="response_hpm_source" className="block text-sm font-medium leading-6 text-gray-900">Tujuan Permintaan:</label>
               <div className="mt-2">
-                <select id="response_hpm_source" name="response_hpm_source" value={formData.response_hpm_source} onChange={handleChange} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+                <select id="response_hpm_source" name="response_hpm_source" value={formData.response_hpm_source} onChange={handleChange} className="block pl-1 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
                   <option> </option>
                   <option>BOSS</option>
                   <option>STELLA</option>
@@ -331,14 +331,14 @@ const EditHomepass = () => {
           <div className="col-span-full">
             <label htmlFor="current_address" className="block text-sm font-medium leading-6 text-gray-900">Alamat Saat Ini:</label>
             <div className="mt-2">
-              <textarea type="text" id="current_address" name="current_address" value={formData.current_address} onChange={handleChange} rows="3" className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></textarea>
+              <textarea type="text" id="current_address" name="current_address" value={formData.current_address} onChange={handleChange} rows="3" className="block pl-1 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></textarea>
             </div>
           </div>
 
           <div className="col-span-full">
             <label htmlFor="destination_address" className="block text-sm font-medium leading-6 text-gray-900">Alamat Tujuan:</label>
             <div className="mt-2">
-              <textarea  type="text" id="destination_address" name="destination_address" value={formData.destination_address} onChange={handleChange} rows="3" className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></textarea>
+              <textarea  type="text" id="destination_address" name="destination_address" value={formData.destination_address} onChange={handleChange} rows="3" className="block pl-1 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></textarea>
             </div>
           </div>
 
@@ -355,7 +355,7 @@ const EditHomepass = () => {
                 id="photo_front_of_house"
                 name="photo_front_of_house"
                 onChange={handleFileChange}
-                className="mt-2 block w-full text-sm text-gray-500 bg-white
+                className="mt-2 pl-1 block w-full text-sm text-gray-500 bg-white
                   file:mr-4 file:py-2 file:px-4
                   file:rounded-md file:border-0
                   file:text-sm file:font-semibold
@@ -374,7 +374,7 @@ const EditHomepass = () => {
                 id="photo_old_fat"
                 name="photo_old_fat"
                 onChange={handleFileChange}
-                className="mt-2 block w-full text-sm text-gray-500 bg-white
+                className="mt-2 pl-1 block w-full text-sm text-gray-500 bg-white
                   file:mr-4 file:py-2 file:px-4
                   file:rounded-md file:border-0
                   file:text-sm file:font-semibold
@@ -393,7 +393,7 @@ const EditHomepass = () => {
                 id="photo_right_of_house"
                 name="photo_right_of_house"
                 onChange={handleFileChange}
-                className="mt-2 block w-full text-sm text-gray-500 bg-white
+                className="mt-2 pl-1 block w-full text-sm text-gray-500 bg-white
                   file:mr-4 file:py-2 file:px-4
                   file:rounded-md file:border-0
                   file:text-sm file:font-semibold
@@ -412,7 +412,7 @@ const EditHomepass = () => {
                 id="photo_new_fat"
                 name="photo_new_fat"
                 onChange={handleFileChange}
-                className="mt-2 block w-full text-sm text-gray-500 bg-white
+                className="mt-2 pl-1 block w-full text-sm text-gray-500 bg-white
                   file:mr-4 file:py-2 file:px-4
                   file:rounded-md file:border-0
                   file:text-sm file:font-semibold
@@ -431,7 +431,7 @@ const EditHomepass = () => {
                 id="photo_left_of_house"
                 name="photo_left_of_house"
                 onChange={handleFileChange}
-                className="mt-2 block w-full text-sm text-gray-500 bg-white
+                className="mt-2 pl-1 block w-full text-sm text-gray-500 bg-white
                   file:mr-4 file:py-2 file:px-4
                   file:rounded-md file:border-0
                   file:text-sm file:font-semibold
@@ -456,9 +456,3 @@ const EditHomepass = () => {
 }
 
 export default EditHomepass;
-
-
-
-
-
-

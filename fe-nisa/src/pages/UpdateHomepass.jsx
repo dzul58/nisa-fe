@@ -154,7 +154,7 @@ const UpdateHomepass = () => {
             <div className="sm:col-span-3">
                 <label htmlFor="homepass_id" className="block text-sm font-medium leading-6 text-gray-900">Homepass ID:</label>
               <div className="mt-2">
-                <input type="text" id="homepass_id" name="homepass_id" value={formData.homepass_id} onChange={handleChange} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                <input type="text" id="homepass_id" name="homepass_id" value={formData.homepass_id} onChange={handleChange} className="block pl-1 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
               </div>
             </div>
 
@@ -162,7 +162,7 @@ const UpdateHomepass = () => {
             <div className="sm:col-span-3">
               <label htmlFor="network" className="block text-sm font-medium leading-6 text-gray-900">Network:</label>
                 <div className="mt-2">
-                  <select id="network" name="network" value={formData.network} onChange={handleChange} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+                  <select id="network" name="network" value={formData.network} onChange={handleChange} className="block pl-1 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
                     <option> </option>
                     <option>MyRepublic</option>
                     <option>MTI</option>
@@ -179,7 +179,7 @@ const UpdateHomepass = () => {
             <div className="sm:col-span-3">
               <label htmlFor="remarks" className="block text-sm font-medium leading-6 text-gray-900">Remarks: (Uncover/Reject)</label>
                 <div className="mt-2">
-                  <select id="remarks" name="remarks" value={formData.remarks} onChange={handleChange} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+                  <select id="remarks" name="remarks" value={formData.remarks} onChange={handleChange} className="block pl-1 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
                     <option> </option>
                     <option>Add Pole (membutuhkan tiang tambahan)</option>
                     <option>Data Not Valid (tidak sesuai)</option>
@@ -199,7 +199,7 @@ const UpdateHomepass = () => {
             <div className="sm:col-span-3">
               <label htmlFor="hpm_check_result" className="block text-sm font-medium leading-6 text-gray-900">HPM Check Result:</label>
               <div className="mt-2">
-                <select id="hpm_check_result" name="hpm_check_result" value={formData.hpm_check_result} onChange={handleChange} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+                <select id="hpm_check_result" name="hpm_check_result" value={formData.hpm_check_result} onChange={handleChange} className="block pl-1 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
                   <option> </option>
                   <option>Tercover</option>
                   <option>Tidak Tercover</option>
@@ -211,7 +211,7 @@ const UpdateHomepass = () => {
             <div className="sm:col-span-3">
               <label htmlFor="home_id_status" className="block text-sm font-medium leading-6 text-gray-900">Home ID Status:</label>
               <div className="mt-2">
-                <select id="home_id_status" name="home_id_status" value={formData.home_id_status} onChange={handleChange} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+                <select id="home_id_status" name="home_id_status" value={formData.home_id_status} onChange={handleChange} className="block pl-1 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
                   <option> </option>
                   <option>Taken</option>
                   <option>Released</option>
@@ -222,14 +222,14 @@ const UpdateHomepass = () => {
             <div className="col-span-full">
               <label htmlFor="notes_recommendations" className="block text-sm font-medium leading-6 text-gray-900">Note/Recomendation (free text):</label>
               <div className="mt-2">
-                <textarea id="notes_recommendations" name="notes_recommendations" value={formData.notes_recommendations} onChange={handleChange} rows="3" className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></textarea>
+                <textarea id="notes_recommendations" name="notes_recommendations" value={formData.notes_recommendations} onChange={handleChange} rows="3" className="block pl-1 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></textarea>
               </div>
             </div>
   
             <div className="sm:col-span-3">
               <label htmlFor="status" className="block text-sm font-medium leading-6 text-gray-900">Status:</label>
               <div className="mt-2">
-                <select id="status" name="status" value={formData.status} onChange={handleChange} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+                <select id="status" name="status" value={formData.status} onChange={handleChange} className="block pl-1 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
                   <option> </option>
                   <option>Done</option>
                   <option>On Progress</option>

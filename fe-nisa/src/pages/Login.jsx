@@ -49,7 +49,7 @@ const Login = () => {
               <input
                 type="text"
                 placeholder="Username"
-                className="border w-full h-5 px-3 py-5 mt-2 hover:outline-none focus:outline-none focus:ring-indigo-500 focus:ring-1 rounded-md"
+                className="border w-full pl-1 h-5 px-3 py-5 mt-2 hover:outline-none focus:outline-none focus:ring-indigo-500 focus:ring-1 rounded-md"
                 required
                 onChange={usernameOnChange}
               />
@@ -57,7 +57,7 @@ const Login = () => {
               <input
                 type="password"
                 placeholder="Password"
-                className="border w-full h-5 px-3 py-5 mt-2 hover:outline-none focus:outline-none focus:ring-indigo-500 focus:ring-1 rounded-md"
+                className="border w-full pl-1 h-5 px-3 py-5 mt-2 hover:outline-none focus:outline-none focus:ring-indigo-500 focus:ring-1 rounded-md"
                 required
                 onChange={passwordOnChange}
               />
