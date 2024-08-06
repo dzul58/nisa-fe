@@ -3,15 +3,18 @@ import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import { format } from 'date-fns';
 import { id } from 'date-fns/locale';
-import Swal from 'sweetalert2';
+// import Swal from 'sweetalert2';
 
 const Home = () => {
   const [data, setData] = useState([]);
   const [filterValues, setFilterValues] = useState({
     request_purpose: '',
-    customerCid: '',
-    homepassId: '',
+    customer_cid: '',
+    homepass_id: '',
     network: '',
+    home_id_status: '',
+    full_name_pic: '',
+    hpm_check_result: '',
     status: '',
   });
   const [page, setPage] = useState(1);
@@ -27,9 +30,9 @@ const Home = () => {
     }));
   };
 
-  const fetchData = async () => {
+  const fetchData = async (pageNumber = page) => {
     try {
-      const queryParams = new URLSearchParams({ ...filterValues, page }).toString();
+      const queryParams = new URLSearchParams({ ...filterValues, page: pageNumber }).toString();
       const response = await axios.get(`https://moving-address-be.oss.myrepublic.co.id/api/homepass?${queryParams}`, {
         headers: {
           Authorization: `Bearer ${localStorage.access_token}`,
@@ -37,6 +40,7 @@ const Home = () => {
       });
       setData(response.data.requests);
       setTotalPages(response.data.totalPages);
+      setPage(pageNumber);
     } catch (error) {
       console.error('Error fetching data:', error);
     }
@@ -58,7 +62,7 @@ const Home = () => {
   useEffect(() => {
     fetchData();
     fetchUserRole();
-  }, [page]);
+  }, []);
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -67,7 +71,7 @@ const Home = () => {
 
   const handlePageChange = (newPage) => {
     if (newPage > 0 && newPage <= totalPages) {
-      setPage(newPage);
+      fetchData(newPage);
     }
   };
 
@@ -87,17 +91,17 @@ const Home = () => {
   const handleCreateClick = () => {
     if (isAdmin()) {
       navigate('/createhomepass');
-    } 
-    // else {
-    //   showUnauthorizedAlert()
-    // }
+    }
   };
 
   const handleEditClick = (e, id) => {
     if (!isAdmin()) {
       e.preventDefault();
-      // showUnauthorizedAlert()
     }
+  };
+
+  const handleSearch = () => {
+    fetchData(1);
   };
 
   return (
@@ -184,7 +188,7 @@ const Home = () => {
             className="border rounded p-1 text-xs w-28"
           />
           <button
-            onClick={fetchData}
+            onClick={handleSearch}
             className="bg-[#662b81] hover:bg-[#4A0F70] text-white font-bold py-1 px-2 rounded text-xs"
           >
             Search
@@ -213,7 +217,7 @@ const Home = () => {
           <tbody>
             {data.map((row, index) => (
               <tr key={row.id} className={index % 2 === 0 ? 'bg-gray-50' : 'bg-white'}>
-                <td className="border-b p-1 text-center">{(page - 1) * 10 + index + 1}</td>
+                <td className="border-b p-1 text-center">{(page - 1) * 25 + index + 1}</td>
                 <td className="border-b p-1 text-center">{format(new Date(row.timestamp), "yyyy/MM/dd HH:mm")}</td>
                 <td className="border-b p-1 text-center">{row.id}</td>
                 <td className="border-b p-1 text-center">{row.request_purpose.substring(0, 20)}..</td>
