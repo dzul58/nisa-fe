@@ -214,7 +214,7 @@ const Home = () => {
             {data.map((row, index) => (
               <tr key={row.id} className={index % 2 === 0 ? 'bg-gray-50' : 'bg-white'}>
                 <td className="border-b p-1 text-center">{(page - 1) * 10 + index + 1}</td>
-                <td className="border-b p-1 text-center">{format(new Date(row.timestamp), "yyyy/dd/MM HH:mm")}</td>
+                <td className="border-b p-1 text-center">{format(new Date(row.timestamp), "yyyy/MM/dd HH:mm")}</td>
                 <td className="border-b p-1 text-center">{row.id}</td>
                 <td className="border-b p-1 text-center">{row.request_purpose.substring(0, 20)}..</td>
                 <td className="border-b p-1 text-center">{row.customer_cid}</td>
