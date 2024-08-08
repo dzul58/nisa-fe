@@ -11,6 +11,7 @@ import ErrorPage from '../pages/ErrorPage';
 import UpdateSurveyHomepass from '../pages/UpdateSurveyHomepass';
 import UpdateTaken from '../pages/UpdateTaken';
 import HistorysUpdate from '../pages/HistorysUpdate';
+import CsKpiDashboard from '../pages/CsKpiDashboard';
 
 
 const aunthBeforeLogin = () => {
@@ -59,6 +60,10 @@ const router = createBrowserRouter([
         {
           path: "/hpm-history",
           element: <HistorysUpdate />,
+        },
+        {
+          path: "/customer-service-performance ",
+          element: <CsKpiDashboard />,
         },
         {
           path: "/hmpdetails/:id",
