@@ -62,7 +62,7 @@ const router = createBrowserRouter([
           element: <HistorysUpdate />,
         },
         {
-          path: "/customer-service-performance ",
+          path: "/customer-service-performance",
           element: <CsKpiDashboard />,
         },
         {
