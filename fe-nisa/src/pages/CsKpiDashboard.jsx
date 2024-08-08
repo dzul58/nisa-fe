@@ -64,7 +64,7 @@ const CsKpiDashboard = () => {
   return (
     <div className="p-2 bg-slate-50">
       <div className="flex justify-between items-center mb-4">
-        <h2 className="text-xl font-bold">CS KPI Dashboard</h2>
+        <h2 className="text-xl font-bold">Customer Service Performance</h2>
   
         <div className="flex gap-2">
           <input
